@@ -28,14 +28,12 @@ int main(int argc, char* argv[])
     return -1;
   }
 
-  std::ofstream log("dfgdfgdfg.log");
-
-
   for (auto& item : t)
   {
-    log << "Target: " << item.first << "\n";
-    log << "Coordinates: x = " << item.second.x << " ; y = " << item.second.y << " ; z = " << item.second.z << "\n";
-    log << "Velocities: x = " << item.second.vx << " ; y = " << item.second.vy << " ; z = " << item.second.vz << "\n";
+    std::cout << "Target: " << item.first << "\n";
+	std::cout << "Coordinates: x = " << item.second.x << " ; y = " << item.second.y << " ; z = " << item.second.z << "\n";
+	std::cout << "Velocities: x = " << item.second.vx << " ; y = " << item.second.vy << " ; z = " << item.second.vz << "\n";
+	std::cout << "--------------------------------------------------------------------\n";
   }
 
   std::cin.ignore();

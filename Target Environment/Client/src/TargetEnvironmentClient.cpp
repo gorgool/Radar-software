@@ -11,7 +11,7 @@ namespace TargetEnvironment
     _tbl.clear();
     for (size_t idx = 0; idx < ntargets; ++idx)
     {
-      const TargetDesc* target_ptr = reinterpret_cast<const TargetDesc*>(msg);
+      const TargetDesc* target_ptr = reinterpret_cast<const TargetDesc*>(msg + idx * sizeof(TargetDesc));
 
       TargetDesc buff;
       memcpy(reinterpret_cast<char*>(&buff), target_ptr, sizeof(TargetDesc));
