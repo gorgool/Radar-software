@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include <chrono>
+#include <array>
 
 namespace TargetEnvironment
 {
@@ -71,16 +72,23 @@ namespace TargetEnvironment
   {
     std::size_t target_id;
 
-    // Coordinates, meters
-    double x, y, z;
+    // X coordinate vector, meters, metera/sec, meters/(sec*sec), etc.
+    std::array<double, 6> x;
 
-    // Velocity, meters/sec
-    double vx, vy, vz;
+    // Y coordinate vector, meters, metera/sec, meters/(sec*sec), etc.
+    std::array<double, 6> y;
 
-    TargetDesc(std::size_t _id, double _x, double _y, double _z, double _vx, double _vy, double _vz) :
+    // Z coordinate vector, meters, metera/sec, meters/(sec*sec), etc.
+    std::array<double, 6> z;
+
+    TargetDesc(std::size_t _id, 
+               std::array<double, 6>& x_params,
+               std::array<double, 6>& y_params, 
+               std::array<double, 6>& z_params) :
       target_id(_id),
-      x(_x), y(_y), z(_z),
-      vx(_vx), vy(_vy), vz(_vz) {}
+      x(x_params),
+      y(y_params),
+      z(z_params) {}
 
     TargetDesc() = default;
   };

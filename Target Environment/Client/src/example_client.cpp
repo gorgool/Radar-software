@@ -2,6 +2,17 @@
 #include "../include/TargetEnvironmentClient.h"
 #include <clocale>
 
+std::ostream& operator<<(std::ostream& out, std::array<double,6>& arr)
+{
+  for (auto&& item : arr)
+  {
+    out << item << " ; ";
+  }
+  out << std::endl;
+  return out;
+}
+
+
 int main(int argc, char* argv[])
 {
   setlocale(LC_ALL, "");
@@ -31,9 +42,10 @@ int main(int argc, char* argv[])
   for (auto& item : t)
   {
     std::cout << "Target: " << item.first << "\n";
-	std::cout << "Coordinates: x = " << item.second.x << " ; y = " << item.second.y << " ; z = " << item.second.z << "\n";
-	std::cout << "Velocities: x = " << item.second.vx << " ; y = " << item.second.vy << " ; z = " << item.second.vz << "\n";
-	std::cout << "--------------------------------------------------------------------\n";
+	  std::cout << "X vector = " << item.second.x << "\n";
+	  std::cout << "Y vector = " << item.second.y << "\n";
+    std::cout << "Z vector = " << item.second.z << "\n";
+	  std::cout << "--------------------------------------------------------------------\n";
   }
 
   std::cin.ignore();

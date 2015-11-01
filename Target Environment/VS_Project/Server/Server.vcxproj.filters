@@ -21,6 +21,9 @@
     <ClInclude Include="..\..\Server\include\TargetEnvironmentServer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Server\include\ComputeParams.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Server\src\Connection.cpp">
@@ -66,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Utils\src\Logger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Server\src\ComputeParams.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

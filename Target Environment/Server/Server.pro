@@ -9,10 +9,12 @@ LIBS = -lboost_system -lboost_thread -lboost_regex \
 
 HEADERS += \
     include/Connection.h \
-    include/TargetEnvironmentServer.h
+    include/TargetEnvironmentServer.h \
+    include/ComputeParams.h
 
 SOURCES += \
     src/Connection.cpp \
     src/example_server.cpp \
     src/SectorCheck.cpp \
-    src/TargetEnvironmentServer.cpp
+    src/TargetEnvironmentServer.cpp \
+    src/ComputeParams.cpp

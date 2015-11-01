@@ -66,6 +66,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Server\include\ComputeParams.h" />
     <ClInclude Include="..\..\Server\include\Connection.h" />
     <ClInclude Include="..\..\Server\include\TargetEnvironmentServer.h" />
   </ItemGroup>
@@ -81,6 +82,7 @@
     <ClCompile Include="..\..\Satellite_Utils\src\norad_base.cpp" />
     <ClCompile Include="..\..\Satellite_Utils\src\utils.cpp" />
     <ClCompile Include="..\..\Satellite_Utils\src\vector3.cpp" />
+    <ClCompile Include="..\..\Server\src\ComputeParams.cpp" />
     <ClCompile Include="..\..\Server\src\Connection.cpp" />
     <ClCompile Include="..\..\Server\src\example_server.cpp" />
     <ClCompile Include="..\..\Server\src\SectorCheck.cpp" />

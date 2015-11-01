@@ -17,6 +17,7 @@
 #include "../../Shared/include/ReferencePointDesc.h"
 #include "../../../Utils/include/FormatString.h"
 #include "../../../Utils/include/SplitString.hpp"
+#include "ComputeParams.h"
 
 #define DEBUG_LOG
 #include "../../../Utils/include/Logger.h"

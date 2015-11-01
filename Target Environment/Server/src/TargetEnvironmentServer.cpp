@@ -221,7 +221,27 @@ namespace TargetEnvironment
       if (sector_check(point, conn->ref_point))
       {
         // If target in sector
-        target_buffer.emplace_back(item.get()->number, v0.x, v0.y, v0.z, v1.x, v1.y, v1.z);
+
+        // Compute 5 more points with offsets +10 +20 +30 +40 +50 seconds
+        std::array<double, 6> x_points;
+        x_points[0] = v0.x;
+        std::array<double, 6> y_points;
+        y_points[0] = v0.y;
+        std::array<double, 6> z_points;
+        z_points[0] = v0.z;
+
+        const double time_offset = 10.0;
+
+        for (std::size_t idx = 1; idx < 6; ++idx)
+        {
+          compute_position->getPosition(elapced_time + (time_offset * idx) / 60.0, v0, v1, NoradBase::CSType::cs_GSC);
+          x_points[idx] = v0.x;
+          y_points[idx] = v0.y;
+          z_points[idx] = v0.z;
+        }
+
+        auto desc = compute_params(item.get()->number, x_points, y_points, z_points);
+        target_buffer.push_back(desc);
       }
     }
     
