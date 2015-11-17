@@ -10,7 +10,7 @@ namespace TargetEnvironment
     if (ec)
     {
       // Check shutdown of connection
-      if (error::eof == ec)
+      if (error::eof == ec || error::connection_reset == ec)
       {
         Utils::Log.log_display("Target Environment Server: Deleting client.");
         conn->shutdown();
