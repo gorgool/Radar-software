@@ -65,9 +65,6 @@
     <ClCompile Include="..\..\..\CoordinateSystems\src\CSTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\CoordinateSystems\src\CSTransform_to.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Utils\src\Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

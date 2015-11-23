@@ -53,7 +53,7 @@ namespace TargetEnvironment
 
     if (msg_header == "RefPoint")
     {
-      if (tokens.size() != 11)
+      if (tokens.size() != 19)
       {
         Utils::Log.log_display("Target Environment Server: Reference point message parse error. Message incomplete or too large.");
         send_msg(RefPointFail);
@@ -71,6 +71,10 @@ namespace TargetEnvironment
         ref_point.longitude = boost::lexical_cast<double>(tokens[6]);
         ref_point.height = boost::lexical_cast<double>(tokens[8]);
         ref_point.range = boost::lexical_cast<double>(tokens[10]);
+        ref_point.azimuth_ang = boost::lexical_cast<double>(tokens[12]);
+        ref_point.azimuth_width = boost::lexical_cast<double>(tokens[14]);
+        ref_point.elevation_ang = boost::lexical_cast<double>(tokens[16]);
+        ref_point.elevation_width = boost::lexical_cast<double>(tokens[18]);
       }
 
       catch (const boost::bad_lexical_cast &)

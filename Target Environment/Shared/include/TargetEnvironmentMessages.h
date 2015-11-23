@@ -4,6 +4,7 @@
 #include <sstream>
 #include <chrono>
 #include <array>
+#include "../../Shared/include/ReferencePointDesc.h"
 
 namespace TargetEnvironment
 {
@@ -17,14 +18,18 @@ namespace TargetEnvironment
   struct RefPoint
   {
     std::string msg;
-    RefPoint(const std::size_t id, double lat, const double lon, const double alt, const double range)
+    RefPoint(const ReferencePointDesc& rfp_desc)
     {
       std::stringstream s;
-      s << "RefPoint [ id:" << id
-        << "; lat:" << lat
-        << "; lon:" << lon
-        << "; alt:" << alt
-        << "; range:" << range
+      s << "RefPoint [ id:" << rfp_desc.client_id
+        << "; lat:" << rfp_desc.latitude
+        << "; lon:" << rfp_desc.longitude
+        << "; alt:" << rfp_desc.height
+        << "; range:" << rfp_desc.range
+        << "; elevation_angle:" << rfp_desc.elevation_ang
+        << "; elevation_width:" << rfp_desc.elevation_width
+        << "; azimuth_angle:" << rfp_desc.azimuth_ang
+        << "; azimuth_width:" << rfp_desc.azimuth_width
         << ";]\n";
       msg = s.str();
     }

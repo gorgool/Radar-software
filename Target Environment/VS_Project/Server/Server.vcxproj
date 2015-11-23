@@ -72,7 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\CoordinateSystems\src\CSTransform.cpp" />
-    <ClCompile Include="..\..\..\CoordinateSystems\src\CSTransform_to.cpp" />
     <ClCompile Include="..\..\..\Utils\src\Logger.cpp" />
     <ClCompile Include="..\..\Satellite_Utils\src\catalog_tle.cpp" />
     <ClCompile Include="..\..\Satellite_Utils\src\noradCircl.cpp" />

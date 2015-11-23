@@ -29,7 +29,7 @@ namespace TargetEnvironment
     bool _connected;
 
   public:
-    TargetEnvironmentClient();
+    TargetEnvironmentClient(const ReferencePointDesc&);
     ~TargetEnvironmentClient();
 
     /*

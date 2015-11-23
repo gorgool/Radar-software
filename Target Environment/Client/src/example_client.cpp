@@ -1,6 +1,7 @@
 #include <iostream>
 #include "../include/TargetEnvironmentClient.h"
 #include <clocale>
+#include <random>
 
 std::ostream& operator<<(std::ostream& out, std::array<double,6>& arr)
 {
@@ -12,13 +13,18 @@ std::ostream& operator<<(std::ostream& out, std::array<double,6>& arr)
   return out;
 }
 
-
 int main(int argc, char* argv[])
 {
   setlocale(LC_ALL, "");
   boost::asio::ip::tcp::endpoint server_address(boost::asio::ip::address::from_string("127.0.0.1"), 6565);
 
-  TargetEnvironment::TargetEnvironmentClient client;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<std::size_t> id(0, std::numeric_limits<std::size_t>::max());
+  auto client_id = id(gen);
+  TargetEnvironment::ReferencePointDesc rfp(client_id, 44.392087, -68.204052, 100, 3000000, 45.0, 25.0, 10.0, 40.0);
+  
+  TargetEnvironment::TargetEnvironmentClient client(rfp);
 
   auto err = client.connect(server_address);
   if (err != TargetEnvironment::ErrorCode::OK_EC)

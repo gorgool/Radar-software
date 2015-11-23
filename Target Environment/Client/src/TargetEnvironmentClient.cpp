@@ -1,5 +1,4 @@
 #include "../include/TargetEnvironmentClient.h"
-#include <random>
 
 using namespace boost::asio;
 using namespace boost::system;
@@ -45,17 +44,12 @@ namespace TargetEnvironment
     return ErrorCode::OK_EC;
   }
 
-  TargetEnvironmentClient::TargetEnvironmentClient() :
+  TargetEnvironmentClient::TargetEnvironmentClient(const ReferencePointDesc& rf_point) :
     _service(),
     _socket(_service),
+    _reference_point(rf_point),
     _connected(false)
   {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<std::size_t> id(0, std::numeric_limits<std::size_t>::max());
-    auto client_id = id(gen);
-
-    _reference_point = ReferencePointDesc(client_id, 44.392087, -68.204052, 100, 2000000);
   }
 
   TargetEnvironmentClient::~TargetEnvironmentClient()
@@ -102,12 +96,7 @@ namespace TargetEnvironment
     DLOG("Target Environment client: Connection success.");
 
     DLOG("Target Environment client: Send reference point descriptor message.");
-    RefPoint msg(
-      _reference_point.client_id, 
-      _reference_point.latitude, 
-      _reference_point.longitude, 
-      _reference_point.height,
-      _reference_point.range);
+    RefPoint msg(_reference_point);
 
     write(_socket, buffer(msg.msg), ec);
     if (ec)

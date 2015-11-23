@@ -20,32 +20,6 @@ CSUtils::Angle CSUtils::rad_to_degrees(double _rads)
   return CSUtils::Angle(degrees, minutes, seconds);
 };
 
-void CSUtils::set_Tx_UT_position(const CSUtils::Angle& latitude, const CSUtils::Angle& longitude, const double altitude)
-{
-  CSUtils::Tx_UT_unit_latitude = latitude;
-  CSUtils::Tx_UT_unit_longitude = longitude;
-  CSUtils::Tx_UT_unit_altitude = altitude;
-}
-
-void CSUtils::set_Tx_UT_direction(const CSUtils::Angle& elevation, const CSUtils::Angle& azimuth)
-{
-  CSUtils::Tx_UT_unit_elevation = elevation;
-  CSUtils::Tx_UT_unit_azimuth = azimuth;
-}
-
-void CSUtils::set_Rx_UT_position(const CSUtils::Angle& latitude, const CSUtils::Angle& longitude, const double altitude)
-{
-  CSUtils::Rx_UT_unit_latitude = latitude;
-  CSUtils::Rx_UT_unit_longitude = longitude;
-  CSUtils::Rx_UT_unit_altitude = altitude;
-}
-
-void CSUtils::set_Rx_UT_direction(const CSUtils::Angle& elevation, const CSUtils::Angle& azimuth)
-{
-  CSUtils::Rx_UT_unit_elevation = elevation;
-  CSUtils::Rx_UT_unit_azimuth = azimuth;
-}
-
 CSUtils::ECEFPoint CSUtils::gcs_to_ecef(const CSUtils::GCSPoint& _point)
 {
   CSUtils::ECEFPoint ret;
@@ -82,23 +56,13 @@ CSUtils::GCSPoint CSUtils::ecef_to_gcs(const CSUtils::ECEFPoint& _point)
   return ret;
 }
 
-CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, CSUtils::UnitType _host)
+CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, const CSUtils::GCSPoint& _origin)
 {
-  double phi, lamda, h;
-  Eigen::Vector3d lccs_center_point;
+  double phi = _origin.latitude;
+  double lamda = _origin.longitude;
+  double h = _origin.altitude;
 
-  if ( _host == Tx_UT )
-  {
-    phi = degree_to_rad(Tx_UT_unit_latitude);
-    lamda = degree_to_rad(Tx_UT_unit_longitude);
-    h = Tx_UT_unit_altitude;
-  }
-  else
-  {
-    phi = degree_to_rad(Rx_UT_unit_latitude);
-    lamda = degree_to_rad(Rx_UT_unit_longitude);
-    h = Rx_UT_unit_altitude;
-  }
+  Eigen::Vector3d lccs_center_point;
 
   lccs_center_point(0) = (a * cos(atan(b * tan(phi) / a)) + h * cos(phi)) * cos(lamda);
   lccs_center_point(1) = (a * cos(atan(b * tan(phi) / a)) + h * cos(phi)) * sin(lamda);
@@ -121,26 +85,16 @@ CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, CSUtils
   C.transposeInPlace();
   Eigen::Vector3d result = C * Eigen::Vector3d(_point.x, _point.y, _point.z) - C * lccs_center_point;
 
-  return CSUtils::ENUPoint(result(0), result(1), result(2), _host);
+  return CSUtils::ENUPoint(result(0), result(1), result(2));
 }
 
-CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point)
+CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point, const CSUtils::GCSPoint& _origin)
 {
-  double phi, lamda, h;
-  Eigen::Vector3d lccs_center_point;
+  double phi = _origin.latitude;
+  double lamda = _origin.longitude;
+  double h = _origin.altitude;
 
-  if ( _point.host == Tx_UT )
-  {
-    phi = degree_to_rad(Tx_UT_unit_latitude);
-    lamda = degree_to_rad(Tx_UT_unit_longitude);
-    h = Tx_UT_unit_altitude;
-  }
-  else
-  {
-    phi = degree_to_rad(Rx_UT_unit_latitude);
-    lamda = degree_to_rad(Rx_UT_unit_longitude);
-    h = Rx_UT_unit_altitude;
-  }
+  Eigen::Vector3d lccs_center_point;
 
   lccs_center_point(0) = (a * cos(atan(b * tan(phi) / a)) + h * cos(phi)) * cos(lamda);
   lccs_center_point(1) = (a * cos(atan(b * tan(phi) / a)) + h * cos(phi)) * sin(lamda);
@@ -166,20 +120,10 @@ CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point)
   return CSUtils::ECEFPoint(ret(0), ret(1), ret(2));
 }
 
-CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point)
+CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point, const Angle& _eps, const Angle& _beta)
 {
-  double eps, beta;
-
-  if (_point.host == CSUtils::Tx_UT)
-  {
-    eps = degree_to_rad(Tx_UT_unit_elevation);
-    beta = degree_to_rad(Tx_UT_unit_azimuth);
-  }
-  else
-  {
-    eps = degree_to_rad(Rx_UT_unit_elevation);
-    beta = degree_to_rad(Rx_UT_unit_azimuth);
-  }
+  double eps = degree_to_rad(_eps);
+  double beta = degree_to_rad(_beta);
 
   Eigen::Matrix3d C_1 = Eigen::Matrix3d::Zero();
   C_1(0, 0) = cos(beta); C_1(0, 2) = -sin(beta);
@@ -196,20 +140,10 @@ CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point)
   return CSUtils::CCSAPoint(ret(0), ret(1), ret(2));
 }
 
-CSUtils::ENUPoint CSUtils::ccsa_to_enu(const CCSAPoint& _point)
+CSUtils::ENUPoint CSUtils::ccsa_to_enu(const CCSAPoint& _point, const Angle& _eps, const Angle& _beta)
 {
-  double eps, beta;
-
-  if (_point.host == Tx_UT)
-  {
-    eps = degree_to_rad(Tx_UT_unit_elevation);
-    beta = degree_to_rad(Tx_UT_unit_azimuth);
-  }
-  else
-  {
-    eps = degree_to_rad(Rx_UT_unit_elevation);
-    beta = degree_to_rad(Rx_UT_unit_azimuth);
-  }
+  double eps = degree_to_rad(_eps);
+  double beta = degree_to_rad(_beta);
 
   Eigen::Matrix3d C_1 = Eigen::Matrix3d::Zero();
   C_1(0, 0) = cos(beta); C_1(0, 2) = -sin(beta);
@@ -249,6 +183,28 @@ CSUtils::CCSAPoint CSUtils::bcs_to_ccsa(const CSUtils::BCSPoint& _point)
   ret.x = _point.R * sqrt(1 - _point.epsilon * _point.epsilon - _point.beta * _point.beta);
   ret.y = _point.R * _point.epsilon;
   ret.z = - _point.R * _point.beta;
+
+  return ret;
+}
+
+CSUtils::ENUPoint CSUtils::sph_to_enu(const CSUtils::SPHPoint& _point)
+{
+  CSUtils::ENUPoint ret;
+
+  ret.x = _point.R * sin(_point.theta) * cos(_point.phi);
+  ret.y = _point.R * sin(_point.theta) * sin(_point.phi);
+  ret.z = _point.R * cos(_point.theta);
+
+  return ret;
+}
+
+CSUtils::SPHPoint CSUtils::enu_to_sph(const CSUtils::ENUPoint& _point)
+{
+  CSUtils::SPHPoint ret;
+
+  ret.R = sqrt(_point.x * _point.x + _point.y * _point.y + _point.z * _point.z);
+  ret.theta = atan2(sqrt(_point.x * _point.x + _point.y * _point.y), _point.z);
+  ret.phi = atan2(_point.y, _point.z);
 
   return ret;
 }

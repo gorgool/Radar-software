@@ -5,7 +5,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-#include "../../Utils/include/EigenHeaders.h"
+#include <Eigen\Core>
 
 namespace CSUtils
 {
@@ -31,33 +31,9 @@ namespace CSUtils
   /*
     Transform precise coordinate from degrees to radian representation and vice versa
   */
-  double degree_to_rad(double _degrees, double _minutes, double _seconds);
+  double degree_to_rad(double _degrees, double _minutes = 0.0, double _seconds = 0.0);
   double degree_to_rad(const Angle& _angle);
   Angle rad_to_degrees(double _rads);
-
-  /*
-    Position and orientation of transmiter (Tx_UT) and receiver (Rx_UT) units in geodetic coordinate system
-  */
-
-  void set_Tx_UT_position(const Angle& latitude, const Angle& longitude, const double altitude);
-  void set_Tx_UT_direction(const Angle& elevation, const Angle& azimuth);
-
-  void set_Rx_UT_position(const Angle& latitude, const Angle& longitude, const double altitude);
-  void set_Rx_UT_direction(const Angle& elevation, const Angle& azimuth);
-
-  static Angle Tx_UT_unit_latitude;
-  static Angle Tx_UT_unit_longitude;
-  static double Tx_UT_unit_altitude;
-
-  static Angle Rx_UT_unit_latitude;
-  static Angle Rx_UT_unit_longitude;
-  static double Rx_UT_unit_altitude;
-
-  static Angle Tx_UT_unit_elevation;
-  static Angle Tx_UT_unit_azimuth;
-
-  static Angle Rx_UT_unit_elevation;
-  static Angle Rx_UT_unit_azimuth;
 
   /*
     Coordinate systems transforms
@@ -66,17 +42,17 @@ namespace CSUtils
   BCSPoint ccsa_to_bcs(const CCSAPoint& _point);
   CCSAPoint bcs_to_ccsa(const BCSPoint& _point);
 
-  ENUPoint ccsa_to_enu(const CCSAPoint& _point);
-  CCSAPoint enu_to_ccsa(const ENUPoint& _point);
+  // _eps - elevation angle, _beta - azimuth angle
+  ENUPoint ccsa_to_enu(const CCSAPoint& _point, const Angle& _eps, const Angle& _beta);
+  CCSAPoint enu_to_ccsa(const ENUPoint& _point, const Angle& _eps, const Angle& _beta);
 
-  /* 
-    _host describes what kind of coordinate system (LCCS) to transform.
-    Tx_UT - ENU of transmiting unit
-    Rx_UT - ENU of receiving unit
-  */
-  ENUPoint ecef_to_enu(const ECEFPoint& _point, UnitType _host);
-  ECEFPoint enu_to_ecef(const ENUPoint& _point);
+  SPHPoint enu_to_sph(const ENUPoint& _point);
+  ENUPoint sph_to_enu(const SPHPoint& _point);
 
+  // _origin - position of ENU center
+  ENUPoint ecef_to_enu(const ECEFPoint& _point, const CSUtils::GCSPoint& _origin);
+  ECEFPoint enu_to_ecef(const ENUPoint& _point, const CSUtils::GCSPoint& _origin);
+  
   ECEFPoint gcs_to_ecef(const GCSPoint& _point);
   GCSPoint ecef_to_gcs(const ECEFPoint& _point);
 }
