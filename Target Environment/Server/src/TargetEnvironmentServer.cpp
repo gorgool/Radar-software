@@ -40,54 +40,41 @@ namespace TargetEnvironment
     // Clear read buffer
     conn->read_buffer.get()->consume(size);
 
-    auto tokens = Utils::split_string<std::string, '[', ']', ' ', ';', ':'>(res);
-    // If empty message
-    if (tokens.empty())
+    std::string msg_header;
+    boost::property_tree::ptree cfg;
+    
+    try
+    {
+      boost::property_tree::read_json(std::stringstream(res), cfg);
+      msg_header = cfg.get<std::string>("message");
+    }
+    catch (...)
     {
       Utils::Log.log_display("Target Environment Server: Message parse error. Empty message.");
       start_read(conn);
       return;
     }
 
-    auto msg_header = tokens[0];
-
     if (msg_header == "RefPoint")
     {
-      if (tokens.size() != 19)
-      {
-        Utils::Log.log_display("Target Environment Server: Reference point message parse error. Message incomplete or too large.");
-        send_msg(RefPointFail);
-        start_read(conn);
-        return;
-      }
-
       try
       {
         // Parse Reference point message
-        std::size_t client_id = boost::lexical_cast<std::size_t>(tokens[2]);
         auto& ref_point = conn->ref_point;
-        ref_point.client_id = client_id;
-        ref_point.latitude = boost::lexical_cast<double>(tokens[4]);
-        ref_point.longitude = boost::lexical_cast<double>(tokens[6]);
-        ref_point.height = boost::lexical_cast<double>(tokens[8]);
-        ref_point.range = boost::lexical_cast<double>(tokens[10]);
-        ref_point.azimuth_ang = boost::lexical_cast<double>(tokens[12]);
-        ref_point.azimuth_width = boost::lexical_cast<double>(tokens[14]);
-        ref_point.elevation_ang = boost::lexical_cast<double>(tokens[16]);
-        ref_point.elevation_width = boost::lexical_cast<double>(tokens[18]);
-      }
-
-      catch (const boost::bad_lexical_cast &)
-      {
-        Utils::Log.log_display("Target Environment Server: Reference point message parse error. Wrong data format.");
-        send_msg(RequestFail);
-        start_read(conn);
-        return;
+        ref_point.client_id = cfg.get<std::size_t>("id");
+        ref_point.latitude = cfg.get<double>("lat");
+        ref_point.longitude = cfg.get<double>("lon");
+        ref_point.height = cfg.get<double>("alt");
+        ref_point.range = cfg.get<double>("range");
+        ref_point.azimuth_ang = cfg.get<double>("azimuth_angle");
+        ref_point.azimuth_width = cfg.get<double>("azimuth_width");
+        ref_point.elevation_ang = cfg.get<double>("elevation_angle");
+        ref_point.elevation_width = cfg.get<double>("elevation_width");
       }
 
       catch (...)
       {
-        Utils::Log.log_display("Target Environment Server: Request message error. Unknown error.");
+        Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
         send_msg(RequestFail);
         start_read(conn);
         return;
@@ -100,33 +87,17 @@ namespace TargetEnvironment
     }
     else if (msg_header == "Request")
     {
-      if (tokens.size() != 5)
-      {
-        Utils::Log.log_display("Target Environment Server: Request message parse error. Message incomplete or too large.");
-        send_msg(RequestFail);
-        start_read(conn);
-        return;
-      }
-
       TimeType time;
 
       try
       {
-        ClockType::duration dur(boost::lexical_cast<ClockType::duration::rep>(tokens[4]));
+        ClockType::duration dur(cfg.get<ClockType::duration::rep>("time"));
         time = TimeType(dur);
-      }
-
-      catch (const boost::bad_lexical_cast&)
-      {
-        Utils::Log.log_display("Target Environment Server: Request message parse error. Wrong data format.");
-        send_msg(RequestFail);
-        start_read(conn);
-        return;
       }
       
       catch (...)
       {
-        Utils::Log.log_display("Target Environment Server: Request message error. Unknown error.");
+        Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
         send_msg(RequestFail);
         start_read(conn);
         return;

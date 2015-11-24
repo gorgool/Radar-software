@@ -21,7 +21,21 @@ namespace TargetEnvironment
     RefPoint(const ReferencePointDesc& rfp_desc)
     {
       std::stringstream s;
-      s << "RefPoint [ id:" << rfp_desc.client_id
+      s << "{ \"message\" : \"RefPoint\""
+        << ", \"id\" : " << rfp_desc.client_id
+        << ", \"lat\" : " << rfp_desc.latitude
+        << ", \"lon\" : " << rfp_desc.longitude
+        << ", \"alt\" : " << rfp_desc.height
+        << ", \"range\" : " << rfp_desc.range
+        << ", \"elevation_angle\" : " << rfp_desc.elevation_ang
+        << ", \"elevation_width\" : " << rfp_desc.elevation_width
+        << ", \"azimuth_angle\" : " << rfp_desc.azimuth_ang
+        << ", \"azimuth_width\" : " << rfp_desc.azimuth_width
+        << "}\n";
+
+
+
+      /*s << "RefPoint [ id:" << rfp_desc.client_id
         << "; lat:" << rfp_desc.latitude
         << "; lon:" << rfp_desc.longitude
         << "; alt:" << rfp_desc.height
@@ -30,7 +44,7 @@ namespace TargetEnvironment
         << "; elevation_width:" << rfp_desc.elevation_width
         << "; azimuth_angle:" << rfp_desc.azimuth_ang
         << "; azimuth_width:" << rfp_desc.azimuth_width
-        << ";]\n";
+        << ";]\n";*/
       msg = s.str();
     }
   };
@@ -43,9 +57,13 @@ namespace TargetEnvironment
     Request(const std::size_t id, const ClockType::duration::rep& time)
     {
       std::stringstream s;
-      s << "Request [ id:" << id
+      s << "{ \"message\" : \"Request\""
+        << ", \"id\" : " << id
+        << ", \"time\" : " << time
+        << "}\n";
+      /*s << "Request [ id:" << id
         << "; time:" << time
-        << ";]\n";
+        << ";]\n";*/
       msg = s.str();
     }
   };
@@ -67,8 +85,11 @@ namespace TargetEnvironment
     TargetsList(const std::size_t count)
     {
       std::stringstream s;
-      s << "TargetsList [ size:" << count
-        << ";]\n";
+      s << " { \"message\" : \"TargetsList\""
+        << ", \"size\" : " << count
+        << "}\n";
+      /*s << "TargetsList [ size:" << count
+        << ";]\n";*/
       msg = s.str();
     }
   };

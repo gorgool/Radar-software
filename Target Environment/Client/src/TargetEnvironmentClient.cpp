@@ -182,7 +182,20 @@ namespace TargetEnvironment
 
     DLOG("Target Environment client: Targets list read succefully.");
 
-    const std::size_t ntargets = std::stoi(res.substr(res.find(":") + 1, res.find(";")));
+    std::size_t ntargets;
+    
+    try
+    {
+      boost::property_tree::ptree cfg;
+      boost::property_tree::read_json(std::stringstream(res), cfg);
+      ntargets = cfg.get<std::size_t>("size");
+    }
+    catch (...)
+    {
+      DLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
+      return ErrorCode::RequestFail_EC;
+    }
+
     const std::size_t nbytes = ntargets * sizeof(TargetDesc);
 
     DLOG(Utils::string_format("Target Environment client: Number of targets %u.", ntargets));

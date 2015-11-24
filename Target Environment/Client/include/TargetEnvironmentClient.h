@@ -1,6 +1,8 @@
 #pragma once
 
 #include <boost/asio.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/json_parser.hpp>
 #include <chrono>
 #include "../../Shared/include/TargetTable.h"
 #include <unordered_map>
