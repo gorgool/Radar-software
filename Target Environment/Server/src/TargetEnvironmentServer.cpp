@@ -61,7 +61,7 @@ namespace TargetEnvironment
       {
         // Parse Reference point message
         auto& ref_point = conn->ref_point;
-        ref_point.client_id = cfg.get<std::size_t>("id");
+        ref_point.client_id = cfg.get<std::uint32_t>("id");
         ref_point.latitude = cfg.get<double>("lat");
         ref_point.longitude = cfg.get<double>("lon");
         ref_point.height = cfg.get<double>("alt");

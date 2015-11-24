@@ -10,7 +10,7 @@ namespace TargetEnvironment
 {
   struct ReferencePointDesc
   {
-    std::size_t client_id;
+    std::uint32_t client_id;
 
     // Geodetic coordinates, degrees
     double latitude;

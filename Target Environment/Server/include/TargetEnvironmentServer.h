@@ -20,7 +20,6 @@
 #include "../../../CoordinateSystems/include/CSUtils.h"
 #include "ComputeParams.h"
 
-#define DEBUG_LOG
 #include "../../../Utils/include/Logger.h"
 
 namespace TargetEnvironment

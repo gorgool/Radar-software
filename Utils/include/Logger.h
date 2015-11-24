@@ -10,13 +10,15 @@
 #include <atomic>
 #include "FormatString.h"
 
-#ifdef DEBUG_LOG
-  #define DLOG(text) Utils::Log.log_display(text);
-  #define DFLOG(text) Utils::Log.log(text);
-#endif
+#undef DEBUG_LOG
+
 #ifndef DEBUG_LOG
   #define DLOG(text) ;
   #define DFLOG(text) ;
+#endif
+#ifdef DEBUG_LOG
+  #define DLOG(text) Utils::Log.log_display(text);
+  #define DFLOG(text) Utils::Log.log(text);
 #endif
 
 namespace Utils

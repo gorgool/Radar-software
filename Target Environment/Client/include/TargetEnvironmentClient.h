@@ -10,7 +10,7 @@
 #include "../../Shared/include/TargetEnvironmentErrors.h"
 #include "../../Shared/include/TargetEnvironmentMessages.h"
 
-#define DEBUG_LOG
+#undef DEBUG_LOG
 #include "../../../Utils/include/Logger.h"
 
 namespace TargetEnvironment
