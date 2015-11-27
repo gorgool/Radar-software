@@ -1,4 +1,5 @@
 #include "../include/TargetEnvironmentServer.h"
+#include <omp.h>
 
 namespace TargetEnvironment
 {
@@ -42,7 +43,7 @@ namespace TargetEnvironment
 
     std::string msg_header;
     boost::property_tree::ptree cfg;
-    
+
     try
     {
       boost::property_tree::read_json(std::stringstream(res), cfg);
@@ -94,7 +95,7 @@ namespace TargetEnvironment
         ClockType::duration dur(cfg.get<ClockType::duration::rep>("time"));
         time = TimeType(dur);
       }
-      
+
       catch (...)
       {
         Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
@@ -176,16 +177,17 @@ namespace TargetEnvironment
 #ifdef _WIN32
     gmtime_s(&sat_date, &temp);
 #endif
-
     // In days
     double ref_time = Utils::Julian_date(
-      sat_date.tm_year + 1900, 
-      sat_date.tm_mon + 1, 
-      sat_date.tm_mday, 
+      sat_date.tm_year + 1900,
+      sat_date.tm_mon + 1,
+      sat_date.tm_mday,
       sat_date.tm_hour + sat_date.tm_min / 60.0 + sat_date.tm_sec / 60.0);
- 
-    for (auto&& item : satellite_list)
+
+    #pragma omp parallel for
+    for (int idx = 0; idx < satellite_list.size(); ++idx)
     {
+      auto item = satellite_list[idx];
       // Elapsed time in minutes
       double elapced_time = (ref_time - item.get()->jd) * 24.0 * 60.0;
       auto compute_position = item.get()->norad;
@@ -207,19 +209,23 @@ namespace TargetEnvironment
 
         const double time_offset = 10.0;
 
-        for (std::size_t idx = 1; idx < 6; ++idx)
+        for (std::size_t n_point = 1; n_point < 6; ++n_point)
         {
-          compute_position->getPosition(elapced_time + (time_offset * idx) / 60.0, v0, v1, NoradBase::CSType::cs_GSC);
-          x_points[idx] = v0.x;
-          y_points[idx] = v0.y;
-          z_points[idx] = v0.z;
+          compute_position->getPosition(elapced_time + (time_offset * n_point) / 60.0, v0, v1, NoradBase::CSType::cs_GSC);
+          x_points[n_point] = v0.x;
+          y_points[n_point] = v0.y;
+          z_points[n_point] = v0.z;
         }
 
         auto desc = compute_params(item.get()->number, x_points, y_points, z_points);
-        target_buffer.push_back(desc);
+
+        #pragma omp critical
+        {
+          target_buffer.push_back(desc);
+        }
       }
     }
-    
+
     DLOG(Utils::string_format("Target Environment Server: Found %u satellites for client %u.", target_buffer.size(), conn->ref_point.client_id));
 
     // Sending result back to client
@@ -232,16 +238,16 @@ namespace TargetEnvironment
       Utils::Log.log_display("Target Environment Server: " + ec.message());
       return Unknown_EC;
     }
-    
+
     if (count > 0)
     {
       conn->write_buffer.get()->sputn(
-        reinterpret_cast<char *>(target_buffer.data()), 
+        reinterpret_cast<char *>(target_buffer.data()),
         target_buffer.size() * sizeof(TargetDesc));
-      
-      write(*conn->socket, *conn->write_buffer, 
-        boost::asio::transfer_exactly(sizeof(TargetDesc) * target_buffer.size()),ec);
-        
+
+      write(*conn->socket, *conn->write_buffer,
+        boost::asio::transfer_exactly(sizeof(TargetDesc) * target_buffer.size()), ec);
+
       if (ec)
       {
         Utils::Log.log_display("Target Environment Server: " + ec.message());
@@ -249,7 +255,7 @@ namespace TargetEnvironment
       }
 
     }
-    
+
     return OK_EC;
   }
 
@@ -343,18 +349,18 @@ namespace TargetEnvironment
     DLOG("Target Environment Server: Closing acceptor.");
     if (_acc.is_open())
     {
-        _acc.cancel(ec);
-        if (ec)
-        {
-          Utils::Log.log_display("Target Environment Server: " + ec.message());
-          return Unknown_EC;
-        }
-        _acc.close(ec);
-        if (ec)
-        {
-          Utils::Log.log_display("Target Environment Server: " + ec.message());
-          return Unknown_EC;
-        }
+      _acc.cancel(ec);
+      if (ec)
+      {
+        Utils::Log.log_display("Target Environment Server: " + ec.message());
+        return Unknown_EC;
+      }
+      _acc.close(ec);
+      if (ec)
+      {
+        Utils::Log.log_display("Target Environment Server: " + ec.message());
+        return Unknown_EC;
+      }
     }
 
     DLOG("Target Environment Server: Close coneections for clients.");

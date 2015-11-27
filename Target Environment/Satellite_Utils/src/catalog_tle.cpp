@@ -177,6 +177,7 @@ bool CatalogTLE::parse_keo(const string& filename)
         entry->norad = new NoradSGP4(*entry, imode);
       }
     }
-    _keo_el.push_front(entry);
+
+    _keo_el.push_back(entry);
   }
 }

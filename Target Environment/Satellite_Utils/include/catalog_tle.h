@@ -8,6 +8,7 @@
 #include <cmath>
 #include <string>
 #include <list>
+#include <vector>
 
 //------------------------------------------------------------------------------
 /// \brief Параметры кеплеровых элементов орбиты
@@ -148,6 +149,9 @@ class CatalogTLE
 	friend class NoradSDP4;
 
 public:
+
+  typedef std::vector<std::shared_ptr<KEO>> container_type;
+
   CatalogTLE()
   {
     // юлианская дата начала системной эпохи
@@ -157,7 +161,8 @@ public:
   // Разбор файла каталога
   bool parse_keo(const std::string& filename);
 
-  std::list<std::shared_ptr<KEO>>& get_satellite_list() { return _keo_el; }
+
+  container_type& get_satellite_list() { return _keo_el; }
 
   void clear_satellite_list() { _keo_el.clear(); }
 
@@ -169,7 +174,7 @@ private:
 	double _jd0;
 
 	// Список всех кеплеровых элементов орбит
-	std::list<std::shared_ptr<KEO>> _keo_el;
+  container_type _keo_el;
 };
 
 #endif // CATALOG_TLE_H

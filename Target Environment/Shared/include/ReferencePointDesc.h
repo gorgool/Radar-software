@@ -27,7 +27,7 @@ namespace TargetEnvironment
     double azimuth_ang;
     double azimuth_width;
 
-    ReferencePointDesc(std::size_t id, const double lat, const double lon, const double h, const double r,
+    ReferencePointDesc(std::uint32_t id, const double lat, const double lon, const double h, const double r,
       const double elev_ang, const double elev_width, const double azim_ang, const double azim_width) :
       client_id(id),
       latitude(lat),
