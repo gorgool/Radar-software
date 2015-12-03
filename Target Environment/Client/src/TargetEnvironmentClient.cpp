@@ -187,7 +187,8 @@ namespace TargetEnvironment
     try
     {
       boost::property_tree::ptree cfg;
-      boost::property_tree::read_json(std::stringstream(res), cfg);
+      std::stringstream res_stream(res);
+      boost::property_tree::read_json(res_stream, cfg);
       ntargets = cfg.get<std::size_t>("size");
     }
     catch (...)

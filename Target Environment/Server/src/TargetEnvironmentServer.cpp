@@ -46,7 +46,8 @@ namespace TargetEnvironment
 
     try
     {
-      boost::property_tree::read_json(std::stringstream(res), cfg);
+      std::stringstream res_stream(res);
+      boost::property_tree::read_json(res_stream, cfg);
       msg_header = cfg.get<std::string>("message");
     }
     catch (...)

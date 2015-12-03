@@ -94,6 +94,7 @@ namespace TargetEnvironment
     }
   };
   // Description of target
+#pragma pack(push, 1)
   struct TargetDesc
   {
     std::size_t target_id;
@@ -108,9 +109,9 @@ namespace TargetEnvironment
     std::array<double, 6> z;
 
     TargetDesc(std::size_t _id, 
-               std::array<double, 6>& x_params,
-               std::array<double, 6>& y_params, 
-               std::array<double, 6>& z_params) :
+               const std::array<double, 6>& x_params,
+               const std::array<double, 6>& y_params, 
+               const std::array<double, 6>& z_params) :
       target_id(_id),
       x(x_params),
       y(y_params),
@@ -119,3 +120,4 @@ namespace TargetEnvironment
     TargetDesc() = default;
   };
 }
+#pragma pack(pop)

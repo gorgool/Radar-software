@@ -21,15 +21,18 @@ std::ostream& operator<<(std::ostream& out, std::array<double,6>& arr)
 int main(int argc, char* argv[])
 {
   setlocale(LC_ALL, "");
-  boost::asio::ip::tcp::endpoint server_address(boost::asio::ip::address::from_string("192.168.2.254"), 6565);
+
+  std::string serv_addr = argv[1];
+
+  boost::asio::ip::tcp::endpoint server_address(boost::asio::ip::address::from_string(serv_addr), 6565);
 
   std::random_device rd;
   std::mt19937 gen(rd());
   std::uniform_int_distribution<std::size_t> id(0, std::numeric_limits<std::size_t>::max());
 
-  const size_t n_threads = std::stoi(argv[1]);
+  const size_t n_threads = std::stoi(argv[2]);
   //const size_t n_threads = std::thread::hardware_concurrency();
-  //const size_t n_threads = 1;
+  //const size_t n_threads = 2;
 
   std::vector<std::size_t> counters(n_threads, 0);
   bool stop_flag = true;
@@ -84,7 +87,7 @@ int main(int argc, char* argv[])
 
   std::this_thread::sleep_for(std::chrono::seconds(20));
   
-  stop_flag = false;
+  //stop_flag = false;
   
   for (auto& th : thread_pool)
     th.join();
