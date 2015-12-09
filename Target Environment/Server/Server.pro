@@ -2,10 +2,10 @@ TARGET = te_server
 
 QMAKE_CXXFLAGS += -std=c++11 -fopenmp
 
-QMAKE_LIBDIR = ../Shared ../Satellite_Utils ../../Utils ../../CoordinateSystems -fopenmp
+QMAKE_LIBDIR = ../Shared ../Satellite_Utils ../../Utils ../../CoordinateSystems
 
 LIBS = -lboost_system -lboost_thread -lboost_regex \
-       -lShared -lUtils -lCoordinateSystems -lSatelliteUtils
+       -lShared -lUtils -lCoordinateSystems -lSatelliteUtils -fopenmp
 
 HEADERS += \
     include/Connection.h \
