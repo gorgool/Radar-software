@@ -5,7 +5,7 @@
 #define _USE_MATH_DEFINES
 #include <cmath>
 #include <iostream>
-#include <Eigen\Core>
+#include "../../Utils/include/EigenHeaders.h"
 
 namespace CSUtils
 {
