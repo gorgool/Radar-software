@@ -6,9 +6,7 @@ INCLUDEPATH = include
 HEADERS += \
     CSPoints.h \
     CSTransform.h \
-    CSTransform_to.h \
     CSUtils.h
 
 SOURCES += \
-    src/CSTransform.cpp \
-    src/CSTransform_to.cpp
+    src/CSTransform.cpp
