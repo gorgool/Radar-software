@@ -1,4 +1,5 @@
 #include "../include/TargetEnvironmentClient.h"
+#include "../../../Utils/include/GetValueWrapper.hpp"
 
 using namespace boost::asio;
 using namespace boost::system;
@@ -184,12 +185,18 @@ namespace TargetEnvironment
 
     std::size_t ntargets;
     
+    rapidjson::Document root;
+    root.Parse(res.c_str());
+
+    if (root.HasParseError())
+    {
+      DLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
+      return ErrorCode::RequestFail_EC;
+    }
+
     try
     {
-      boost::property_tree::ptree cfg;
-      std::stringstream res_stream(res);
-      boost::property_tree::read_json(res_stream, cfg);
-      ntargets = cfg.get<std::size_t>("size");
+      ntargets = get_value<std::uint32_t>(root, "size");
     }
     catch (...)
     {

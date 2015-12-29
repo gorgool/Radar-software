@@ -1,4 +1,5 @@
 #include "../include/TargetEnvironmentServer.h"
+#include "../../../Utils/include/GetValueWrapper.hpp"
 #include <omp.h>
 
 namespace TargetEnvironment
@@ -42,17 +43,24 @@ namespace TargetEnvironment
     conn->read_buffer.get()->consume(size);
 
     std::string msg_header;
-    boost::property_tree::ptree cfg;
+    rapidjson::Document root;
+    root.Parse(res.c_str());
+
+    if (root.HasParseError())
+    {
+      Utils::Log.log_display("Target Environment Server: Message parse error. Empty message.");
+      start_read(conn);
+      return;
+    }
 
     try
     {
-      std::stringstream res_stream(res);
-      boost::property_tree::read_json(res_stream, cfg);
-      msg_header = cfg.get<std::string>("message");
+      msg_header = get_value<std::string>(root, "message");
     }
     catch (...)
     {
-      Utils::Log.log_display("Target Environment Server: Message parse error. Empty message.");
+      Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
+      send_msg(RequestFail);
       start_read(conn);
       return;
     }
@@ -63,15 +71,15 @@ namespace TargetEnvironment
       {
         // Parse Reference point message
         auto& ref_point = conn->ref_point;
-        ref_point.client_id = cfg.get<std::uint32_t>("id");
-        ref_point.latitude = cfg.get<double>("lat");
-        ref_point.longitude = cfg.get<double>("lon");
-        ref_point.height = cfg.get<double>("alt");
-        ref_point.range = cfg.get<double>("range");
-        ref_point.azimuth_ang = cfg.get<double>("azimuth_angle");
-        ref_point.azimuth_width = cfg.get<double>("azimuth_width");
-        ref_point.elevation_ang = cfg.get<double>("elevation_angle");
-        ref_point.elevation_width = cfg.get<double>("elevation_width");
+        ref_point.client_id = get_value<std::uint32_t>(root, "id");
+        ref_point.latitude = get_value<double>(root, "lat");
+        ref_point.longitude = get_value<double>(root, "lon");
+        ref_point.height = get_value<double>(root, "alt");
+        ref_point.range = get_value<double>(root, "range");
+        ref_point.azimuth_ang = get_value<double>(root, "azimuth_angle");
+        ref_point.azimuth_width = get_value<double>(root, "azimuth_width");
+        ref_point.elevation_ang = get_value<double>(root, "elevation_angle");
+        ref_point.elevation_width = get_value<double>(root, "elevation_width");
       }
 
       catch (...)
@@ -93,7 +101,7 @@ namespace TargetEnvironment
 
       try
       {
-        ClockType::duration dur(cfg.get<ClockType::duration::rep>("time"));
+        ClockType::duration dur(get_value<std::uint64_t>(root, "time"));
         time = TimeType(dur);
       }
 
@@ -159,6 +167,8 @@ namespace TargetEnvironment
 
     accept_connection();
   }
+
+
 
   ErrorCode TargetEnvironmentServer::process_request(std::list<Connection>::iterator conn, const TimeType& time)
   {
@@ -244,10 +254,10 @@ namespace TargetEnvironment
     {
       conn->write_buffer.get()->sputn(
         reinterpret_cast<char *>(target_buffer.data()),
-        target_buffer.size() * sizeof(TargetDesc));
+        count * sizeof(TargetDesc));
 
-      write(*conn->socket, *conn->write_buffer,
-        boost::asio::transfer_exactly(sizeof(TargetDesc) * target_buffer.size()), ec);
+      auto len = write(*conn->socket, *conn->write_buffer,
+        boost::asio::transfer_exactly(sizeof(TargetDesc) * count), ec);
 
       if (ec)
       {

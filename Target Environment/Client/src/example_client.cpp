@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
   setlocale(LC_ALL, "");
 
   std::string serv_addr = argv[1];
+  //std::string serv_addr = "127.0.0.1";
 
   boost::asio::ip::tcp::endpoint server_address(boost::asio::ip::address::from_string(serv_addr), 6565);
 
@@ -32,7 +33,7 @@ int main(int argc, char* argv[])
 
   const size_t n_threads = std::stoi(argv[2]);
   //const size_t n_threads = std::thread::hardware_concurrency();
-  //const size_t n_threads = 2;
+  //const size_t n_threads = 1;
 
   std::vector<std::size_t> counters(n_threads, 0);
   bool stop_flag = true;
@@ -87,7 +88,7 @@ int main(int argc, char* argv[])
 
   std::this_thread::sleep_for(std::chrono::seconds(20));
   
-  //stop_flag = false;
+  stop_flag = false;
   
   for (auto& th : thread_pool)
     th.join();

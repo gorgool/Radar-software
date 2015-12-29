@@ -176,6 +176,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Utils\include\GetValueWrapper.hpp" />
     <ClInclude Include="..\..\Server\include\ComputeParams.h" />
     <ClInclude Include="..\..\Server\include\Connection.h" />
     <ClInclude Include="..\..\Server\include\TargetEnvironmentServer.h" />
@@ -209,6 +210,7 @@
     <Import Project="..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets" Condition="Exists('..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets')" />
     <Import Project="..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets" Condition="Exists('..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets')" />
     <Import Project="..\packages\Eigen.3.2.6\build\native\Eigen.targets" Condition="Exists('..\packages\Eigen.3.2.6\build\native\Eigen.targets')" />
+    <Import Project="..\packages\rapidjson.1.0.2\build\native\rapidjson.targets" Condition="Exists('..\packages\rapidjson.1.0.2\build\native\rapidjson.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -221,5 +223,6 @@
     <Error Condition="!Exists('..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_system-vc140.1.59.0.0\build\native\boost_system-vc140.targets'))" />
     <Error Condition="!Exists('..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost_thread-vc140.1.59.0.0\build\native\boost_thread-vc140.targets'))" />
     <Error Condition="!Exists('..\packages\Eigen.3.2.6\build\native\Eigen.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Eigen.3.2.6\build\native\Eigen.targets'))" />
+    <Error Condition="!Exists('..\packages\rapidjson.1.0.2\build\native\rapidjson.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\rapidjson.1.0.2\build\native\rapidjson.targets'))" />
   </Target>
 </Project>

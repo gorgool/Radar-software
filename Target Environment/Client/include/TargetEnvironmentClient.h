@@ -1,14 +1,13 @@
 #pragma once
 
 #include <boost/asio.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/json_parser.hpp>
 #include <chrono>
 #include "../../Shared/include/TargetTable.h"
 #include <unordered_map>
 #include "../../Shared/include/ReferencePointDesc.h"
 #include "../../Shared/include/TargetEnvironmentErrors.h"
 #include "../../Shared/include/TargetEnvironmentMessages.h"
+#include <rapidjson\document.h>
 
 #undef DEBUG_LOG
 #include "../../../Utils/include/Logger.h"

@@ -4,9 +4,8 @@
 #include <inttypes.h>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
-#include <boost/lexical_cast.hpp>
-#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/property_tree/ptree.hpp>
 #include "../../../Utils/include/EigenHeaders.h"
 #include <list>
 #include <cstddef>
@@ -18,6 +17,7 @@
 #include "../../../Utils/include/FormatString.h"
 #include "../../../Utils/include/SplitString.hpp"
 #include "../../../CoordinateSystems/include/CSUtils.h"
+#include <rapidjson\document.h>
 #include "ComputeParams.h"
 
 #include "../../../Utils/include/Logger.h"
