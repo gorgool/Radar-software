@@ -17,7 +17,7 @@
 #include "../../../Utils/include/FormatString.h"
 #include "../../../Utils/include/SplitString.hpp"
 #include "../../../CoordinateSystems/include/CSUtils.h"
-#include <rapidjson\document.h>
+#include <rapidjson/document.h>
 #include "ComputeParams.h"
 
 #include "../../../Utils/include/Logger.h"

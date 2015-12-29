@@ -1,11 +1,10 @@
 #pragma once
-#include <rapidjson\document.h>
+#include <rapidjson/document.h>
 
 template<typename T>
 T get_value(rapidjson::Document& root, const char* key)
 {
   // Not implemented for generic type. Specializations see below.
-  static_assert(false);
   return T();
 }
 

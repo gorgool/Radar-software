@@ -7,7 +7,7 @@
 #include "../../Shared/include/ReferencePointDesc.h"
 #include "../../Shared/include/TargetEnvironmentErrors.h"
 #include "../../Shared/include/TargetEnvironmentMessages.h"
-#include <rapidjson\document.h>
+#include <rapidjson/document.h>
 
 #undef DEBUG_LOG
 #include "../../../Utils/include/Logger.h"
