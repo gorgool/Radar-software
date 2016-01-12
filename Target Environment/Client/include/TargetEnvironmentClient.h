@@ -21,7 +21,8 @@ namespace TargetEnvironment
 
     ReferencePointDesc _reference_point;
 
-    bool parse_targets(const char*, const std::size_t);
+    bool parse_targets(const std::vector<TargetEnvironment::TargetDesc>& targets);
+    std::vector<TargetEnvironment::TargetDesc> deserialize(const std::string&);
     ErrorCode close_client();
 
     const std::size_t MAX_TARGETS = 20000;

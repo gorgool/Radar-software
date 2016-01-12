@@ -38,7 +38,7 @@ struct KEO
 
 	double omega;         ///< Угловая частота для моделирования ЭПР (рад/с)
 
-	std::size_t number;      ///< Номер КО по каталогу NORAD
+	std::uint32_t number;      ///< Номер КО по каталогу NORAD
 	std::size_t errors;      ///< Маска признаков ошибок при прогнозе
 
 	NoradBase *norad;     ///< Экземпляр для выполнения прогноза

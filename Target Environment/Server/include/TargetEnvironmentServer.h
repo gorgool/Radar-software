@@ -47,6 +47,7 @@ namespace TargetEnvironment
     void on_accept(std::shared_ptr<boost::asio::ip::tcp::socket>, const boost::system::error_code&);
     ErrorCode process_request(std::list<Connection>::iterator, const TimeType& time);
     ErrorCode load_config();
+    std::string serialize(std::vector<TargetEnvironment::TargetDesc>&);
     bool _stop_flag;
 
   public:

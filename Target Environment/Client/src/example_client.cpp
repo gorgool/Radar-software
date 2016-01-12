@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 
   auto worker = [&](std::size_t idx)
   {
+    setlocale(LC_ALL, "");
     auto client_id = id(gen);
     TargetEnvironment::ReferencePointDesc rfp(client_id, 44.392087, -68.204052, 100, 3000000, 45.0, 25.0, 10.0, 40.0);
 

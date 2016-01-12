@@ -97,7 +97,7 @@ namespace TargetEnvironment
 #pragma pack(push, 1)
   struct TargetDesc
   {
-    std::size_t target_id;
+    std::uint32_t target_id;
 
     // X coordinate vector, meters, metera/sec, meters/(sec*sec), etc.
     std::array<double, 6> x;
@@ -108,7 +108,7 @@ namespace TargetEnvironment
     // Z coordinate vector, meters, metera/sec, meters/(sec*sec), etc.
     std::array<double, 6> z;
 
-    TargetDesc(std::size_t _id, 
+    TargetDesc(std::uint32_t _id, 
                const std::array<double, 6>& x_params,
                const std::array<double, 6>& y_params, 
                const std::array<double, 6>& z_params) :

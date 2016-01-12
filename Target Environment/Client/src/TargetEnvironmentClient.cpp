@@ -1,22 +1,18 @@
 #include "../include/TargetEnvironmentClient.h"
 #include "../../../Utils/include/GetValueWrapper.hpp"
+#include <boost/algorithm/string.hpp>
 
 using namespace boost::asio;
 using namespace boost::system;
 
 namespace TargetEnvironment
 {
-  bool TargetEnvironmentClient::parse_targets(const char * msg, const std::size_t ntargets)
+  bool TargetEnvironmentClient::parse_targets(const std::vector<TargetEnvironment::TargetDesc>& targets)
   {
     _tbl.clear();
-    for (size_t idx = 0; idx < ntargets; ++idx)
+    for (auto& item : targets)
     {
-      const TargetDesc* target_ptr = reinterpret_cast<const TargetDesc*>(msg + idx * sizeof(TargetDesc));
-
-      TargetDesc buff;
-      memcpy(reinterpret_cast<char*>(&buff), target_ptr, sizeof(TargetDesc));
-
-      _tbl.add_target(buff);
+      _tbl.add_target(item);
     }
     return true;
   }
@@ -86,7 +82,6 @@ namespace TargetEnvironment
 
     error_code ec;
     _socket.connect(server_address, ec);
-    // TODO: Connection time out!!!
 
     if (ec)
     {
@@ -168,7 +163,7 @@ namespace TargetEnvironment
     DLOG("Target Environment client: Request send successfully. Read server response.");
 
     streambuf buff;
-    read_until(_socket, buff, "\n", ec);
+    auto len = read_until(_socket, buff, "\n", ec);
 
     if (ec)
     {
@@ -177,7 +172,7 @@ namespace TargetEnvironment
       return ErrorCode::RequestFail_EC;
     }
 
-    std::string res(buffer_cast<const char*>(buff.data()));
+    std::string res(buffer_cast<const char*>(buff.data()), len);
     if (res == RequestFail)
       return ErrorCode::RequestFail_EC;
 
@@ -217,8 +212,8 @@ namespace TargetEnvironment
     if (ntargets != 0)
     {
       DLOG("Target Environment client: Loading targets from server.");
-      streambuf raw_buffer;
-      boost::asio::read(_socket, raw_buffer, boost::asio::transfer_exactly(nbytes), ec);
+      streambuf buffer;
+      len = read_until(_socket, buffer, '\n', ec);
       if (ec)
       {
         DLOG("Target Environment client: " + ec.message());
@@ -227,7 +222,9 @@ namespace TargetEnvironment
       }
       DLOG("Target Environment client: Reading targets success.");
       DLOG("Target Environment client: Parse targets list.");
-      if (parse_targets(boost::asio::buffer_cast<const char*>(raw_buffer.data()), ntargets) == false)
+
+      ;
+      if (parse_targets(deserialize(std::string(buffer_cast<const char*>(buffer.data()), len))) == false)
       {
         DLOG("Target Environment client: Parse targets message error.");
         return ErrorCode::RequestFail_EC;
@@ -237,5 +234,70 @@ namespace TargetEnvironment
     tbl = _tbl.get_table();
     
     return ErrorCode::OK_EC;
+  }
+
+  std::vector<TargetEnvironment::TargetDesc> TargetEnvironmentClient::deserialize(const std::string& msg)
+  {
+    std::vector<TargetEnvironment::TargetDesc> ret;
+
+    if (msg.empty())
+      return ret;
+
+    std::size_t item_end = 0;
+
+    while (true)
+    {
+      auto item_start = item_end;
+      item_end = msg.find(";", item_start + 1);
+
+      if (item_end == std::string::npos)
+        break;
+
+      std::string item_str = msg.substr(item_start + 1, item_end - item_start - 1);
+
+      TargetDesc item;
+
+      std::vector<std::string> tokens;
+      boost::split(tokens, item_str, boost::is_any_of(" ;:"));
+
+      if (tokens.size() != 23)
+      {
+        DLOG("Target Environment client: deserialize error. Wrong message format.");
+      }
+
+      try
+      {
+        item.target_id = std::stoi(tokens[1]);
+
+        item.x[0] = std::stod(tokens[3]);
+        item.x[1] = std::stod(tokens[4]);
+        item.x[2] = std::stod(tokens[5]);
+        item.x[3] = std::stod(tokens[6]);
+        item.x[4] = std::stod(tokens[7]);
+        item.x[5] = std::stod(tokens[8]);
+
+        item.y[0] = std::stod(tokens[10]);
+        item.y[1] = std::stod(tokens[11]);
+        item.y[2] = std::stod(tokens[12]);
+        item.y[3] = std::stod(tokens[13]);
+        item.y[4] = std::stod(tokens[14]);
+        item.y[5] = std::stod(tokens[15]);
+
+        item.z[0] = std::stod(tokens[17]);
+        item.z[1] = std::stod(tokens[18]);
+        item.z[2] = std::stod(tokens[19]);
+        item.z[3] = std::stod(tokens[20]);
+        item.z[4] = std::stod(tokens[21]);
+        item.z[5] = std::stod(tokens[22]);
+      }
+      catch (...)
+      {
+        DLOG("Target Environment client: deserialize error. Parsing message error.");
+      }
+
+      ret.emplace_back(item);
+    }
+
+    return ret;
   }
 }

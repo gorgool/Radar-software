@@ -11,7 +11,7 @@
 */
 
 TargetEnvironment::TargetDesc compute_params(
-  const std::size_t id,
+  const std::uint32_t id,
   const std::array<double, 6>& points_x,
   const std::array<double, 6>& points_y,
   const std::array<double, 6>& points_z);

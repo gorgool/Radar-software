@@ -168,8 +168,6 @@ namespace TargetEnvironment
     accept_connection();
   }
 
-
-
   ErrorCode TargetEnvironmentServer::process_request(std::list<Connection>::iterator conn, const TimeType& time)
   {
     DLOG(Utils::string_format("Target Environment Server: Processing request from client. Id : %u", conn->ref_point.client_id));
@@ -252,19 +250,14 @@ namespace TargetEnvironment
 
     if (count > 0)
     {
-      conn->write_buffer.get()->sputn(
-        reinterpret_cast<char *>(target_buffer.data()),
-        count * sizeof(TargetDesc));
-
-      auto len = write(*conn->socket, *conn->write_buffer,
-        boost::asio::transfer_exactly(sizeof(TargetDesc) * count), ec);
+      auto msg = serialize(target_buffer);
+      write(*conn->socket, buffer(msg), ec);
 
       if (ec)
       {
         Utils::Log.log_display("Target Environment Server: " + ec.message());
         return Unknown_EC;
       }
-
     }
 
     return OK_EC;
@@ -408,5 +401,40 @@ namespace TargetEnvironment
   bool TargetEnvironmentServer::is_stoped()
   {
     return _stop_flag;
+  }
+
+  std::string TargetEnvironmentServer::serialize(std::vector<TargetEnvironment::TargetDesc>& targets)
+  {
+    std::string ret;
+
+    for (auto& item : targets)
+    {
+      std::string item_buff = "id:" + std::to_string(item.target_id);
+
+      item_buff += " x:" + std::to_string(item.x[0]) + " "
+        + std::to_string(item.x[1]) + " "
+        + std::to_string(item.x[2]) + " "
+        + std::to_string(item.x[3]) + " "
+        + std::to_string(item.x[4]) + " "
+        + std::to_string(item.x[5]);
+
+      item_buff += " y:" + std::to_string(item.y[0]) + " "
+        + std::to_string(item.y[1]) + " "
+        + std::to_string(item.y[2]) + " "
+        + std::to_string(item.y[3]) + " "
+        + std::to_string(item.y[4]) + " "
+        + std::to_string(item.y[5]);
+
+      item_buff += " z:" + std::to_string(item.z[0]) + " "
+        + std::to_string(item.z[1]) + " "
+        + std::to_string(item.z[2]) + " "
+        + std::to_string(item.z[3]) + " "
+        + std::to_string(item.z[4]) + " "
+        + std::to_string(item.z[5]) + ";";
+
+      ret += item_buff;
+    }
+
+    return ret + '\n';
   }
 }
