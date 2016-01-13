@@ -15,7 +15,6 @@
 #include "../../Shared/include/TargetEnvironmentMessages.h"
 #include "../../Shared/include/ReferencePointDesc.h"
 #include "../../../Utils/include/FormatString.h"
-#include "../../../Utils/include/SplitString.hpp"
 #include "../../../CoordinateSystems/include/CSUtils.h"
 #include <rapidjson/document.h>
 #include "ComputeParams.h"

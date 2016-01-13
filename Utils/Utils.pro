@@ -7,7 +7,6 @@ HEADERS += \
     ExecTime.hpp \
     FormatString.h \
     Logger.h \
-    SplitString.hpp
 	
 SOURCES += \
     src/Logger.cpp

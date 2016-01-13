@@ -10,8 +10,8 @@
 #include <atomic>
 #include "FormatString.h"
 
-#undef DEBUG_LOG
-//#define DEBUG_LOG
+//#undef DEBUG_LOG
+#define DEBUG_LOG
 
 #ifndef DEBUG_LOG
   #define DLOG(text) ;
