@@ -147,7 +147,7 @@ namespace TargetEnvironment
     if (is_connected() == false)
       return ErrorCode::RequestFail_EC;
 
-    auto dur = std::chrono::time_point_cast<std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100i64, 1i64>, std::nano>>>(t).time_since_epoch().count();
+    auto dur = std::chrono::time_point_cast<std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100, 1>, std::nano>>>(t).time_since_epoch().count();
 
     error_code ec;
     Request req_msg(_reference_point.client_id, dur);
