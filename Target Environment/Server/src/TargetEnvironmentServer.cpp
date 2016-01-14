@@ -101,8 +101,8 @@ namespace TargetEnvironment
 
       try
       {
-        ClockType::duration dur(get_value<std::uint64_t>(root, "time"));
-        time = TimeType(dur);
+        std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100i64, 1i64>, std::nano>> dur(get_value<std::uint64_t>(root, "time"));
+        time = std::chrono::time_point<ClockType, std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100i64, 1i64>, std::nano>>>(dur);
       }
 
       catch (...)
