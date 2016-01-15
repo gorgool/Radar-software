@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../include/TargetEnvironmentServer.h"
 
-int main(int argc, char* argv[])
+int main()
 {
   boost::asio::io_service service;
 

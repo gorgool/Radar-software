@@ -61,9 +61,6 @@ namespace TargetEnvironment
         << ", \"id\" : " << id
         << ", \"time\" : " << time
         << "}\n";
-      /*s << "Request [ id:" << id
-        << "; time:" << time
-        << ";]\n";*/
       msg = s.str();
     }
   };
@@ -88,8 +85,6 @@ namespace TargetEnvironment
       s << " { \"message\" : \"TargetsList\""
         << ", \"size\" : " << count
         << "}\n";
-      /*s << "TargetsList [ size:" << count
-        << ";]\n";*/
       msg = s.str();
     }
   };

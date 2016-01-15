@@ -10,8 +10,8 @@
 #include <atomic>
 #include "FormatString.h"
 
-#undef DEBUG_LOG
-//#define DEBUG_LOG
+//#undef DEBUG_LOG
+#define DEBUG_LOG
 
 #ifndef DEBUG_LOG
   #define DLOG(text) ;
@@ -96,7 +96,6 @@ namespace Utils
 
     std::mutex m;
     const static std::size_t buffer_size = 50;
-    //using buffer_type = std::array<std::string, buffer_size>;
     using buffer_type = std::vector<std::string>;
 
     std::future<void> flush(const std::size_t from, const std::size_t to)
@@ -104,7 +103,7 @@ namespace Utils
       return std::async(std::launch::async, [this](const std::size_t from, const std::size_t to)
       {
         for (auto idx = from; idx < to; ++idx)
-          out_file << second_buffer[idx];
+          out_file << second_buffer[idx] << std::endl;
       }, from, to);
     }
 

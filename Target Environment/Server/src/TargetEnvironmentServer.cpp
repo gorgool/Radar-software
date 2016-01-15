@@ -14,12 +14,12 @@ namespace TargetEnvironment
       // Check shutdown of connection
       if (error::eof == ec || error::connection_reset == ec)
       {
-        Utils::Log.log_display("Target Environment Server: Deleting client.");
+        DFLOG("Target Environment Server: Deleting client.");
         conn->shutdown();
         _clients.erase(conn);
         return;
       }
-      Utils::Log.log_display("Target Environment Server: " + ec.message());
+      DFLOG("Target Environment Server: " + ec.message());
       return;
     }
 
@@ -31,7 +31,7 @@ namespace TargetEnvironment
       {
         if (ec)
         {
-          Utils::Log.log_display("Target Environment Server: " + ec.message());
+          DFLOG("Target Environment Server: " + ec.message());
         }
       });
     };
@@ -48,7 +48,7 @@ namespace TargetEnvironment
 
     if (root.HasParseError())
     {
-      Utils::Log.log_display("Target Environment Server: Message parse error. Empty message.");
+      DFLOG("Target Environment Server: Message parse error. Empty message.");
       start_read(conn);
       return;
     }
@@ -59,7 +59,7 @@ namespace TargetEnvironment
     }
     catch (...)
     {
-      Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
+      DFLOG("Target Environment Server: Request message error. Wrong data format.");
       send_msg(RequestFail);
       start_read(conn);
       return;
@@ -84,13 +84,13 @@ namespace TargetEnvironment
 
       catch (...)
       {
-        Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
+        DFLOG("Target Environment Server: Request message error. Wrong data format.");
         send_msg(RequestFail);
         start_read(conn);
         return;
       }
 
-      DLOG("Target Environment Server: Register success. Send confirmation to client.");
+      DFLOG("Target Environment Server: Register success. Send confirmation to client.");
       send_msg(RegisterSuccess);
       start_read(conn);
       return;
@@ -107,7 +107,7 @@ namespace TargetEnvironment
 
       catch (...)
       {
-        Utils::Log.log_display("Target Environment Server: Request message error. Wrong data format.");
+        DFLOG("Target Environment Server: Request message error. Wrong data format.");
         send_msg(RequestFail);
         start_read(conn);
         return;
@@ -116,7 +116,7 @@ namespace TargetEnvironment
       auto err = process_request(conn, time);
       if (err != OK_EC)
       {
-        Utils::Log.log_display("Target Environment Server: Error processing request.");
+        DFLOG("Target Environment Server: Error processing request.");
         send_msg(RequestFail);
       }
       start_read(conn);
@@ -124,7 +124,7 @@ namespace TargetEnvironment
     }
     else
     {
-      Utils::Log.log_display("Target Environment Server: Unknown type of message.");
+      DFLOG("Target Environment Server: Unknown type of message.");
       start_read(conn);
       return;
     }
@@ -138,7 +138,7 @@ namespace TargetEnvironment
 
   void TargetEnvironmentServer::accept_connection()
   {
-    DLOG("Target Environment Server: Accepting connections...");
+    DFLOG("Target Environment Server: Accepting connections...");
     std::shared_ptr<ip::tcp::socket> accept_socket(new ip::tcp::socket(_service));
 
     _acc.async_accept(
@@ -155,10 +155,10 @@ namespace TargetEnvironment
       {
         return;
       }
-      Utils::Log.log_display("Target Environment Server: " + ec.message());
+      DFLOG("Target Environment Server: " + ec.message());
       return;
     }
-    DLOG("Target Environment Server: Connection accepted.");
+    DFLOG("Target Environment Server: Connection accepted.");
 
     std::list<Connection>::iterator conn = _clients.insert(_clients.end(), Connection(socket));
 
@@ -170,11 +170,11 @@ namespace TargetEnvironment
 
   ErrorCode TargetEnvironmentServer::process_request(std::list<Connection>::iterator conn, const TimeType& time)
   {
-    DLOG(Utils::string_format("Target Environment Server: Processing request from client. Id : %u", conn->ref_point.client_id));
+    DFLOG(Utils::string_format("Target Environment Server: Processing request from client. Id : %u", conn->ref_point.client_id));
 
     std::vector<TargetDesc> target_buffer;
 
-    DLOG("Target Environment Server: Read and filter satellites.");
+    DFLOG("Target Environment Server: Read and filter satellites.");
     auto satellite_list = _satellite_catalog.get_satellite_list();
 
     // Time and date in Julian time
@@ -235,7 +235,7 @@ namespace TargetEnvironment
       }
     }
 
-    DLOG(Utils::string_format("Target Environment Server: Found %u satellites for client %u.", target_buffer.size(), conn->ref_point.client_id));
+    DFLOG(Utils::string_format("Target Environment Server: Found %u satellites for client %u.", target_buffer.size(), conn->ref_point.client_id));
 
     // Sending result back to client
     size_t count = target_buffer.size();
@@ -244,7 +244,7 @@ namespace TargetEnvironment
     write(*conn->socket, buffer(msg.msg), ec);
     if (ec)
     {
-      Utils::Log.log_display("Target Environment Server: " + ec.message());
+      DFLOG("Target Environment Server: " + ec.message());
       return Unknown_EC;
     }
 
@@ -255,7 +255,7 @@ namespace TargetEnvironment
 
       if (ec)
       {
-        Utils::Log.log_display("Target Environment Server: " + ec.message());
+        DFLOG("Target Environment Server: " + ec.message());
         return Unknown_EC;
       }
     }
@@ -289,51 +289,51 @@ namespace TargetEnvironment
 
   ErrorCode TargetEnvironmentServer::start()
   {
-    DLOG("Target Environment Server: Server start.");
+    DFLOG("Target Environment Server: Server start.");
     setlocale(LC_ALL, "");
 
     auto err = load_config();
     if (err != OK_EC)
     {
-      Utils::Log.log_display("Target Environment Server: Error while reading or parsing configuration file.");
+      DFLOG("Target Environment Server: Error while reading or parsing configuration file.");
       return Unknown_EC;
     }
 
-    DLOG("Target Environment Server: Loading satellite catalog.");
+    DFLOG("Target Environment Server: Loading satellite catalog.");
     if (_satellite_catalog.parse_keo("Resource/catalog.tle") == false)
     {
-      Utils::Log.log_display("Target Environment Server: Error parsing tle file.");
+      DFLOG("Target Environment Server: Error parsing tle file.");
       return Unknown_EC;
     }
-    DLOG("Target Environment Server: Catalog load success.");
+    DFLOG("Target Environment Server: Catalog load success.");
 
     error_code ec;
 
     _acc.open(_ep.protocol(), ec);
     if (ec)
     {
-      Utils::Log.log_display("Target Environment Server: " + ec.message());
+      DFLOG("Target Environment Server: " + ec.message());
       return Unknown_EC;
     }
     _acc.bind(_ep, ec);
     if (ec)
     {
-      Utils::Log.log_display("Target Environment Server: " + ec.message());
+      DFLOG("Target Environment Server: " + ec.message());
       return Unknown_EC;
     }
     _acc.listen();
 
     accept_connection();
 
-    DLOG("Target Environment Server: Starting work threads...");
+    DFLOG("Target Environment Server: Starting work threads...");
     for (size_t n = 0; n < boost::thread::hardware_concurrency(); ++n)
     {
       _work_threads.create_thread([this]()
       {
-        DLOG("Target Environment Server: Work thread started.");
+        DFLOG("Target Environment Server: Work thread started.");
         setlocale(LC_ALL, "");
         _service.run();
-        DLOG("Target Environment Server: Work thread stoped.");
+        DFLOG("Target Environment Server: Work thread stoped.");
       });
     }
 
@@ -344,30 +344,30 @@ namespace TargetEnvironment
 
   ErrorCode TargetEnvironmentServer::stop()
   {
-    DLOG("Target Environment Server: Server stop.");
+    DFLOG("Target Environment Server: Server stop.");
     error_code ec;
 
-    DLOG("Target Environment Server: Clear satellite catalog.");
+    DFLOG("Target Environment Server: Clear satellite catalog.");
     _satellite_catalog.clear_satellite_list();
 
-    DLOG("Target Environment Server: Closing acceptor.");
+    DFLOG("Target Environment Server: Closing acceptor.");
     if (_acc.is_open())
     {
       _acc.cancel(ec);
       if (ec)
       {
-        Utils::Log.log_display("Target Environment Server: " + ec.message());
+        DFLOG("Target Environment Server: " + ec.message());
         return Unknown_EC;
       }
       _acc.close(ec);
       if (ec)
       {
-        Utils::Log.log_display("Target Environment Server: " + ec.message());
+        DFLOG("Target Environment Server: " + ec.message());
         return Unknown_EC;
       }
     }
 
-    DLOG("Target Environment Server: Close coneections for clients.");
+    DFLOG("Target Environment Server: Close coneections for clients.");
     for (auto& conn : _clients)
     {
       if (conn.socket.get()->is_open())
@@ -376,7 +376,7 @@ namespace TargetEnvironment
         conn.socket.get()->close(ec);
         if (ec)
         {
-          Utils::Log.log_display("Target Environment Server: " + ec.message());
+          DFLOG("Target Environment Server: " + ec.message());
         }
       }
     }
@@ -386,9 +386,9 @@ namespace TargetEnvironment
 
     _service.reset();
 
-    DLOG("Target Environment Server: Waiting for work threads.");
+    DFLOG("Target Environment Server: Waiting for work threads.");
     _work_threads.join_all();
-    DLOG("Target Environment Server: Work threads closed.");
+    DFLOG("Target Environment Server: Work threads closed.");
     _stop_flag = true;
     return OK_EC;
   }

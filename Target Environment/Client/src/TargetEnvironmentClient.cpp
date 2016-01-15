@@ -26,7 +26,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       return ErrorCode::Unknown_EC;
     }
 
@@ -34,7 +34,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       return ErrorCode::Unknown_EC;
     }
 
@@ -51,22 +51,21 @@ namespace TargetEnvironment
 
   TargetEnvironmentClient::~TargetEnvironmentClient()
   {
-    DLOG("Target Environment client: Client delete.");
+    DFLOG("Target Environment client: Client delete.");
     if (_socket.is_open())
     {
-      DLOG("Target Environment client: Close client socket.");
+      DFLOG("Target Environment client: Close client socket.");
       error_code ec;
       _socket.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-      // Throw an error when attempting to shutdown connection on 
-      // server side with failed server connection
+
       if (ec)
       {
-        DLOG("Target Environment client: " + ec.message());
+        DFLOG("Target Environment client: " + ec.message());
       }
       _socket.close(ec);
       if (ec)
       {
-        DLOG("Target Environment client: " + ec.message());
+        DFLOG("Target Environment client: " + ec.message());
       }
     }
   }
@@ -78,53 +77,53 @@ namespace TargetEnvironment
       return ErrorCode::OK_EC;
     }
     
-    DLOG("Target Environment client: Connect to server.");
+    DFLOG("Target Environment client: Connect to server.");
 
     error_code ec;
     _socket.connect(server_address, ec);
 
     if (ec)
     {
-      DLOG(ec.message());
+      DFLOG(ec.message());
       return ErrorCode::Unknown_EC;
     }
 
-    DLOG("Target Environment client: Connection success.");
+    DFLOG("Target Environment client: Connection success.");
 
-    DLOG("Target Environment client: Send reference point descriptor message.");
+    DFLOG("Target Environment client: Send reference point descriptor message.");
     RefPoint msg(_reference_point);
 
     write(_socket, buffer(msg.msg), ec);
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       return ErrorCode::RegisterFail_EC;
     }
-    DLOG("Target Environment client: Reference point descriptor message was send successfully.");
+    DFLOG("Target Environment client: Reference point descriptor message was send successfully.");
     
     streambuf buff;
     read_until(_socket, buff, "\n", ec);
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       return ErrorCode::RegisterFail_EC;
     }
 
     std::string res(buffer_cast<const char*>(buff.data()));
     if (res == RegisterSuccess)
     {
-      DLOG("Target Environment client: Register success.");
+      DFLOG("Target Environment client: Register success.");
       _connected = true;
       return ErrorCode::OK_EC;
     }
     else if (res == RefPointFail)
     {
-      DLOG("Target Environment client: Register failed.");
+      DFLOG("Target Environment client: Register failed.");
       return ErrorCode::RegisterFail_EC;
     }
     else
     {
-      DLOG("Target Environment client: Unknow type of message.");
+      DFLOG("Target Environment client: Unknow type of message.");
       return ErrorCode::Unknown_EC;
     }
   }
@@ -136,13 +135,13 @@ namespace TargetEnvironment
 
   ErrorCode TargetEnvironmentClient::disconnect()
   {
-    DLOG("Target Environment client: Disconnect from server.");
+    DFLOG("Target Environment client: Disconnect from server.");
     return close_client();
   }
 
   ErrorCode TargetEnvironmentClient::get_targets(TargetTable::TableType& tbl, const TimeType& t)
   {
-    DLOG("Target Environment client: Sending request.");
+    DFLOG("Target Environment client: Sending request.");
     
     if (is_connected() == false)
       return ErrorCode::RequestFail_EC;
@@ -156,18 +155,18 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       close_client();
       return ErrorCode::RequestFail_EC;
     }
-    DLOG("Target Environment client: Request send successfully. Read server response.");
+    DFLOG("Target Environment client: Request send successfully. Read server response.");
 
     streambuf buff;
     auto len = read_until(_socket, buff, "\n", ec);
 
     if (ec)
     {
-      DLOG("Target Environment client: " + ec.message());
+      DFLOG("Target Environment client: " + ec.message());
       close_client();
       return ErrorCode::RequestFail_EC;
     }
@@ -176,7 +175,7 @@ namespace TargetEnvironment
     if (res == RequestFail)
       return ErrorCode::RequestFail_EC;
 
-    DLOG("Target Environment client: Targets list read succefully.");
+    DFLOG("Target Environment client: Targets list read succefully.");
 
     std::size_t ntargets;
     
@@ -185,7 +184,7 @@ namespace TargetEnvironment
 
     if (root.HasParseError())
     {
-      DLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
+      DFLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
       return ErrorCode::RequestFail_EC;
     }
 
@@ -195,37 +194,37 @@ namespace TargetEnvironment
     }
     catch (...)
     {
-      DLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
+      DFLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
       return ErrorCode::RequestFail_EC;
     }
     const std::size_t nbytes = ntargets * sizeof(TargetDesc);
 
-    DLOG(Utils::string_format("Target Environment client: Number of targets %u.", ntargets));
+    DFLOG(Utils::string_format("Target Environment client: Number of targets %u.", ntargets));
 
     if (ntargets > sizeof(TargetDesc) * MAX_TARGETS)
     {
-      DLOG("Target Environment client: Too many targets.");
+      DFLOG("Target Environment client: Too many targets.");
       return ErrorCode::RequestFail_EC;
     }
 
     if (ntargets != 0)
     {
-      DLOG("Target Environment client: Loading targets from server.");
+      DFLOG("Target Environment client: Loading targets from server.");
       streambuf buffer;
       len = read_until(_socket, buffer, '\n', ec);
       if (ec)
       {
-        DLOG("Target Environment client: " + ec.message());
+        DFLOG("Target Environment client: " + ec.message());
         close_client();
         return ErrorCode::RequestFail_EC;
       }
-      DLOG("Target Environment client: Reading targets success.");
-      DLOG("Target Environment client: Parse targets list.");
+      DFLOG("Target Environment client: Reading targets success.");
+      DFLOG("Target Environment client: Parse targets list.");
 
       ;
       if (parse_targets(deserialize(std::string(buffer_cast<const char*>(buffer.data()), len))) == false)
       {
-        DLOG("Target Environment client: Parse targets message error.");
+        DFLOG("Target Environment client: Parse targets message error.");
         return ErrorCode::RequestFail_EC;
       }
     }
@@ -261,7 +260,8 @@ namespace TargetEnvironment
 
       if (tokens.size() != 23)
       {
-        DLOG("Target Environment client: deserialize error. Wrong message format.");
+        DFLOG("Target Environment client: deserialize error. Wrong message format.");
+        return ret;
       }
 
       try
@@ -291,7 +291,8 @@ namespace TargetEnvironment
       }
       catch (...)
       {
-        DLOG("Target Environment client: deserialize error. Parsing message error.");
+        DFLOG("Target Environment client: deserialize error. Parsing message error.");
+        return ret;
       }
 
       ret.emplace_back(item);

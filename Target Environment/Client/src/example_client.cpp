@@ -22,18 +22,38 @@ int main(int argc, char* argv[])
 {
   setlocale(LC_ALL, "");
 
-  std::string serv_addr = argv[1];
-  //std::string serv_addr = "127.0.0.1";
+  if (argc != 3)
+  {
+    std::cerr << "Wrong number of arguments. Usage: te_client server_ip number_of_threads.\n";
+    return -1;
+  }
 
-  boost::asio::ip::tcp::endpoint server_address(boost::asio::ip::address::from_string(serv_addr), 6565);
+  std::string serv_addr = argv[1];
+
+  boost::system::error_code ec;
+  auto server_ip = boost::asio::ip::address::from_string(serv_addr, ec);
+
+  if (ec)
+  {
+    std::cerr << "Wrong server ip format. Example: te_client 127.0.0.1 4.\n";
+    return -1;
+  }
+
+  size_t n_threads = 1;
+  try
+  {
+    n_threads = std::stoi(argv[2]);
+  }
+  catch (...)
+  {
+    std::cerr << "Wrong number of threads. Should be positive interger. Using default value (1). Example: te_client 127.0.0.1 4.\n";
+  }
+
+  boost::asio::ip::tcp::endpoint server_address(server_ip, 6565);
 
   std::random_device rd;
   std::mt19937 gen(rd());
-  std::uniform_int_distribution<std::size_t> id(0, std::numeric_limits<std::size_t>::max());
-
-  const size_t n_threads = std::stoi(argv[2]);
-  //const size_t n_threads = std::thread::hardware_concurrency();
-  //const size_t n_threads = 1;
+  std::uniform_int_distribution<std::uint32_t> id(0, std::numeric_limits<std::uint32_t>::max());
 
   std::vector<std::size_t> counters(n_threads, 0);
   bool stop_flag = true;
@@ -81,7 +101,7 @@ int main(int argc, char* argv[])
     { 
       while (stop_flag)
       {
-        printf("%u\n", c);
+        printf("%zu\n", c);
         std::this_thread::sleep_for(std::chrono::seconds(1));
       }
     }, std::ref(counters[i])));
