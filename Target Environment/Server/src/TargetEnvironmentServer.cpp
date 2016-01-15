@@ -194,7 +194,7 @@ namespace TargetEnvironment
       sat_date.tm_hour + sat_date.tm_min / 60.0 + sat_date.tm_sec / 60.0);
 
     #pragma omp parallel for
-    for (int idx = 0; idx < satellite_list.size(); ++idx)
+    for (std::size_t idx = 0; idx < satellite_list.size(); ++idx)
     {
       auto item = satellite_list[idx];
       // Elapsed time in minutes

@@ -197,8 +197,6 @@ namespace TargetEnvironment
       DFLOG("Target Environment client: Error parsing Target list message. Wrong data format.");
       return ErrorCode::RequestFail_EC;
     }
-    const std::size_t nbytes = ntargets * sizeof(TargetDesc);
-
     DFLOG(Utils::string_format("Target Environment client: Number of targets %u.", ntargets));
 
     if (ntargets > sizeof(TargetDesc) * MAX_TARGETS)

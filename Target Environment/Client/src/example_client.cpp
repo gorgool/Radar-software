@@ -71,7 +71,7 @@ int main(int argc, char* argv[])
     {
       std::cerr << "Error connecting to server.\n";
       std::cin.ignore();
-      return -1;
+      return;
     }
 
     while (stop_flag)
@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
       {
         std::cerr << "Error getting target list.\n";
         std::cin.ignore();
-        return -1;
+        return;
       }
       counters[idx]++;
     }
