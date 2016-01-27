@@ -56,6 +56,6 @@ namespace TargetEnvironment
         - OK_EC if request procced succefully
         - RequestFail_EC if request failed
     */
-    ErrorCode get_targets(std::unordered_map<std::size_t, TargetDesc>&, const TimeType& time);
+    ErrorCode get_targets(std::unordered_map<std::size_t, TargetDesc>&, const ClockType::time_point& time);
   };
 }

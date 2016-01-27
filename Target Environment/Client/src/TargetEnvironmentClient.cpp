@@ -139,7 +139,7 @@ namespace TargetEnvironment
     return close_client();
   }
 
-  ErrorCode TargetEnvironmentClient::get_targets(TargetTable::TableType& tbl, const TimeType& t)
+  ErrorCode TargetEnvironmentClient::get_targets(TargetTable::TableType& tbl, const ClockType::time_point& t)
   {
     DFLOG("Target Environment client: Sending request.");
     
