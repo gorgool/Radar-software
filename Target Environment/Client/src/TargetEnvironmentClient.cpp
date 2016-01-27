@@ -97,7 +97,7 @@ namespace TargetEnvironment
     if (ec)
     {
       DFLOG("Target Environment client: " + ec.message());
-      return ErrorCode::RegisterFail_EC;
+      return ErrorCode::Unknown_EC;
     }
     DFLOG("Target Environment client: Reference point descriptor message was send successfully.");
     
@@ -106,7 +106,7 @@ namespace TargetEnvironment
     if (ec)
     {
       DFLOG("Target Environment client: " + ec.message());
-      return ErrorCode::RegisterFail_EC;
+      return ErrorCode::Unknown_EC;
     }
 
     std::string res(buffer_cast<const char*>(buff.data()));
@@ -146,7 +146,7 @@ namespace TargetEnvironment
     if (is_connected() == false)
       return ErrorCode::RequestFail_EC;
 
-    auto dur = std::chrono::time_point_cast<std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100, 1>, std::nano>>>(t).time_since_epoch().count();
+    auto dur = std::chrono::time_point_cast<DurationType>(t).time_since_epoch().count();
 
     error_code ec;
     Request req_msg(_reference_point.client_id, dur);
@@ -157,7 +157,7 @@ namespace TargetEnvironment
     {
       DFLOG("Target Environment client: " + ec.message());
       close_client();
-      return ErrorCode::RequestFail_EC;
+      return ErrorCode::Unknown_EC;
     }
     DFLOG("Target Environment client: Request send successfully. Read server response.");
 
@@ -168,7 +168,7 @@ namespace TargetEnvironment
     {
       DFLOG("Target Environment client: " + ec.message());
       close_client();
-      return ErrorCode::RequestFail_EC;
+      return ErrorCode::Unknown_EC;
     }
 
     std::string res(buffer_cast<const char*>(buff.data()), len);
@@ -214,7 +214,7 @@ namespace TargetEnvironment
       {
         DFLOG("Target Environment client: " + ec.message());
         close_client();
-        return ErrorCode::RequestFail_EC;
+        return ErrorCode::Unknown_EC;
       }
       DFLOG("Target Environment client: Reading targets success.");
       DFLOG("Target Environment client: Parse targets list.");

@@ -101,8 +101,8 @@ namespace TargetEnvironment
 
       try
       {
-        std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100, 1>, std::nano>> dur(get_value<std::uint64_t>(root, "time"));
-        time = std::chrono::time_point<ClockType, std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100, 1>, std::nano>>>(dur);
+        DurationType dur(get_value<std::uint64_t>(root, "time"));
+        time = TimeType(dur);
       }
 
       catch (...)
@@ -194,7 +194,7 @@ namespace TargetEnvironment
       sat_date.tm_hour + sat_date.tm_min / 60.0 + sat_date.tm_sec / 60.0);
 
     #pragma omp parallel for
-    for (std::size_t idx = 0; idx < satellite_list.size(); ++idx)
+    for (int idx = 0; idx < satellite_list.size(); ++idx)
     {
       auto item = satellite_list[idx];
       // Elapsed time in minutes

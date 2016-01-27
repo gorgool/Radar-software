@@ -9,7 +9,9 @@
 namespace TargetEnvironment
 {
   using ClockType = std::chrono::system_clock;
-  using TimeType = ClockType::time_point;
+  using DurationType = std::chrono::duration<uint64_t, std::ratio_multiply<std::ratio<100, 1>, std::nano>>;
+  using TimeType = std::chrono::time_point<ClockType, DurationType>;
+  
   /*
     From client to server
   */
