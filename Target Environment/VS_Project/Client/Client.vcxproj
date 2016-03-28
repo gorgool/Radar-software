@@ -112,6 +112,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_WIN32_WINDOWS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\;D:\Документы\Sources\Git\Radar software\Target Environment</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -139,6 +140,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_WIN32_WINDOWS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\;D:\Документы\Sources\Git\Radar software\Target Environment</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -168,6 +170,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_WIN32_WINDOWS;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\;D:\Документы\Sources\Git\Radar software\Target Environment</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -176,13 +179,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Utils\src\Logger.cpp" />
-    <ClCompile Include="..\..\Client\src\example_client.cpp" />
-    <ClCompile Include="..\..\Client\src\TargetEnvironmentClient.cpp" />
-    <ClCompile Include="..\..\Shared\src\TargetTable.cpp" />
+    <ClCompile Include="..\..\..\Utils\Logger.cpp" />
+    <ClCompile Include="..\..\Client\example_client.cpp" />
+    <ClCompile Include="..\..\Client\Client.cpp" />
+    <ClCompile Include="..\..\Shared\TargetTable.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Client\include\TargetEnvironmentClient.h" />
+    <ClInclude Include="..\..\Client\Client.h" />
+    <ClInclude Include="..\..\Shared\TargetTable.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -113,6 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
       <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -141,6 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
       <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -171,6 +173,7 @@
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
       <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -179,30 +182,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Utils\include\GetValueWrapper.hpp" />
-    <ClInclude Include="..\..\Server\include\ComputeParams.h" />
-    <ClInclude Include="..\..\Server\include\Connection.h" />
-    <ClInclude Include="..\..\Server\include\TargetEnvironmentServer.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\CoordinateSystems\src\CSTransform.cpp" />
-    <ClCompile Include="..\..\..\Utils\src\Logger.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\catalog_tle.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\noradCircl.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\noradSDP4.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\noradSGDP4.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\noradSGP4.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\norad_base.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\utils.cpp" />
-    <ClCompile Include="..\..\Satellite_Utils\src\vector3.cpp" />
-    <ClCompile Include="..\..\Server\src\ComputeParams.cpp" />
-    <ClCompile Include="..\..\Server\src\Connection.cpp" />
-    <ClCompile Include="..\..\Server\src\example_server.cpp" />
-    <ClCompile Include="..\..\Server\src\SectorCheck.cpp" />
-    <ClCompile Include="..\..\Server\src\TargetEnvironmentServer.cpp" />
+    <ClCompile Include="..\..\..\CoordinateSystems\CSTransform.cpp" />
+    <ClCompile Include="..\..\..\Utils\Logger.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\catalog_tle.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\noradCircl.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\noradSDP4.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\noradSGDP4.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\noradSGP4.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\norad_base.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\utils.cpp" />
+    <ClCompile Include="..\..\SatelliteUtils\vector3.cpp" />
+    <ClCompile Include="..\..\Server\ComputeParams.cpp" />
+    <ClCompile Include="..\..\Server\Connection.cpp" />
+    <ClCompile Include="..\..\Server\example_server.cpp" />
+    <ClCompile Include="..\..\Server\SectorCheck.cpp" />
+    <ClCompile Include="..\..\Server\Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Server\ComputeParams.h" />
+    <ClInclude Include="..\..\Server\Connection.h" />
+    <ClInclude Include="..\..\Server\SectorCheck.h" />
+    <ClInclude Include="..\..\Server\Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

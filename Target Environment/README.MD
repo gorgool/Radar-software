@@ -1,16 +1,16 @@
-Library Dependencies:
-	boost-chrono
-	boost-asio
-	boost-regex
-	boost-thread
-	boost-system
-	boost-date-time
-	boost-property-tree
-	Eigen
-	qmake
+Library Dependencies
+---
+* boost-asio
+* boost-thread
+* Eigen
+*	qmake
+*	rapidjson
+
 
 Install deps for linux ubuntu:
-	sudo apr-get install libeigen3-dev libboost-all-dev
-	
+
+	sudo apr-get install libeigen3-dev libboost-all-dev rapidjson-dev
+
 Install deps for MS Visual Studio 2015 nuget (in pakages.config file):
-    Update-Package -reinstall
+
+	Update-Package -reinstall
