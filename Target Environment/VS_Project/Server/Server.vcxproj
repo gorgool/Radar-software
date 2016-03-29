@@ -112,8 +112,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
-      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\..\;$(MSBuildProjectDirectory)\..\..\;D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -141,8 +141,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
-      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;_WINSOCK_DEPRECATED_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\..\;$(MSBuildProjectDirectory)\..\..\;$(MSBuildProjectDirectory)\..\..\;$(MSBuildProjectDirectory)\..\..\..\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -172,8 +172,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <OpenMPSupport>true</OpenMPSupport>
-      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;_WIN32_WINDOWS;_WINSOCK_DEPRECATED_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\..\..\..\;$(MSBuildProjectDirectory)\..\..\;D:\Документы\Sources\Git\Radar software\Target Environment;D:\Документы\Sources\Git\Radar software;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -199,13 +199,13 @@
     <ClCompile Include="..\..\Server\Server.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Server\ComputeParams.h" />
     <ClInclude Include="..\..\Server\Connection.h" />
     <ClInclude Include="..\..\Server\SectorCheck.h" />
     <ClInclude Include="..\..\Server\Server.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

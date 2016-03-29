@@ -29,14 +29,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Client\Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Shared\TargetTable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

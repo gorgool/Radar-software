@@ -62,9 +62,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\..\Server\ComputeParams.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -77,5 +74,8 @@
     <ClInclude Include="..\..\Server\Server.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
