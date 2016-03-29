@@ -36,7 +36,7 @@ std::string get_value(const rapidjson::Value& root, const char* key)
   {
     if (root.HasMember(key) && root[key].IsString())
     {
-      return root[key].GetString();
+      return root[key].GetString(); 
     }
     else
       throw std::system_error(std::error_code(), "Parse error.");

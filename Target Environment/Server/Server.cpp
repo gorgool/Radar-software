@@ -114,7 +114,7 @@ namespace TargetEnvironment
     rapidjson::Document root;
     root.Parse(res.c_str());
 
-    if (root.HasParseError())
+    if (root.HasParseError() || !root.IsObject())
     {
       Utils::Log.log("Target Environment Server: Message parse error. Empty message.");
       send_msg(RequestFailMsg);
