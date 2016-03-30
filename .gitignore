@@ -6,3 +6,9 @@ Release/
 .vs
 *.sdf
 *.db
+*.o
+Makefile*
+*.user
+*.a
+te_client
+te_server

@@ -2,19 +2,24 @@ TARGET = te_server
 
 QMAKE_CXXFLAGS += -std=c++11 -fopenmp
 
-QMAKE_LIBDIR = ../Shared ../Satellite_Utils ../../Utils ../../CoordinateSystems
+QMAKE_LIBDIR = ../Shared ../SatelliteUtils ../../Utils ../../CoordinateSystems
 
 LIBS = -lboost_system -lboost_thread -lboost_regex \
        -lShared -lUtils -lCoordinateSystems -lSatelliteUtils -fopenmp
 
+INCLUDEPATH +=\
+    ../ \
+    ../..
+
 HEADERS += \
-    include/Connection.h \
-    include/TargetEnvironmentServer.h \
-    include/ComputeParams.h
+    Connection.h \
+    Server.h \
+    ComputeParams.h \
+    SectorCheck.h
 
 SOURCES += \
-    src/Connection.cpp \
-    src/example_server.cpp \
-    src/SectorCheck.cpp \
-    src/TargetEnvironmentServer.cpp \
-    src/ComputeParams.cpp
+    Connection.cpp \
+    example_server.cpp \
+    SectorCheck.cpp \
+    Server.cpp \
+    ComputeParams.cpp

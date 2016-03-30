@@ -6,7 +6,6 @@ template<typename T>
 T get_value(const rapidjson::Value& root, const char* key = nullptr)
 {
   // Not implemented for generic type. Specializations see below.
-  static_assert(false);
   return T();
 }
 

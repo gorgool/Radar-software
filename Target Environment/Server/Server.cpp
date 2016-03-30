@@ -14,9 +14,9 @@ namespace TargetEnvironment
   Server::Server() :
     _service(),
     _acc(_service),
-    _clients_counter(0),
     _stopped(true),
-    _config_loaded(false)
+    _config_loaded(false),
+    _clients_counter(0)
   {
     setlocale(LC_ALL, "");
   }

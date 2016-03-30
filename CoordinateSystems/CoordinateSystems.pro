@@ -1,7 +1,9 @@
 TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++11
-INCLUDEPATH = include
+
+INCLUDEPATH += \
+    ../ \
 
 HEADERS += \
     CSPoints.h \
@@ -9,4 +11,4 @@ HEADERS += \
     CSUtils.h
 
 SOURCES += \
-    src/CSTransform.cpp
+    CSTransform.cpp

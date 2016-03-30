@@ -6,9 +6,13 @@ QMAKE_LIBDIR = ../Shared ../../Utils
 LIBS = -lboost_system -lboost_thread -lboost_regex \
         -lShared -lUtils
 
+INCLUDEPATH += \
+    ../ \
+    ../..
+
 HEADERS += \
-    include/TargetEnvironmentClient.h
+    Client.h
 
 SOURCES += \
-    src/example_client.cpp \
-    src/TargetEnvironmentClient.cpp
+    example_client.cpp \
+    Client.cpp

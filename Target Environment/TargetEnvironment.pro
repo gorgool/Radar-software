@@ -8,7 +8,7 @@ CoordinateSystems.file = ../CoordinateSystems/CoordinateSystems.pro
 
 Shared.file = Shared/Shared.pro
 
-SatelliteUtils.file = Satellite_Utils/SatelliteUtils.pro
+SatelliteUtils.file = SatelliteUtils/SatelliteUtils.pro
 
 Client.file = Client/Client.pro
 Client.depends = Shared Utils

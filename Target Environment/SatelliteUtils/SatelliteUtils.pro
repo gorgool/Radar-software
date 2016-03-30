@@ -1,7 +1,6 @@
 TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++11 -O2
-INCLUDEPATH = include
 
 HEADERS += \
     catalog_tle.h \
@@ -14,11 +13,11 @@ HEADERS += \
     vector3.h
 
 SOURCES += \
-    src/catalog_tle.cpp \
-    src/norad_base.cpp \
-    src/noradCircl.cpp \
-    src/noradSDP4.cpp \
-    src/noradSGDP4.cpp \
-    src/noradSGP4.cpp \
-    src/utils.cpp \
-    src/vector3.cpp
+    catalog_tle.cpp \
+    norad_base.cpp \
+    noradCircl.cpp \
+    noradSDP4.cpp \
+    noradSGDP4.cpp \
+    noradSGP4.cpp \
+    utils.cpp \
+    vector3.cpp
