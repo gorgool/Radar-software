@@ -16,6 +16,15 @@ namespace TargetEnvironment
     write_buffer(new boost::asio::streambuf())
   {}
 
+  /**
+   * @fn  void TargetEnvironment::Connection::shutdown()
+   *
+   * @brief Shuts down this connection.
+   *
+   * @author  Gorgool
+   * @date  20.04.2016
+   */
+
   void TargetEnvironment::Connection::shutdown()
   {
     if (socket.get()->is_open())

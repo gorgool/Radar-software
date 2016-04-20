@@ -15,7 +15,16 @@ namespace CSUtils
   const static double a = 6378136.0;
   const static double b = 6356751.36;
   const static double e_2 = 0.0066943662;
-  
+
+  /**
+   * @struct  Angle
+   *
+   * @brief An angle.
+   *
+   * @author  Gorgool
+   * @date  20.04.2016
+   */
+
   struct Angle 
   { 
     double degrees, minutes, seconds; // in radians

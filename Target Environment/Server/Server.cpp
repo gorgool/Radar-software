@@ -21,55 +21,66 @@ namespace TargetEnvironment
     setlocale(LC_ALL, "");
   }
 
-  // Read and parse configuration file. Return OK if read and parsing was success. 
-  // Return SystemError if file was not found and ConfigError due to parse error.
-  ErrorCode Server::load_config(std::string path_to_file)
-  {
-    std::ifstream config_file(path_to_file);
+  /**
+  * @fn  ErrorCode Server::load_config(const ConfigManager& conf);
+  *
+  * @brief Loads a configuration.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param conf  The conf.
+  *
+  * @return  OK if read and parsing was success. Return SystemError if file was not found and ConfigError due to parse error.
+  */
 
-    if (config_file.good() == false)
+  ErrorCode Server::load_config(const ConfigManager& conf)
+  {
+    if (_stopped == false)
     {
-      Utils::Log.log("Target Environment Server: Error opening config file.");
+      Utils::Log.log("Target Environment Server: Can't load config, server is running now.");
       return ErrorCode::SystemError;
     }
 
-    std::stringstream config_stream;
-    config_stream << config_file.rdbuf();
-
-    config_file.close();
-
     try
     {
-      rapidjson::Document config;
-      config.Parse(config_stream.str().c_str());
-
-      if (config.HasMember("te_settings") == false)
-      {
-        Utils::Log.log("Target Environment Server: Config file has no te_settings object.");
-        return ErrorCode::ConfigError;
-      }
-
-      auto json_settings = get_nested_object(config, "te_settings");
-
-      auto port = get_value<std::uint32_t>(json_settings, "port");
+      auto& section = conf.get_section("te_settings");
+      auto port = conf.get_value<std::uint32_t>(section, "port");
       _ep = ip::tcp::endpoint(ip::tcp::v4(), port);
 
-      _max_connections = get_value<std::uint32_t>(json_settings, "max_connections");
+      _max_connections = conf.get_value<std::uint32_t>(section, "max_connections");
 
-      _tle_path = get_value<std::string>(json_settings, "tle_catalog");
+      _tle_path = conf.get_value<std::string>(section, "tle_catalog");
 
       _config_loaded = true;
 
       return ErrorCode::OK;
     }
-    catch (...)
+    catch (const SystemException& ex)
     {
-      Utils::Log.log("Target Environment Server: Error parsing file.");
+      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      return ErrorCode::SystemError;
+    }
+    catch (const ConfigException& ex)
+    {
+      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
       return ErrorCode::ConfigError;
     }
   }
 
-  // Reading callback
+  /**
+  * @fn  void Server::on_read(std::list<Connection>::iterator conn, const boost::system::error_code& err, size_t s);
+  *
+  * @brief Executes the read action.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param conn  The connection iterator.
+  * @param err   The error code.
+  * @param s     The size of received message.
+  */
+
   void Server::on_read(std::list<Connection>::iterator conn, const boost::system::error_code & ec, size_t size)
   {
     if (ec)
@@ -182,14 +193,32 @@ namespace TargetEnvironment
     return;
   }
 
-  // Start reading for specific connection.
+  /**
+  * @fn  void Server::start_read(std::list<Connection>::iterator conn);
+  *
+  * @brief Starts reading from socket for specific connection.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param conn  The connection iterator.
+  */
+
   void Server::start_read(std::list<Connection>::iterator conn)
   {
     async_read_until(*conn->socket, *conn->read_buffer, "\n",
       std::bind(&Server::on_read, this, conn, std::placeholders::_1, std::placeholders::_2));
   }
 
-  // Start accepting new connections
+  /**
+  * @fn  void Server::start_accept();
+  *
+  * @brief Starts an accepting of new connections.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  */
+
   void Server::start_accept()
   {
     std::shared_ptr<ip::tcp::socket> accept_socket(new ip::tcp::socket(_service));
@@ -199,7 +228,18 @@ namespace TargetEnvironment
       std::bind(&Server::on_accept, this, accept_socket, std::placeholders::_1));
   }
 
-  // Accept callback
+  /**
+  * @fn  void Server::on_accept(std::shared_ptr<boost::asio::ip::tcp::socket> socket, const boost::system::error_code& err);
+  *
+  * @brief Executes the accept action.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param socket  The socket.
+  * @param err     The error code.
+  */
+
   void Server::on_accept(std::shared_ptr<ip::tcp::socket> socket, const error_code& ec)
   {
     if (ec)
@@ -254,7 +294,23 @@ namespace TargetEnvironment
     start_accept();
   }
 
-  // Process request from client.
+  /**
+  * @fn  ErrorCode Server::process_request(const TargetEnvironment::SearchArea& area, const CSUtils::GCSPoint& radar_loc, const TimeType& time, TargetsListMsg& ret_targets);
+  *
+  * @brief Process the request.
+  *        Return list of targets thats are found in given search area.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param area                  The search area descriptor.
+  * @param radar_loc             The radar location.
+  * @param time                  Time.
+  * @param [out]  ret_targets    List of targets in given area.
+  *
+  * @return  An ErrorCode.
+  */
+
   ErrorCode Server::process_request(const SearchArea& area, const CSUtils::GCSPoint& radar_location,const TimeType& time, TargetsListMsg& result)
   {
     std::vector<Target> target_buffer;
@@ -323,7 +379,17 @@ namespace TargetEnvironment
     return OK;
   }
 
-  // Start server. Return OK if start was succefull, SystemError otherwise.
+  /**
+  * @fn  ErrorCode Server::start();
+  *
+  * @brief Start server.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @return  OK if start was succefull, SystemError otherwise.
+  */
+
   ErrorCode Server::start()
   {
     if (_stopped == false)
@@ -383,6 +449,17 @@ namespace TargetEnvironment
 
     return ErrorCode::OK;
   }
+
+  /**
+  * @fn  ErrorCode Server::stop();
+  *
+  * @brief Stop server.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @return  OK if start was succefull, SystemError otherwise.
+  */
 
   ErrorCode Server::stop()
   {

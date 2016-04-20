@@ -1,14 +1,55 @@
 #include "CSTransform.h"
 
+/**
+ * @fn  double CSUtils::degree_to_rad(double _degrees, double _minutes, double _seconds)
+ *
+ * @brief Convert degrees to radians.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _degrees  The angular degrees.
+ * @param _minutes  The angular minutes.
+ * @param _seconds  The angular seconds.
+ *
+ * @return  Angle in radians.
+ */
+
 double CSUtils::degree_to_rad(double _degrees, double _minutes, double _seconds)
 {
   return M_PI * (_degrees + (_minutes + _seconds / 60.0) / 60.0) / 180.0;
 };
 
+/**
+ * @fn  double CSUtils::degree_to_rad(const CSUtils::Angle& _angle)
+ *
+ * @brief Converts degree to radians.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _angle  The angle.
+ *
+ * @return  Angle in radians.
+ */
+
 double CSUtils::degree_to_rad(const CSUtils::Angle& _angle)
 {
   return M_PI * (_angle.degrees + (_angle.minutes + _angle.seconds / 60.0) / 60.0) / 180.0;
 };
+
+/**
+ * @fn  CSUtils::Angle CSUtils::rad_to_degrees(double _rads)
+ *
+ * @brief Converts radians to degrees.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _rads Angle in radians.
+ *
+ * @return  The Angle.
+ */
 
 CSUtils::Angle CSUtils::rad_to_degrees(double _rads)
 {
@@ -19,6 +60,19 @@ CSUtils::Angle CSUtils::rad_to_degrees(double _rads)
 
   return CSUtils::Angle(degrees, minutes, seconds);
 };
+
+/**
+ * @fn  CSUtils::ECEFPoint CSUtils::gcs_to_ecef(const CSUtils::GCSPoint& _point)
+ *
+ * @brief Converts point from Geodetic coordinate system to Earth Center Earth Fixed coordinate system.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Geodetic coordinate system.
+ *
+ * @return  Earth Center Earth Fixed coordinate system point.
+ */
 
 CSUtils::ECEFPoint CSUtils::gcs_to_ecef(const CSUtils::GCSPoint& _point)
 {
@@ -32,6 +86,19 @@ CSUtils::ECEFPoint CSUtils::gcs_to_ecef(const CSUtils::GCSPoint& _point)
 
   return ret;
 }
+
+/**
+ * @fn  CSUtils::GCSPoint CSUtils::ecef_to_gcs(const CSUtils::ECEFPoint& _point)
+ *
+ * @brief Converts point from Earth Center Earth Fixed coordinate system to Geodetic coordinate system.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  Earth Center Earth Fixed coordinate system point.
+ *
+ * @return  The point in Geodetic coordinate system.
+ */
 
 CSUtils::GCSPoint CSUtils::ecef_to_gcs(const CSUtils::ECEFPoint& _point)
 {
@@ -55,6 +122,20 @@ CSUtils::GCSPoint CSUtils::ecef_to_gcs(const CSUtils::ECEFPoint& _point)
 
   return ret;
 }
+
+/**
+ * @fn  CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, const CSUtils::GCSPoint& _origin)
+ *
+ * @brief Converts point from Earth Center Earth Fixed coordinate system to East North Up coordinate system with specific origin point.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Earth Center Earth Fixed coordinate system.
+ * @param _origin The origin of East North Up coordinate system.
+ *
+ * @return  East North Up coordinate system point.
+ */
 
 CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, const CSUtils::GCSPoint& _origin)
 {
@@ -88,6 +169,20 @@ CSUtils::ENUPoint CSUtils::ecef_to_enu(const CSUtils::ECEFPoint& _point, const C
   return CSUtils::ENUPoint(result(0), result(1), result(2));
 }
 
+/**
+ * @fn  CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point, const CSUtils::GCSPoint& _origin)
+ *
+ * @brief Converts point from East North Up coordinate system to Earth Center Earth Fixed coordinate system with specific origin point.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in East North Up coordinate system.
+ * @param _origin The origin of East North Up coordinate system.
+ *
+ * @return  The point in Earth Center Earth Fixed coordinate system.
+ */
+
 CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point, const CSUtils::GCSPoint& _origin)
 {
   double phi = _origin.latitude;
@@ -120,6 +215,21 @@ CSUtils::ECEFPoint CSUtils::enu_to_ecef(const CSUtils::ENUPoint& _point, const C
   return CSUtils::ECEFPoint(ret(0), ret(1), ret(2));
 }
 
+/**
+ * @fn  CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point, const Angle& _eps, const Angle& _beta)
+ *
+ * @brief Converts point from East North Up coordinate system to Cartesian Coordinate System of Antenna with specific orientation.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in East North Up coordinate system.
+ * @param _eps    The elevation angle of antenna orientation.
+ * @param _beta   The azimuth angle of antenna orientation.
+ *
+ * @return  Cartesian Coordinate System of Antenna point.
+ */
+
 CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point, const Angle& _eps, const Angle& _beta)
 {
   double eps = degree_to_rad(_eps);
@@ -139,6 +249,21 @@ CSUtils::CCSAPoint CSUtils::enu_to_ccsa(const ENUPoint& _point, const Angle& _ep
 
   return CSUtils::CCSAPoint(ret(0), ret(1), ret(2));
 }
+
+/**
+ * @fn  CSUtils::ENUPoint CSUtils::ccsa_to_enu(const CCSAPoint& _point, const Angle& _eps, const Angle& _beta)
+ *
+ * @brief Converts point from Cartesian Coordinate System of Antenna to East North Up coordinate system with specific orientation.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Cartesian Coordinate System of Antenna.
+ * @param _eps    The elevation angle of antenna orientation.
+ * @param _beta   The azimuth angle of antenna orientation.
+ *
+ * @return  East North Up coordinate system point.
+ */
 
 CSUtils::ENUPoint CSUtils::ccsa_to_enu(const CCSAPoint& _point, const Angle& _eps, const Angle& _beta)
 {
@@ -160,6 +285,19 @@ CSUtils::ENUPoint CSUtils::ccsa_to_enu(const CCSAPoint& _point, const Angle& _ep
   return CSUtils::ENUPoint(ret(0), ret(1), ret(2));
 }
 
+/**
+ * @fn  CSUtils::BCSPoint CSUtils::ccsa_to_bcs(const CSUtils::CCSAPoint& _point)
+ *
+ * @brief Converts point from Cartesian Coordinate System of Antenna to Biconical coordinate system.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Cartesian Coordinate System of Antenna.
+ *
+ * @return  Biconical coordinate system point.
+ */
+
 CSUtils::BCSPoint CSUtils::ccsa_to_bcs(const CSUtils::CCSAPoint& _point)
 {
   CSUtils::BCSPoint ret;
@@ -177,6 +315,19 @@ CSUtils::BCSPoint CSUtils::ccsa_to_bcs(const CSUtils::CCSAPoint& _point)
   return ret;
 }
 
+/**
+ * @fn  CSUtils::CCSAPoint CSUtils::bcs_to_ccsa(const CSUtils::BCSPoint& _point)
+ *
+ * @brief Converts point from Biconical coordinate system to Cartesian Coordinate System of Antenna.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Biconical coordinate system.
+ *
+ * @return  Cartesian Coordinate System of Antenna point.
+ */
+
 CSUtils::CCSAPoint CSUtils::bcs_to_ccsa(const CSUtils::BCSPoint& _point)
 {
   CSUtils::CCSAPoint ret;
@@ -186,6 +337,19 @@ CSUtils::CCSAPoint CSUtils::bcs_to_ccsa(const CSUtils::BCSPoint& _point)
 
   return ret;
 }
+
+/**
+ * @fn  CSUtils::ENUPoint CSUtils::sph_to_enu(const CSUtils::SPHPoint& _point)
+ *
+ * @brief Converts point from Spherical coordinate system to East North Up coordinate system.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in Spherical coordinate system.
+ *
+ * @return  East North Up coordinate system point.
+ */
 
 CSUtils::ENUPoint CSUtils::sph_to_enu(const CSUtils::SPHPoint& _point)
 {
@@ -197,6 +361,19 @@ CSUtils::ENUPoint CSUtils::sph_to_enu(const CSUtils::SPHPoint& _point)
 
   return ret;
 }
+
+/**
+ * @fn  CSUtils::SPHPoint CSUtils::enu_to_sph(const CSUtils::ENUPoint& _point)
+ *
+ * @brief Converts point from East North Up coordinate system to Spherical coordinate system.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param _point  The point in East North Up coordinate system.
+ *
+ * @return  Spherical coordinate system point.
+ */
 
 CSUtils::SPHPoint CSUtils::enu_to_sph(const CSUtils::ENUPoint& _point)
 {

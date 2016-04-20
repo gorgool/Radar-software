@@ -24,9 +24,14 @@ int max_connection_test(const std::uint32_t _max = 100)
   int counter = 0;
   std::vector<TargetEnvironment::Client> clients_pool(101);
   auto client_iterator = clients_pool.begin();
+
+  ConfigManager mng;
+  mng.set_path(R"(etc/)");
+  mng.load_config("settings");
+
   while (true)
   {
-    auto err = client_iterator->load_config(R"(etc/settings.cfg)");
+    auto err = client_iterator->load_config(mng);
     if (err != ErrorCode::OK)
     {
       std::cerr << "Error loading config.\n";
@@ -74,6 +79,10 @@ int main(int argc, char* argv[])
   std::vector<std::size_t> targets_counters(n_threads, 0);
   bool stop_flag = true;
 
+  ConfigManager mng;
+  mng.set_path(R"(etc/)");
+  mng.load_config("settings");
+
   auto worker = [&](std::size_t idx)
   {
     setlocale(LC_ALL, "");
@@ -83,7 +92,7 @@ int main(int argc, char* argv[])
 
     TargetEnvironment::Client client;
 
-    auto err = client.load_config(R"(etc/settings.cfg)");
+    auto err = client.load_config(mng);
     if (err != ErrorCode::OK)
     {
       std::cerr << "Error loading config.\n";

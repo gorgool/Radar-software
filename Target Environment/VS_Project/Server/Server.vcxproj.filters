@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="tle">
+      <UniqueIdentifier>{4e15b875-e32c-4c16-aec0-c73ec82e2dd0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Server\ComputeParams.cpp">
@@ -27,30 +30,6 @@
     <ClCompile Include="..\..\Server\SectorCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\catalog_tle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\norad_base.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\noradCircl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\noradSDP4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\noradSGDP4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\noradSGP4.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\SatelliteUtils\vector3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\CoordinateSystems\CSTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -59,6 +38,33 @@
     </ClCompile>
     <ClCompile Include="..\..\Server\Server.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Config Manager\ConfigManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\catalog_tle.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\norad_base.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\noradCircl.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\noradSDP4.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\noradSGDP4.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\utils.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\vector3.cpp">
+      <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\SatelliteUtils\noradSGP4.cpp">
+      <Filter>tle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

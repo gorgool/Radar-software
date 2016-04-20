@@ -37,6 +37,17 @@ namespace TargetEnvironment
     }
   }
 
+  /**
+  * @fn  ErrorCode Client::close_client();
+  *
+  * @brief Closes and cleanup the client.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @return  An ErrorCode.
+  */
+
   ErrorCode Client::close_client()
   {
     error_code ec;
@@ -62,36 +73,32 @@ namespace TargetEnvironment
     return ErrorCode::OK;
   }
 
-  ErrorCode Client::load_config(std::string path_to_file)
-  {
-    std::ifstream config_file(path_to_file);
+  /**
+  * @fn  ErrorCode Client::load_config(const ConfigManager& conf);
+  *
+  * @brief Loads a configuration.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param conf  The configuration manager object.
+  *
+  * @return  OK if read and parsing was success. Return SystemError if file was not found and ConfigError due to parse error..
+  */
 
-    if (config_file.good() == false)
+  ErrorCode Client::load_config(const ConfigManager& conf)
+  {
+    if (_connected)
     {
-      Utils::Log.log("Target Environment Server: Error opening config file.");
+      Utils::Log.log("Target Environment Client: Can't load config, client already connected.");
       return ErrorCode::SystemError;
     }
 
-    std::stringstream config_stream;
-    config_stream << config_file.rdbuf();
-
-    config_file.close();
-
     try
     {
-      rapidjson::Document config;
-      config.Parse(config_stream.str().c_str());
-
-      if (config.HasMember("te_settings") == false)
-      {
-        Utils::Log.log("Target Environment Server: Config file has no te_settings object.");
-        return ErrorCode::ConfigError;
-      }
-
-      auto json_settings = get_nested_object(config, "te_settings");
-
-      auto server_ip = get_value<std::string>(json_settings, "ip_address");
-      auto server_port = get_value<std::uint32_t>(json_settings, "port");
+      auto& section = conf.get_section("te_settings");
+      auto server_ip = conf.get_value<std::string>(section, "ip_address");
+      auto server_port = conf.get_value<std::uint32_t>(section, "port");
 
       _server_endpoint = ip::tcp::endpoint(ip::address::from_string(server_ip), server_port);
 
@@ -99,12 +106,28 @@ namespace TargetEnvironment
 
       return ErrorCode::OK;
     }
-    catch (...)
+    catch (const SystemException& ex)
     {
-      Utils::Log.log("Target Environment Server: Error parsing file.");
+      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      return ErrorCode::SystemError;
+    }
+    catch (const ConfigException& ex)
+    {
+      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
       return ErrorCode::ConfigError;
     }
   }
+
+  /**
+  * @fn  ErrorCode Client::connect();
+  *
+  * @brief Connects to servert.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @return  OK if succeeded, RegisterFail or SystemError otherwise.
+  */
 
   ErrorCode Client::connect()
   {
@@ -155,10 +178,37 @@ namespace TargetEnvironment
     }
   }
 
+  /**
+  * @fn  ErrorCode Client::disconnect();
+  *
+  * @brief Disconnect from server.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @return  OK if succeeded, SystemError otherwise.
+  */
+
   ErrorCode Client::disconnect()
   {
     return close_client();
   }
+
+  /**
+  * @fn  ErrorCode Client::get_targets(TargetEnvironment::TargetTable& tbl, const TargetEnvironment::SearchArea& area, const CSUtils::GCSPoint& radar_loc, const ClockType::time_point& time);
+  *
+  * @brief Request targets list (by time t) from server.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param [out]  tbl    The targets list.
+  * @param area          The search area descriptor.
+  * @param radar_loc     The radar location.
+  * @param time          The time.
+  *
+  * @return  OK if request procced succefully, RequestFail of SystemError otherwise.
+  */
 
   ErrorCode Client::get_targets(TargetTable& tbl, const SearchArea& sa, const CSUtils::GCSPoint& radar_loc, const ClockType::time_point& t)
   {
@@ -204,6 +254,20 @@ namespace TargetEnvironment
 
     return deserialize(res, tbl);
   }
+
+  /**
+  * @fn  ErrorCode Client::deserialize(const std::string& msg, TargetTable& tbl);
+  *
+  * @brief deserialize json string message to the goven table.
+  *
+  * @author  Gorgool
+  * @date  20.04.2016
+  *
+  * @param msg           The json message string.
+  * @param [out] tbl     The table.
+  *
+  * @return  An ErrorCode.
+  */
 
   ErrorCode Client::deserialize(const std::string& msg, TargetTable& tbl)
   {

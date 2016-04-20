@@ -1,9 +1,12 @@
 #include "ComputeParams.h"
 #include "Utils/EigenHeaders.h"
 
-// Precumputed 6x6 matrix for 6 time points - 0 10 20 30 40 50
-// x_prec = ((X'*X)^-1)*X', where ' - transpose matrix, ^-1 reverse matrix
-// *) In transponse form, Eigen copy data by columns
+
+/** @brief Precumputed 6x6 matrix for 6 time points - 0 10 20 30 40 50
+* x_prec = ((X'*X)^-1)*X', where ' - transpose matrix, ^-1 reverse matrix
+* (In transponse form, Eigen copy data by columns).
+* 
+*/
 const double x_data[] =
 {
   1.000000000002234, -0.228333333348094, 0.037500000004917, -0.004250000000822, 0.000300000000074, -0.000010000000003,
@@ -21,6 +24,22 @@ static std::array<double, 6> comp_par_helper(const std::array<double, 6>& points
   Eigen::Matrix<double, 6, 1> params = x_prec * p;
   return {params(0), params(1), params(2), params(3), params(4), params(5)};
 }
+
+/**
+ * @fn  TargetEnvironment::Target compute_params( const std::uint32_t id, const std::array<double, 6>& points_x, const std::array<double, 6>& points_y, const std::array<double, 6>& points_z)
+ *
+ * @brief Fit points into polynomial regression.
+ *
+ * @author  Gorgool
+ * @date  20.04.2016
+ *
+ * @param id        The identifier.
+ * @param points_x  The points x coordinate.
+ * @param points_y  The points y coordinate.
+ * @param points_z  The points z coordinate.
+ *
+ * @return  Target.
+ */
 
 TargetEnvironment::Target compute_params(
   const std::uint32_t id,

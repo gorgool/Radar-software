@@ -6,26 +6,81 @@
 
 namespace TargetEnvironment
 {
+  /**
+   * @class TargetTable
+   *
+   * @brief A target table.
+   *
+   * @author  Gorgool
+   * @date  20.04.2016
+   */
+
   class TargetTable
   {
   public:
 
-    // Target table type.
+    /**
+     * @typedef std::unordered_map<std::uint32_t, Target> TableType
+     *
+     * @brief Defines an alias representing type of the table.
+     */
+
     typedef std::unordered_map<std::uint32_t, Target> TableType;
 
     TargetTable();
     ~TargetTable();
 
-    // Add target to table.
-    void add_target(const Target&);
+    /**
+     * @fn  void TargetTable::add_target(const Target& t);
+     *
+     * @brief Adds a target.
+     *
+     * @author  Gorgool
+     * @date  20.04.2016
+     *
+     * @param t The target.
+     */
 
-    // Gat target descriptor by id. Return OK if found, SystemError otherwise.
+    void add_target(const Target& t);
+
+    /**
+     * @fn  ErrorCode TargetTable::get_target(Target& target, const std::uint32_t id);
+     *
+     * @brief Gat target descriptor by id.
+     *
+     * @author  Gorgool
+     * @date  20.04.2016
+     *
+     * @param [out]  target     The Target.
+     * @param id                The identifier.
+     *
+     * @return  OK if found, SystemError otherwise.
+     */
+
     ErrorCode get_target(Target& target, const std::uint32_t id);
 
-    // Size of the table
+    /**
+     * @fn  size_t TargetTable::size() const;
+     *
+     * @brief Gets the size of the table.
+     *
+     * @author  Gorgool
+     * @date  20.04.2016
+     *
+     * @return  A size_t.
+     */
+
     size_t size() const;
 
-    // Clear target table
+    /**
+     * @fn  void TargetTable::clear();
+     *
+     * @brief Clear target table.
+     *
+     * @author  Gorgool
+     * @date  20.04.2016
+     */
+
     void clear();
 
     // Begin\End itertators
@@ -34,7 +89,7 @@ namespace TargetEnvironment
 
   private:
 
-    // Target table
+    /** @brief The table. */
     TableType _tbl;
   };
 }

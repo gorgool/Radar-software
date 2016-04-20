@@ -7,7 +7,11 @@ int main()
 {
   TargetEnvironment::Server serv;
 
-  if (serv.load_config(R"(etc/settings.cfg)") != ErrorCode::OK)
+  ConfigManager mng;
+  mng.set_path(R"(etc/)");
+  mng.load_config("settings");
+
+  if (serv.load_config(mng) != ErrorCode::OK)
   {
     std::cerr << "load_config error\n";
     return -1;
