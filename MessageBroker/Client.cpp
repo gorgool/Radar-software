@@ -11,6 +11,14 @@
 
 using namespace std;
 
+MessageBroker::Client::Client() : 
+  _config_loaded(false), 
+  _heartbeat_start(false), 
+  _connected(false), 
+  _message_processing(false) 
+{}
+
+
 /**
 * @fn  void Client::load_config(const ConfigManager& mng);
 *

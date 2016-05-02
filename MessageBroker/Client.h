@@ -15,6 +15,8 @@ namespace MessageBroker
   {
   public:
 
+    Client();
+
     /**
      * @fn  void Client::load_config(const ConfigManager& mng);
      *

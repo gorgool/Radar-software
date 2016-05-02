@@ -184,25 +184,6 @@ public:
   template<typename RetType> 
   RetType get_value(const Settings settings, const char* key = nullptr) const;
 
-  /* Specializations */
-  template<>
-  std::string get_value<std::string>(const Settings settings, const char* key) const;
-
-  template<>
-  double get_value<double>(const Settings settings, const char* key) const;
-
-  template<>
-  std::uint32_t get_value<std::uint32_t>(const Settings settings, const char* key) const;
-
-  template<>
-  std::int32_t get_value<std::int32_t>(const Settings settings, const char* key) const;
-
-  template<>
-  std::uint64_t get_value<std::uint64_t>(const Settings settings, const char* key) const;
-
-  template<>
-  std::int64_t get_value<std::int64_t>(const Settings settings, const char* key) const;
-
   /**
    * @fn  template<typename RetType, std::size_t Size> std::array<RetType, Size> ConfigManager::get_array(const Object& settings) const;
    *
@@ -271,158 +252,25 @@ public:
   void set_array(Object object, const std::vector<ArrayType>& arr);
 };
 
+/* Specializations */
+  template<>
+  std::string ConfigManager::get_value<std::string>(const Settings settings, const char* key) const;
 
-// !!! ---------------------------- Template function members implementations --------------------!!! //
+  template<>
+  double ConfigManager::get_value<double>(const Settings settings, const char* key) const;
 
-template<typename RetType>
-RetType ConfigManager::get_value(const Settings settings, const char * key) const
-{
-  // Not implemented for generic type
-  assert(false);
-  return RetType();
-}
+  template<>
+  std::uint32_t ConfigManager::get_value<std::uint32_t>(const Settings settings, const char* key) const;
 
-template<>
-std::string ConfigManager::get_value<std::string>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings.HasMember(key) && settings[key].IsString())
-    {
-      return settings[key].GetString();
-    }
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsString())
-      return settings.GetString();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
+  template<>
+  std::int32_t ConfigManager::get_value<std::int32_t>(const Settings settings, const char* key) const;
 
-template<>
-double ConfigManager::get_value<double>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings[key].IsNumber() && settings.HasMember(key))
-      return settings[key].GetDouble();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsNumber())
-      return settings.GetDouble();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
+  template<>
+  std::uint64_t ConfigManager::get_value<std::uint64_t>(const Settings settings, const char* key) const;
 
-template<>
-std::uint32_t ConfigManager::get_value<std::uint32_t>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings.HasMember(key) && settings[key].IsUint())
-    {
-      return settings[key].GetUint();
-    }
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsUint())
-    {
-      return settings.GetUint();
-    }
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
+  template<>
+  std::int64_t ConfigManager::get_value<std::int64_t>(const Settings settings, const char* key) const;
 
-template<>
-std::int32_t ConfigManager::get_value<std::int32_t>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings.HasMember(key) && settings[key].IsInt())
-      return settings[key].GetInt();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsInt())
-      return settings.GetInt();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
-
-template<>
-std::uint64_t ConfigManager::get_value<std::uint64_t>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings.HasMember(key) && settings[key].IsUint64())
-    {
-      return settings[key].GetUint64();
-    }
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsUint64())
-      return settings.GetUint64();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
-
-template<>
-std::int64_t ConfigManager::get_value<std::int64_t>(const Settings settings, const char* key) const
-{
-  if (key != nullptr)
-  {
-    if (settings.HasMember(key) && settings[key].IsInt64())
-    {
-      return settings[key].GetInt64();
-    }
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-  else
-  {
-    if (settings.IsInt64())
-      return settings.GetInt64();
-    else
-      throw ConfigException("Configuration Manager: Parse error.");
-  }
-}
-
-template<typename RetType>
-std::vector<RetType> ConfigManager::get_array(const Object object) const
-{
-  if (object.IsArray())
-  {
-    std::vector<RetType> ret;
-    for (rapidjson::SizeType i = 0; i < object.Size(); i++)
-    {
-      ret.push_back(get_value<RetType>(object[i]));
-    }
-    return ret;
-  }
-  else
-  {
-    throw ConfigException("Configuration Manager: Parse error.");;
-  }
-}
 
 template<typename ArrayType>
 void ConfigManager::set_array(Object object, const std::vector<ArrayType>& arr)

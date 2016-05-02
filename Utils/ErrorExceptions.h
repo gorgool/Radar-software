@@ -13,9 +13,11 @@
 
 class SystemException : public std::exception
 {
+  std::string err_message;  
 public:
-  SystemException(const char* msg) : exception(msg) {}
-  SystemException(const std::string& msg) : exception(msg.c_str()) {}
+  SystemException(const char* msg) : err_message(msg) {}
+  SystemException(const std::string& msg) : err_message(msg) {}
+  const char* what() const noexcept { return err_message.c_str(); }
 };
 
 /**
@@ -29,7 +31,9 @@ public:
 
 class ConfigException : public std::exception
 {
+  std::string err_message;  
 public:
-  ConfigException(const char* msg) : exception(msg) {}
-  ConfigException(const std::string& msg) : exception(msg.c_str()) {}
+  ConfigException(const char* msg) : err_message(msg) {}
+  ConfigException(const std::string& msg) : err_message(msg) {}
+  const char* what() const noexcept { return err_message.c_str(); }
 };

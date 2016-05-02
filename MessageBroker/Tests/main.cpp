@@ -16,18 +16,28 @@ int main(int argc, char** argv)
     std::cerr << "Wrong parameters. Usage server: app_name -s. Usage client: app_name IDENIFIER SUBSCRIBE_TYPE1 SUBSCRIBE_TYPE2 ... \n";
     return -1;
   }
+
+  ConfigManager mng;
+
+  try
+  {
+      mng.set_path(R"(etc/)");
+      mng.load_config("config01");
+  }
+  catch(const std::exception& ex)
+  {
+      std::cerr << "Error. " + std::string(ex.what());
+      return -1;
+  }
+
   // As server
   if (argc == 2)
   {
-    if (argv[1] == "-s")
+    std::string mode(argv[1]);
+    if ( mode == "-s")
     {
       try
       {
-        ConfigManager mng;
-        mng.set_path(R"(etc/)");
-        mng.load_config("config01");
-
-
         MessageBroker::Server srv;
         srv.load_config(mng);
 
@@ -71,10 +81,6 @@ int main(int argc, char** argv)
 
     try
     {
-      ConfigManager mng;
-      mng.set_path(R"(etc/)");
-      mng.load_config("config01");
-
       MessageBroker::Client cli;
       cli.load_config(mng);
       cli.connect();
@@ -109,7 +115,7 @@ int main(int argc, char** argv)
         if (std::getline(std::cin, command))
         {
           if (command == "STOP")
-            return 0;
+            break;
 
           if (std::regex_match(command, filter))
           {
@@ -132,10 +138,10 @@ int main(int argc, char** argv)
         }
         else
         {
-          cli.stop_message_processing();
+          break;
         }
       }
-
+      cli.stop_message_processing();
       message_queue_thread.join();
     }
     catch (const std::exception& ex)

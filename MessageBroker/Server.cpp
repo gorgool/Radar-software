@@ -1,6 +1,9 @@
 #include "Server.h"
 #include <iostream>
 
+
+MessageBroker::Server::Server() : _config_loaded(false) {}
+
 /**
 * @fn: void load_config();
 *
@@ -20,12 +23,12 @@ void MessageBroker::Server::load_config(const ConfigManager& mng)
     auto& section = mng.get_section("message_broker_settings");
     _server_pub_port = mng.get_value<std::string>(section, "server_pub_port");
     _server_sub_port = mng.get_value<std::string>(section, "server_sub_port");
+    _config_loaded = true;
   }
   catch (const std::exception& ex)
   {
     throw ConfigException("Message Broker server : " + std::string(ex.what()));
   }
-
 }
 
 /**
@@ -42,6 +45,8 @@ void MessageBroker::Server::load_config(const ConfigManager& mng)
 
 void MessageBroker::Server::start()
 {
+  if (_config_loaded == false)
+    throw ConfigException("Message Broker server: Can't start server, config not loaded.");
   try
   {
     _ctx = std::make_unique<zmq::context_t>();

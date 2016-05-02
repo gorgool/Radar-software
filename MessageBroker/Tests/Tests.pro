@@ -1,13 +1,17 @@
-TARGET = message_broker
+TARGET = mb_test
+TEMPALTE = app
 
-QMAKE_CXXFLAGS += -std=c++11 -fopenmp
+QMAKE_CXXFLAGS += -std=c++11
 
-QMAKE_LIBDIR = ../
+QMAKE_LIBDIR += \
+ 	../ \
+	../../ConfigManager 
 
-LIBS = -lmessage_broker
+LIBS = -lmessage_broker -lzmq -lboost_system -lconfig_manager -lboost_filesystem
 
 INCLUDEPATH +=\
-    ../
+    ../ \
+    ../../
 
 SOURCES += \
-    server_test.cpp
+    main.cpp

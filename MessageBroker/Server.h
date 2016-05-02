@@ -27,8 +27,11 @@ namespace MessageBroker
     /** @brief The control socket. */
     std::unique_ptr<zmq::socket_t> _control;
 
+    /** @brief true if configuration loaded. */
+    bool _config_loaded;
   public:
 
+    Server();
     /**
     * @fn: void load_config();
     *
