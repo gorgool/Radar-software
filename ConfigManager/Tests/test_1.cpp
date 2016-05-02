@@ -34,7 +34,7 @@ void test_1(ConfigManager& mng)
   // 3 ------------------!! WINDOWS ONLY !!---------------------
   try
   {
-    mng.set_path(R"(D:\Документы\Sources\Utilities\Configuration Manager\etc)");
+    mng.set_path(R"(D:\пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ\Sources\Utilities\Configuration Manager\etc)");
   }
   catch (...)
   {
