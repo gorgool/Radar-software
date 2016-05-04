@@ -61,6 +61,11 @@ void MessageBroker::Server::start()
     _control->connect("tcp://127.0.0.1:6666");
 
     zmq::proxy_steerable(static_cast<void *>(*_input), static_cast<void *>(*_output), nullptr, static_cast<void *>(*_control));
+
+    _control.reset();
+    _input.reset();
+    _output.reset();
+    _ctx.reset();
   }
   catch (const std::exception& ex)
   {

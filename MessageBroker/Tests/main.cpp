@@ -82,6 +82,7 @@ int main(int argc, char** argv)
     try
     {
       MessageBroker::Client cli;
+      
       cli.load_config(mng);
       cli.connect();
 
@@ -93,10 +94,11 @@ int main(int argc, char** argv)
         });
       }
 
-      std::thread message_queue_thread([&cli]()
+      std::thread message_queue_thread([&cli, &app_id]()
       {
         try
         {
+          cli.start_heartbeat(app_id);
           cli.start_message_processing();
           cli.disconnect();
         }
@@ -141,8 +143,10 @@ int main(int argc, char** argv)
           break;
         }
       }
+      cli.stop_heartbeat();
       cli.stop_message_processing();
       message_queue_thread.join();
+      return 0;
     }
     catch (const std::exception& ex)
     {

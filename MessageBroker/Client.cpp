@@ -110,9 +110,9 @@ void MessageBroker::Client::disconnect() noexcept
   {
     return;
   }
-  _ctx.reset();
   _input.reset();
   _output.reset();
+  _ctx.reset();
 }
 
 /**
