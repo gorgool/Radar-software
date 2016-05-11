@@ -32,6 +32,9 @@ class Logger
   /** @brief The path to location with log files. */
   static boost::filesystem::path _path;
 
+  /** @brief Number of files in rotation. */
+  static std::uint32_t _num_files;
+
   /** @brief true if configuration loaded. */
   static bool _config_loaded;
 

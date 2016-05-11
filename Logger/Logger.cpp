@@ -18,6 +18,9 @@ std::shared_ptr<spdlog::logger> Logger::_file_chanel;
 /** @brief The path to location with log files. */
 filesystem::path Logger::_path;
 
+/** @brief Number of files in rotation. */
+std::uint32_t Logger::_num_files;
+
 /** @brief Currently opened session id. */
 std::uint32_t Logger::_id;
 
@@ -67,8 +70,12 @@ void Logger::load_config(const ConfigManager& mng)
     if (!filesystem::exists(_path))
       filesystem::create_directory(_path);
 
-    spdlog::set_async_mode(std::pow(2, 20));
-    spdlog::set_pattern("[%l - %d.%m.%Y %H:%M:%S.%F] %v");
+    auto buffer_size = mng.get_value<std::uint32_t>(section, "buffer_size");
+    _num_files = mng.get_value<std::uint32_t>(section, "num_files");
+    auto format = mng.get_value<std::string>(section, "message_format");
+
+    spdlog::set_async_mode(buffer_size);
+    spdlog::set_pattern(format);
 
     _display_chanel->set_level(spdlog::level::notice);
     _display_chanel->set_level(spdlog::level::err);
@@ -167,7 +174,7 @@ void Logger::start_session(const std::uint32_t id)
 
   try
   {
-    _file_chanel = spdlog::rotating_logger_mt("file_logger", _path.generic_string() + filename, 1024 * 1024 * 5, 10);;
+    _file_chanel = spdlog::rotating_logger_mt("file_logger", _path.generic_string() + filename, 1024 * 1024 * 5, _num_files);
     _file_chanel->set_level(spdlog::level::notice);
     _file_chanel->set_level(spdlog::level::err);
     _file_chanel->set_level(spdlog::level::debug);
