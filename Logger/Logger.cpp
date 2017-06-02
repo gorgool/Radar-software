@@ -6,7 +6,8 @@
 #include <boost/filesystem.hpp>
 #include <clocale>
 
-#include <ctime>
+#define __STDC_WANT_LIB_EXT1__ 1
+#include <time.h>
 
 using namespace boost;
 
@@ -158,11 +159,18 @@ void Logger::start_session(const std::uint32_t id)
   }
   
   auto current_date = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-  auto current_date_local = *std::localtime(&current_date);
-  char buff[26];
+  char buff[100];
 
-  std::strftime(buff, 26, "%A %c", &current_date_local);
-  //std::ctime_s(buff, 26, &current_date);
+  #if defined (_WIN32) || (_WIN64)
+  auto err = ctime_s(buff, 100, &current_date);
+  if (err)
+  {
+    std::cerr << "Logger: Error in ctime_s.\n";
+  }
+  #else
+  auto current_date_local = *localtime(&current_date);
+  std::strftime(buff, 100, "%b %d %H-%M-%S %G", &current_date_local);
+  #endif
 
   auto temp = std::string(buff);
   auto time_str = temp.substr(0, temp.find('\n'));
