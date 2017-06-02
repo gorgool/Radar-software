@@ -54,7 +54,6 @@ int max_connection_test(const std::uint32_t _max = 100)
   return counter;
 }
 
-
 int main(int argc, char* argv[])
 {
   setlocale(LC_ALL, "");
@@ -82,6 +81,9 @@ int main(int argc, char* argv[])
   ConfigManager mng;
   mng.set_path(R"(etc/)");
   mng.load_config("settings");
+
+  Logger::load_config(mng);
+  Logger::start_session();
 
   auto worker = [&](std::size_t idx)
   {

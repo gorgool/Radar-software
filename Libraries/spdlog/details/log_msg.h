@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <spdlog/common.h>
-#include <spdlog/details/format.h>
+#include "../common.h"
+#include "format.h"
 
 #include <string>
 #include <utility>

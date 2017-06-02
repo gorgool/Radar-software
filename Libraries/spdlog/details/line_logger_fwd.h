@@ -4,8 +4,8 @@
 //
 #pragma once
 
-#include <spdlog/common.h>
-#include <spdlog/details/log_msg.h>
+#include "../common.h"
+#include "log_msg.h"
 
 #include <string>
 

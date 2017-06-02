@@ -1,11 +1,12 @@
 #include "Logger.h"
 #include <chrono>
-#include <ctime>
 #include <random>
 #include <cstring>
 #include <sstream>
 #include <boost/filesystem.hpp>
 #include <clocale>
+
+#include <ctime>
 
 using namespace boost;
 
@@ -134,7 +135,7 @@ void Logger::start_session(const std::uint32_t id)
     // Generate unique id
     std::random_device seed;
     std::mt19937 id_generator(seed());
-    std::uniform_int<std::uint32_t> get_new_id(0, std::numeric_limits<std::uint32_t>::max());
+    std::uniform_int_distribution<std::uint32_t> get_new_id(0, std::numeric_limits<std::uint32_t>::max());
 
     auto new_id = get_new_id(id_generator);
     std::size_t guard_counter = 0;
@@ -157,8 +158,11 @@ void Logger::start_session(const std::uint32_t id)
   }
   
   auto current_date = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+  auto current_date_local = *std::localtime(&current_date);
   char buff[26];
-  ctime_s(buff, 26, &current_date);
+
+  std::strftime(buff, 26, "%A %c", &current_date_local);
+  //std::ctime_s(buff, 26, &current_date);
 
   auto temp = std::string(buff);
   auto time_str = temp.substr(0, temp.find('\n'));

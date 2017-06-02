@@ -3,6 +3,8 @@
 #include <iostream>
 #include "Server.h"
 
+#include "Logger/Logger.h"
+
 int main()
 {
   TargetEnvironment::Server serv;
@@ -10,6 +12,9 @@ int main()
   ConfigManager mng;
   mng.set_path(R"(etc/)");
   mng.load_config("settings");
+
+  Logger::load_config(mng);
+  Logger::start_session();
 
   if (serv.load_config(mng) != ErrorCode::OK)
   {

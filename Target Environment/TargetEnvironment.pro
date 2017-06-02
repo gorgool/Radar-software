@@ -1,6 +1,6 @@
 TEMPLATE = subdirs
 
-SUBDIRS = Utils CoordinateSystems Shared SatelliteUtils Client Server
+SUBDIRS = Utils CoordinateSystems Shared SatelliteUtils Client Server ConfigManager Logger
 
 Utils.file = ../Utils/Utils.pro
 
@@ -10,8 +10,13 @@ Shared.file = Shared/Shared.pro
 
 SatelliteUtils.file = SatelliteUtils/SatelliteUtils.pro
 
+ConfigManager.file = ../ConfigManager/ConfigManager.pro
+
+Logger.file = ../Logger/Logger.pro
+
 Client.file = Client/Client.pro
-Client.depends = Shared Utils
+Client.depends = Shared Utils ConfigManager Logger
 
 Server.file = Server/Server.pro
-Server.depends = Shared Utils SatelliteUtils CoordinateSystems
+Server.depends = Shared Utils SatelliteUtils CoordinateSystems ConfigManager Logger
+

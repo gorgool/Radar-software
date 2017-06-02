@@ -179,8 +179,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Config Manager\ConfigManager.cpp" />
-    <ClCompile Include="..\..\..\Utils\Logger.cpp" />
+    <ClCompile Include="..\..\..\ConfigManager\ConfigManager.cpp" />
+    <ClCompile Include="..\..\..\Logger\Logger.cpp" />
     <ClCompile Include="..\..\Client\example_client.cpp" />
     <ClCompile Include="..\..\Client\Client.cpp" />
     <ClCompile Include="..\..\Shared\TargetTable.cpp" />

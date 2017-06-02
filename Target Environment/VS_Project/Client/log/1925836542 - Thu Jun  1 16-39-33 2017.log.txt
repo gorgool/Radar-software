@@ -1,0 +1,4 @@
+[error - 01.06.2017 16:39:37.029480700] Target Environment Client : Target Environment client: Client connect success.
+[error - 01.06.2017 16:39:37.031977900] Target Environment Client : Target Environment client: Client connect success.
+[error - 01.06.2017 16:39:37.034675000] Target Environment Client : Target Environment client: Client connect success.
+[error - 01.06.2017 16:39:37.036823100] Target Environment Client : Target Environment client: Client connect success.

@@ -1,9 +1,9 @@
 #pragma once
-#include "ConfigManager.h"
+#include "ConfigManager/ConfigManager.hpp"
 #include <iostream>
 #include <array>
 #include <thread>
-#include "spdlog/spdlog.h"
+#include "Libraries/spdlog/spdlog.h"
 
 /**
  * @enum  SeverityLevel

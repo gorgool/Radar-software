@@ -16,7 +16,8 @@
 #include "Shared/Messages.h"
 #include "Shared/TargetTable.h"
 #include "CoordinateSystems/CSUtils.h"
-#include "Config Manager/ConfigManager.hpp"
+#include "ConfigManager/ConfigManager.hpp"
+#include "Logger/Logger.h"
 
 namespace TargetEnvironment
 {

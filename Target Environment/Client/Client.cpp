@@ -2,8 +2,6 @@
 #include "Utils/GetValueWrapper.hpp"
 #include <boost/algorithm/string.hpp>
 
-#include "Utils/Logger.h"
-
 using namespace boost::asio;
 using namespace boost::system;
 
@@ -27,12 +25,12 @@ namespace TargetEnvironment
 
       if (ec)
       {
-        Utils::Log.log("Target Environment client: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       }
       _socket.close(ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment client: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       }
     }
   }
@@ -57,7 +55,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       return ErrorCode::SystemError;
     }
 
@@ -65,11 +63,11 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       return ErrorCode::SystemError;
     }
 
-    Utils::Log.log("Target Environment client: Client dissconnected.");
+    Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Client", "Client disconnected.");
     return ErrorCode::OK;
   }
 
@@ -90,7 +88,7 @@ namespace TargetEnvironment
   {
     if (_connected)
     {
-      Utils::Log.log("Target Environment Client: Can't load config, client already connected.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Can't load config, client already connected.");
       return ErrorCode::SystemError;
     }
 
@@ -101,19 +99,18 @@ namespace TargetEnvironment
       auto server_port = conf.get_value<std::uint32_t>(section, "port");
 
       _server_endpoint = ip::tcp::endpoint(ip::address::from_string(server_ip), server_port);
-
-      _config_loaded = true;
+      _config_loaded = true; 
 
       return ErrorCode::OK;
     }
     catch (const SystemException& ex)
     {
-      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ex.what());
       return ErrorCode::SystemError;
     }
     catch (const ConfigException& ex)
     {
-      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ex.what());
       return ErrorCode::ConfigError;
     }
   }
@@ -138,7 +135,7 @@ namespace TargetEnvironment
 
     if (_config_loaded == false)
     {
-      Utils::Log.log("Target Environment client: Config not loaded.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Config not loaded.");
       return ErrorCode::SystemError;
     }
 
@@ -147,7 +144,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       return ErrorCode::SystemError;
     }
  
@@ -155,7 +152,7 @@ namespace TargetEnvironment
     auto size = read_until(_socket, buff, "\n", ec);
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       return ErrorCode::SystemError;
     }
 
@@ -163,17 +160,17 @@ namespace TargetEnvironment
     if (res == RegisterSuccessMsg)
     {
       _connected = true;
-      Utils::Log.log("Target Environment client: Client connect success.");
+      Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Client", "Client connect success.");
       return ErrorCode::OK;
     }
     else if (res == RegisterFailMsg)
     {
-      Utils::Log.log("Target Environment client: Register failed.");
+      Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Client", "Register failed.");
       return ErrorCode::RegisterFail;
     }
     else
     {
-      Utils::Log.log("Target Environment client: Unknow type of message or wrong reply message format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Unknow type of message or wrong reply message format.");
       return ErrorCode::SystemError;
     }
   }
@@ -214,7 +211,7 @@ namespace TargetEnvironment
   {
     if (_connected == false)
     {
-      Utils::Log.log("Target Environment client: Request error. Client do not connected to server.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Request error. Client do not connected to server.");
       return ErrorCode::RequestFail;
     }
 
@@ -227,7 +224,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       close_client();
       return ErrorCode::SystemError;
     }
@@ -237,7 +234,7 @@ namespace TargetEnvironment
 
     if (ec)
     {
-      Utils::Log.log("Target Environment client: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", ec.message());
       close_client();
       return ErrorCode::SystemError;
     }
@@ -246,7 +243,7 @@ namespace TargetEnvironment
 
     if (res == RequestFailMsg)
     {
-      Utils::Log.log("Target Environment client: Request failed.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Request failed.");
       return ErrorCode::RequestFail;
     }
     
@@ -273,7 +270,7 @@ namespace TargetEnvironment
   {
     if (msg.empty())
     {
-      Utils::Log.log("Target Environment client: Target list message is empty.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Target list message is empty.");
       return ErrorCode::RequestFail;
     }
 
@@ -282,7 +279,7 @@ namespace TargetEnvironment
 
     if (root.HasParseError())
     {
-      Utils::Log.log("Target Environment client: Error parsing Target list message. Wrong data format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Error parsing Target list message. Wrong data format.");
       return ErrorCode::RequestFail;
     }
 
@@ -296,19 +293,19 @@ namespace TargetEnvironment
     }
     catch (...)
     {
-      Utils::Log.log("Target Environment client: Error parsing Target list message. Wrong data format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Error parsing Target list message. Wrong data format.");
       return ErrorCode::RequestFail;
     }
 
     if (msg_headser != "TE_TargetsList")
     {
-      Utils::Log.log("Target Environment client: Unknown type of message or wrong data format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Unknown type of message or wrong data format.");
       return ErrorCode::RequestFail;
     }
 
     if (ntargets == 0)
     {
-      Utils::Log.log("Target Environment client: Targets not found.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Targets not found.");
       return ErrorCode::OK;
     }
 
@@ -334,19 +331,19 @@ namespace TargetEnvironment
           else
           {
             return ErrorCode::RequestFail;
-            Utils::Log.log("Target Environment client: Unknown type of message or wrong data format.");
+            Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Unknown type of message or wrong data format.");
           }
         }
       }
       else
       {
-        Utils::Log.log("Target Environment client: Unknown type of message or wrong data format.");
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Unknown type of message or wrong data format.");
         return ErrorCode::RequestFail;
       }
     }
     else
     {
-      Utils::Log.log("Target Environment client: Unknown type of message or wrong data format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Client", "Unknown type of message or wrong data format.");
       return ErrorCode::RequestFail;
     }
 

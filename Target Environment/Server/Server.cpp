@@ -3,9 +3,6 @@
 #include <omp.h>
 #include <sstream>
 
-#include "Utils/Logger.h"
-// TODO Logger!!!!
-
 namespace TargetEnvironment
 {
   using namespace boost::asio;
@@ -38,7 +35,7 @@ namespace TargetEnvironment
   {
     if (_stopped == false)
     {
-      Utils::Log.log("Target Environment Server: Can't load config, server is running now.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Can't load config, server is running now.");
       return ErrorCode::SystemError;
     }
 
@@ -58,12 +55,12 @@ namespace TargetEnvironment
     }
     catch (const SystemException& ex)
     {
-      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ex.what());
       return ErrorCode::SystemError;
     }
     catch (const ConfigException& ex)
     {
-      Utils::Log.log("Target Environment Server: " + std::string(ex.what()));
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ex.what());
       return ErrorCode::ConfigError;
     }
   }
@@ -88,7 +85,7 @@ namespace TargetEnvironment
       // Check shutdown of connection
       if (error::eof == ec || error::connection_reset == ec)
       {
-        Utils::Log.log("Target Environment Server: Deleting client.");
+        Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Server", "Deleting client.");
         conn->shutdown();
 
         _clients_mutex.lock();
@@ -99,7 +96,7 @@ namespace TargetEnvironment
 
         return;
       }
-      Utils::Log.log("Target Environment Server: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       return;
     }
 
@@ -111,7 +108,7 @@ namespace TargetEnvironment
       {
         if (ec)
         {
-          Utils::Log.log("Target Environment Server: " + ec.message());
+          Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
         }
       });
     };
@@ -127,7 +124,7 @@ namespace TargetEnvironment
 
     if (root.HasParseError() || !root.IsObject())
     {
-      Utils::Log.log("Target Environment Server: Message parse error. Empty message.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Message parse error. Empty message.");
       send_msg(RequestFailMsg);
       start_read(conn);
       return;
@@ -143,7 +140,7 @@ namespace TargetEnvironment
       msg_header = get_value<std::string>(root, "message");
       if (msg_header != "TE_Request")
       {
-        Utils::Log.log("Target Environment Server: Request message error. Wrong data format.");
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Request message error. Wrong data format.");
         send_msg(RequestFailMsg);
         start_read(conn);
         return;
@@ -167,7 +164,7 @@ namespace TargetEnvironment
     }
     catch (...)
     {
-      Utils::Log.log("Target Environment Server: Request message error. Wrong data format.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Request message error. Wrong data format.");
       send_msg(RequestFailMsg);
       start_read(conn);
       return;
@@ -178,7 +175,7 @@ namespace TargetEnvironment
     auto err = process_request(sa, radar_loc, time, response);
     if (err != OK)
     {
-      Utils::Log.log("Target Environment Server: Error processing request.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Error processing request.");
       send_msg(RequestFailMsg);
     }
 
@@ -186,7 +183,7 @@ namespace TargetEnvironment
     write(*conn->socket, buffer(response.msg), ec_temp);
     if (ec)
     {
-      Utils::Log.log("Target Environment Server: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
     }
 
     start_read(conn);
@@ -249,24 +246,25 @@ namespace TargetEnvironment
       {
         return;
       }
-      Utils::Log.log("Target Environment Server: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       return;
     }
 
+    
     if (_clients_counter == _max_connections)
     {
-      Utils::Log.log("Target Environment Server: Connection refused. Maximum number of connections.");
+      Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Server", "Connection refused. Maximum number of connections.");
       
       error_code ec;
       write(*socket, buffer(RegisterFailMsg), ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment Server: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Target Environment Server: " + ec.message());
       }
     }
     else
     {
-      Utils::Log.log("Target Environment Server: Connection accepted.");
+      Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Server", "Connection accepted.");
 
       std::list<Connection>::iterator conn;
       try
@@ -277,7 +275,7 @@ namespace TargetEnvironment
       }
       catch (...)
       {
-        Utils::Log.log("Target Environment Server: Connection insert failed.");
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Connection insert failed.");
         start_accept();
         return;
       }
@@ -288,9 +286,10 @@ namespace TargetEnvironment
       write(*socket, buffer(RegisterSuccessMsg), ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment Server: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       }
     }
+    
     start_accept();
   }
 
@@ -394,19 +393,19 @@ namespace TargetEnvironment
   {
     if (_stopped == false)
     {
-      Utils::Log.log("Target Environment Server: Server already running.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Server already running.");
       return ErrorCode::SystemError;
     }
 
     if (_config_loaded == false)
     {
-      Utils::Log.log("Target Environment Server: Config not loaded.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Config not loaded.");
       return ErrorCode::SystemError;
     }
 
     if (_satellite_catalog.parse_keo(_tle_path) == false)
     {
-      Utils::Log.log("Target Environment Server: Error parsing tle file.");
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Error parsing tle file.");
       return ErrorCode::ConfigError;
     }
     
@@ -414,18 +413,18 @@ namespace TargetEnvironment
     _acc.open(_ep.protocol(), ec);
     if (ec)
     {
-      Utils::Log.log("Target Environment Server: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       return ErrorCode::SystemError;
     }
 
     _acc.bind(_ep, ec);
     if (ec)
     {
-      Utils::Log.log("Target Environment Server: " + ec.message());
+      Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       _acc.close(ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment Server: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
       }
       return ErrorCode::SystemError;
     }
@@ -445,7 +444,7 @@ namespace TargetEnvironment
 
     _stopped = false;
 
-    Utils::Log.log("Target Environment Server: Server started.");
+    Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Server", "Server started.");
 
     return ErrorCode::OK;
   }
@@ -471,13 +470,13 @@ namespace TargetEnvironment
       _acc.cancel(ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment Server: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
         return ErrorCode::SystemError;
       }
       _acc.close(ec);
       if (ec)
       {
-        Utils::Log.log("Target Environment Server: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
         return ErrorCode::SystemError;
       }
     }
@@ -490,7 +489,7 @@ namespace TargetEnvironment
         conn.socket.get()->close(ec);
         if (ec)
         {
-          Utils::Log.log("Target Environment Server: " + ec.message());
+          Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", ec.message());
         }
       }
     }
@@ -502,7 +501,7 @@ namespace TargetEnvironment
     _work_threads.join_all();
     _stopped = true;
 
-    Utils::Log.log("Target Environment Server: Server stopped.");
+    Logger::log_dispfile(SeverityLevel::Notice, "Target Environment Server", "Server stopped.");
 
     return ErrorCode::OK;
   }

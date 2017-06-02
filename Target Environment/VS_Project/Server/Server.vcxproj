@@ -182,9 +182,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Config Manager\ConfigManager.cpp" />
+    <ClCompile Include="..\..\..\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="..\..\..\CoordinateSystems\CSTransform.cpp" />
-    <ClCompile Include="..\..\..\Utils\Logger.cpp" />
+    <ClCompile Include="..\..\..\Logger\Logger.cpp" />
     <ClCompile Include="..\..\SatelliteUtils\catalog_tle.cpp" />
     <ClCompile Include="..\..\SatelliteUtils\noradCircl.cpp" />
     <ClCompile Include="..\..\SatelliteUtils\noradSDP4.cpp" />

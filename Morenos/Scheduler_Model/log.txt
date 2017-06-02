@@ -1,0 +1,880 @@
+10000000 [1001] : Transmit Rephase.
+10270000 [1001] : Transmit.
+20000000 [3000] : Transmit Rephase.
+20270000 [3000] : Transmit.
+22960000 [2000] : Transmit Rephase.
+23230000 [2000] : Transmit.
+23342600 [1001] : Receive Rephase.
+23609600 [1001] : Turn off protection.
+23612600 [1001] : Receive.
+29631300 [2000] : Receive Rephase.
+29898300 [2000] : Turn off protection.
+29901300 [2000] : Receive.
+34009700 [3000] : Receive Rephase.
+34250000 [1002] : Transmit Rephase.
+34276700 [3000] : Turn off protection.
+34279700 [3000] : Receive.
+34520000 [1002] : Transmit.
+42000000 [3000] : Transmit Rephase.
+42270000 [3000] : Transmit.
+47210000 [2000] : Transmit Rephase.
+47480000 [2000] : Transmit.
+47592600 [1002] : Receive Rephase.
+47859600 [1002] : Turn off protection.
+47862600 [1002] : Receive.
+53881300 [2000] : Receive Rephase.
+54148300 [2000] : Turn off protection.
+54151300 [2000] : Receive.
+56009700 [3000] : Receive Rephase.
+56250000 [1000] : Transmit Rephase.
+56276700 [3000] : Turn off protection.
+56279700 [3000] : Receive.
+56520000 [1000] : Transmit.
+64000000 [3000] : Transmit Rephase.
+64270000 [3000] : Transmit.
+69210000 [2000] : Transmit Rephase.
+69480000 [2000] : Transmit.
+69592600 [1000] : Receive Rephase.
+69859600 [1000] : Turn off protection.
+69862600 [1000] : Receive.
+75881300 [2000] : Receive Rephase.
+76148300 [2000] : Turn off protection.
+76151300 [2000] : Receive.
+78009700 [3000] : Receive Rephase.
+78250000 [1000] : Transmit Rephase.
+78276700 [3000] : Turn off protection.
+78279700 [3000] : Receive.
+78520000 [1000] : Transmit.
+86000000 [3000] : Transmit Rephase.
+86270000 [3000] : Transmit.
+91210000 [2000] : Transmit Rephase.
+91480000 [2000] : Transmit.
+91592600 [1000] : Receive Rephase.
+91859600 [1000] : Turn off protection.
+91862600 [1000] : Receive.
+97881300 [2000] : Receive Rephase.
+98148300 [2000] : Turn off protection.
+98151300 [2000] : Receive.
+100009700 [3000] : Receive Rephase.
+100250000 [1000] : Transmit Rephase.
+100276700 [3000] : Turn off protection.
+100279700 [3000] : Receive.
+100520000 [1000] : Transmit.
+108000000 [3000] : Transmit Rephase.
+108270000 [3000] : Transmit.
+110000000 [4001] : Transmit Rephase.
+110270000 [4001] : Transmit.
+113210000 [2000] : Transmit Rephase.
+113480000 [2000] : Transmit.
+113592600 [1000] : Receive Rephase.
+113859600 [1000] : Turn off protection.
+113862600 [1000] : Receive.
+119600000 [2001] : Transmit Rephase.
+119870000 [2001] : Transmit.
+119881300 [2000] : Receive Rephase.
+120148300 [2000] : Turn off protection.
+120151300 [2000] : Receive.
+120380000 [3001] : Transmit Rephase.
+120650000 [3001] : Transmit.
+121160000 [2002] : Transmit Rephase.
+121430000 [2002] : Transmit.
+122009700 [3000] : Receive Rephase.
+122250000 [3002] : Transmit Rephase.
+122276700 [3000] : Turn off protection.
+122279700 [3000] : Receive.
+122520000 [3002] : Transmit.
+124009700 [4001] : Receive Rephase.
+124250000 [4002] : Transmit Rephase.
+124276700 [4001] : Turn off protection.
+124279700 [4001] : Receive.
+124520000 [4002] : Transmit.
+126271300 [2001] : Receive Rephase.
+126538300 [2001] : Turn off protection.
+126541300 [2001] : Receive.
+127051300 [3001] : Receive Rephase.
+127318300 [3001] : Turn off protection.
+127321300 [3001] : Receive.
+127831300 [2002] : Receive Rephase.
+128098300 [2002] : Turn off protection.
+128101300 [2002] : Receive.
+128921300 [3002] : Receive Rephase.
+128940000 [1000] : Transmit Rephase.
+129188300 [3002] : Turn off protection.
+129191300 [3002] : Receive.
+129210000 [1000] : Transmit.
+138259700 [4002] : Receive Rephase.
+138500000 [3000] : Transmit Rephase.
+138526700 [4002] : Turn off protection.
+138529700 [4002] : Receive.
+138770000 [3000] : Transmit.
+141900000 [2000] : Transmit Rephase.
+142170000 [2000] : Transmit.
+142282600 [1000] : Receive Rephase.
+142549600 [1000] : Turn off protection.
+142552600 [1000] : Receive.
+148571300 [2000] : Receive Rephase.
+148838300 [2000] : Turn off protection.
+148841300 [2000] : Receive.
+152509700 [3000] : Receive Rephase.
+152750000 [1000] : Transmit Rephase.
+152776700 [3000] : Turn off protection.
+152779700 [3000] : Receive.
+153020000 [1000] : Transmit.
+160450000 [3000] : Transmit Rephase.
+160720000 [3000] : Transmit.
+165710000 [2000] : Transmit Rephase.
+165980000 [2000] : Transmit.
+166092600 [1000] : Receive Rephase.
+166359600 [1000] : Turn off protection.
+166362600 [1000] : Receive.
+172381300 [2000] : Receive Rephase.
+172648300 [2000] : Turn off protection.
+172651300 [2000] : Receive.
+174459700 [3000] : Receive Rephase.
+174700000 [1003] : Transmit Rephase.
+174726700 [3000] : Turn off protection.
+174729700 [3000] : Receive.
+174970000 [1003] : Transmit.
+182400000 [3000] : Transmit Rephase.
+182670000 [3000] : Transmit.
+187660000 [2000] : Transmit Rephase.
+187930000 [2000] : Transmit.
+188042600 [1003] : Receive Rephase.
+188309600 [1003] : Turn off protection.
+188312600 [1003] : Receive.
+194331300 [2000] : Receive Rephase.
+194598300 [2000] : Turn off protection.
+194601300 [2000] : Receive.
+196409700 [3000] : Receive Rephase.
+196650000 [1000] : Transmit Rephase.
+196676700 [3000] : Turn off protection.
+196679700 [3000] : Receive.
+196920000 [1000] : Transmit.
+204350000 [3000] : Transmit Rephase.
+204620000 [3000] : Transmit.
+209610000 [2000] : Transmit Rephase.
+209880000 [2000] : Transmit.
+209992600 [1000] : Receive Rephase.
+210259600 [1000] : Turn off protection.
+210262600 [1000] : Receive.
+216281300 [2000] : Receive Rephase.
+216548300 [2000] : Turn off protection.
+216551300 [2000] : Receive.
+218359700 [3000] : Receive Rephase.
+218600000 [1000] : Transmit Rephase.
+218626700 [3000] : Turn off protection.
+218629700 [3000] : Receive.
+218870000 [1000] : Transmit.
+226300000 [3000] : Transmit Rephase.
+226570000 [3000] : Transmit.
+228240000 [4003] : Transmit Rephase.
+228510000 [4003] : Transmit.
+231560000 [2003] : Transmit Rephase.
+231830000 [2003] : Transmit.
+231942600 [1000] : Receive Rephase.
+232209600 [1000] : Turn off protection.
+232212600 [1000] : Receive.
+237950000 [2000] : Transmit Rephase.
+238220000 [2000] : Transmit.
+238231300 [2003] : Receive Rephase.
+238498300 [2003] : Turn off protection.
+238501300 [2003] : Receive.
+238730000 [3003] : Transmit Rephase.
+239000000 [3003] : Transmit.
+240309700 [3000] : Receive Rephase.
+240576700 [3000] : Turn off protection.
+240579700 [3000] : Receive.
+242249700 [4003] : Receive Rephase.
+242516700 [4003] : Turn off protection.
+242519700 [4003] : Receive.
+244621300 [2000] : Receive Rephase.
+244888300 [2000] : Turn off protection.
+244891300 [2000] : Receive.
+245401300 [3003] : Receive Rephase.
+245420000 [1000] : Transmit Rephase.
+245668300 [3003] : Turn off protection.
+245671300 [3003] : Receive.
+245690000 [1000] : Transmit.
+253120000 [3000] : Transmit Rephase.
+253390000 [3000] : Transmit.
+258380000 [2000] : Transmit Rephase.
+258650000 [2000] : Transmit.
+258762600 [1000] : Receive Rephase.
+259029600 [1000] : Turn off protection.
+259032600 [1000] : Receive.
+265051300 [2000] : Receive Rephase.
+265318300 [2000] : Turn off protection.
+265321300 [2000] : Receive.
+267129700 [3000] : Receive Rephase.
+267370000 [1000] : Transmit Rephase.
+267396700 [3000] : Turn off protection.
+267399700 [3000] : Receive.
+267640000 [1000] : Transmit.
+275070000 [3000] : Transmit Rephase.
+275340000 [3000] : Transmit.
+280330000 [2000] : Transmit Rephase.
+280600000 [2000] : Transmit.
+280712600 [1000] : Receive Rephase.
+280979600 [1000] : Turn off protection.
+280982600 [1000] : Receive.
+287001300 [2000] : Receive Rephase.
+287268300 [2000] : Turn off protection.
+287271300 [2000] : Receive.
+289079700 [3000] : Receive Rephase.
+289320000 [1003] : Transmit Rephase.
+289346700 [3000] : Turn off protection.
+289349700 [3000] : Receive.
+289590000 [1003] : Transmit.
+297020000 [3000] : Transmit Rephase.
+297290000 [3000] : Transmit.
+302280000 [2000] : Transmit Rephase.
+302550000 [2000] : Transmit.
+302662600 [1003] : Receive Rephase.
+302929600 [1003] : Turn off protection.
+302932600 [1003] : Receive.
+308951300 [2000] : Receive Rephase.
+309218300 [2000] : Turn off protection.
+309221300 [2000] : Receive.
+311029700 [3000] : Receive Rephase.
+311270000 [1000] : Transmit Rephase.
+311296700 [3000] : Turn off protection.
+311299700 [3000] : Receive.
+311540000 [1000] : Transmit.
+319000000 [3000] : Transmit Rephase.
+319270000 [3000] : Transmit.
+324230000 [2000] : Transmit Rephase.
+324500000 [2000] : Transmit.
+324612600 [1000] : Receive Rephase.
+324879600 [1000] : Turn off protection.
+324882600 [1000] : Receive.
+330620000 [2003] : Transmit Rephase.
+330890000 [2003] : Transmit.
+330901300 [2000] : Receive Rephase.
+331168300 [2000] : Turn off protection.
+331171300 [2000] : Receive.
+333009700 [3000] : Receive Rephase.
+333250000 [1000] : Transmit Rephase.
+333276700 [3000] : Turn off protection.
+333279700 [3000] : Receive.
+333520000 [1000] : Transmit.
+337291300 [2003] : Receive Rephase.
+337558300 [2003] : Turn off protection.
+337561300 [2003] : Receive.
+341000000 [4003] : Transmit Rephase.
+341270000 [4003] : Transmit.
+343000000 [3000] : Transmit Rephase.
+343270000 [3000] : Transmit.
+346210000 [2000] : Transmit Rephase.
+346480000 [2000] : Transmit.
+346592600 [1000] : Receive Rephase.
+346859600 [1000] : Turn off protection.
+346862600 [1000] : Receive.
+352600000 [3003] : Transmit Rephase.
+352870000 [3003] : Transmit.
+352881300 [2000] : Receive Rephase.
+353148300 [2000] : Turn off protection.
+353151300 [2000] : Receive.
+355009700 [4003] : Receive Rephase.
+355276700 [4003] : Turn off protection.
+355279700 [4003] : Receive.
+357009700 [3000] : Receive Rephase.
+357250000 [1000] : Transmit Rephase.
+357276700 [3000] : Turn off protection.
+357279700 [3000] : Receive.
+357520000 [1000] : Transmit.
+359271300 [3003] : Receive Rephase.
+359538300 [3003] : Turn off protection.
+359541300 [3003] : Receive.
+365000000 [3000] : Transmit Rephase.
+365270000 [3000] : Transmit.
+370210000 [2000] : Transmit Rephase.
+370480000 [2000] : Transmit.
+370592600 [1000] : Receive Rephase.
+370859600 [1000] : Turn off protection.
+370862600 [1000] : Receive.
+376881300 [2000] : Receive Rephase.
+377148300 [2000] : Turn off protection.
+377151300 [2000] : Receive.
+379009700 [3000] : Receive Rephase.
+379250000 [1000] : Transmit Rephase.
+379276700 [3000] : Turn off protection.
+379279700 [3000] : Receive.
+379520000 [1000] : Transmit.
+387000000 [3000] : Transmit Rephase.
+387270000 [3000] : Transmit.
+392210000 [2000] : Transmit Rephase.
+392480000 [2000] : Transmit.
+392592600 [1000] : Receive Rephase.
+392859600 [1000] : Turn off protection.
+392862600 [1000] : Receive.
+398881300 [2000] : Receive Rephase.
+399148300 [2000] : Turn off protection.
+399151300 [2000] : Receive.
+401009700 [3000] : Receive Rephase.
+401250000 [1003] : Transmit Rephase.
+401276700 [3000] : Turn off protection.
+401279700 [3000] : Receive.
+401520000 [1003] : Transmit.
+409000000 [3000] : Transmit Rephase.
+409270000 [3000] : Transmit.
+414210000 [2000] : Transmit Rephase.
+414480000 [2000] : Transmit.
+414592600 [1003] : Receive Rephase.
+414859600 [1003] : Turn off protection.
+414862600 [1003] : Receive.
+420881300 [2000] : Receive Rephase.
+421148300 [2000] : Turn off protection.
+421151300 [2000] : Receive.
+423009700 [3000] : Receive Rephase.
+423250000 [1000] : Transmit Rephase.
+423276700 [3000] : Turn off protection.
+423279700 [3000] : Receive.
+423520000 [1000] : Transmit.
+431000000 [3000] : Transmit Rephase.
+431270000 [3000] : Transmit.
+436210000 [2000] : Transmit Rephase.
+436480000 [2000] : Transmit.
+436592600 [1000] : Receive Rephase.
+436859600 [1000] : Turn off protection.
+436862600 [1000] : Receive.
+442600000 [2003] : Transmit Rephase.
+442870000 [2003] : Transmit.
+442881300 [2000] : Receive Rephase.
+443148300 [2000] : Turn off protection.
+443151300 [2000] : Receive.
+445009700 [3000] : Receive Rephase.
+445250000 [1000] : Transmit Rephase.
+445276700 [3000] : Turn off protection.
+445279700 [3000] : Receive.
+445520000 [1000] : Transmit.
+449271300 [2003] : Receive Rephase.
+449538300 [2003] : Turn off protection.
+449541300 [2003] : Receive.
+453000000 [4003] : Transmit Rephase.
+453270000 [4003] : Transmit.
+455000000 [3000] : Transmit Rephase.
+455270000 [3000] : Transmit.
+458210000 [2000] : Transmit Rephase.
+458480000 [2000] : Transmit.
+458592600 [1000] : Receive Rephase.
+458859600 [1000] : Turn off protection.
+458862600 [1000] : Receive.
+464600000 [3003] : Transmit Rephase.
+464870000 [3003] : Transmit.
+464881300 [2000] : Receive Rephase.
+465148300 [2000] : Turn off protection.
+465151300 [2000] : Receive.
+467009700 [4003] : Receive Rephase.
+467276700 [4003] : Turn off protection.
+467279700 [4003] : Receive.
+469009700 [3000] : Receive Rephase.
+469250000 [1000] : Transmit Rephase.
+469276700 [3000] : Turn off protection.
+469279700 [3000] : Receive.
+469520000 [1000] : Transmit.
+471271300 [3003] : Receive Rephase.
+471538300 [3003] : Turn off protection.
+471541300 [3003] : Receive.
+477000000 [3000] : Transmit Rephase.
+477270000 [3000] : Transmit.
+482210000 [2000] : Transmit Rephase.
+482480000 [2000] : Transmit.
+482592600 [1000] : Receive Rephase.
+482859600 [1000] : Turn off protection.
+482862600 [1000] : Receive.
+488881300 [2000] : Receive Rephase.
+489148300 [2000] : Turn off protection.
+489151300 [2000] : Receive.
+491009700 [3000] : Receive Rephase.
+491250000 [1000] : Transmit Rephase.
+491276700 [3000] : Turn off protection.
+491279700 [3000] : Receive.
+491520000 [1000] : Transmit.
+499000000 [3000] : Transmit Rephase.
+499270000 [3000] : Transmit.
+504210000 [2000] : Transmit Rephase.
+504480000 [2000] : Transmit.
+504592600 [1000] : Receive Rephase.
+504859600 [1000] : Turn off protection.
+504862600 [1000] : Receive.
+510881300 [2000] : Receive Rephase.
+511148300 [2000] : Turn off protection.
+511151300 [2000] : Receive.
+513009700 [3000] : Receive Rephase.
+513250000 [1003] : Transmit Rephase.
+513276700 [3000] : Turn off protection.
+513279700 [3000] : Receive.
+513520000 [1003] : Transmit.
+521000000 [3000] : Transmit Rephase.
+521270000 [3000] : Transmit.
+526210000 [2000] : Transmit Rephase.
+526480000 [2000] : Transmit.
+526592600 [1003] : Receive Rephase.
+526859600 [1003] : Turn off protection.
+526862600 [1003] : Receive.
+532881300 [2000] : Receive Rephase.
+533148300 [2000] : Turn off protection.
+533151300 [2000] : Receive.
+535009700 [3000] : Receive Rephase.
+535250000 [1000] : Transmit Rephase.
+535276700 [3000] : Turn off protection.
+535279700 [3000] : Receive.
+535520000 [1000] : Transmit.
+543000000 [3000] : Transmit Rephase.
+543270000 [3000] : Transmit.
+548210000 [2000] : Transmit Rephase.
+548480000 [2000] : Transmit.
+548592600 [1000] : Receive Rephase.
+548859600 [1000] : Turn off protection.
+548862600 [1000] : Receive.
+554600000 [2003] : Transmit Rephase.
+554870000 [2003] : Transmit.
+554881300 [2000] : Receive Rephase.
+555148300 [2000] : Turn off protection.
+555151300 [2000] : Receive.
+557009700 [3000] : Receive Rephase.
+557250000 [1000] : Transmit Rephase.
+557276700 [3000] : Turn off protection.
+557279700 [3000] : Receive.
+557520000 [1000] : Transmit.
+561271300 [2003] : Receive Rephase.
+561538300 [2003] : Turn off protection.
+561541300 [2003] : Receive.
+565000000 [4003] : Transmit Rephase.
+565270000 [4003] : Transmit.
+567000000 [3000] : Transmit Rephase.
+567270000 [3000] : Transmit.
+570210000 [2000] : Transmit Rephase.
+570480000 [2000] : Transmit.
+570592600 [1000] : Receive Rephase.
+570859600 [1000] : Turn off protection.
+570862600 [1000] : Receive.
+576600000 [3003] : Transmit Rephase.
+576870000 [3003] : Transmit.
+576881300 [2000] : Receive Rephase.
+577148300 [2000] : Turn off protection.
+577151300 [2000] : Receive.
+579009700 [4003] : Receive Rephase.
+579276700 [4003] : Turn off protection.
+579279700 [4003] : Receive.
+581009700 [3000] : Receive Rephase.
+581250000 [1000] : Transmit Rephase.
+581276700 [3000] : Turn off protection.
+581279700 [3000] : Receive.
+581520000 [1000] : Transmit.
+583271300 [3003] : Receive Rephase.
+583538300 [3003] : Turn off protection.
+583541300 [3003] : Receive.
+589000000 [3000] : Transmit Rephase.
+589270000 [3000] : Transmit.
+594210000 [2000] : Transmit Rephase.
+594480000 [2000] : Transmit.
+594592600 [1000] : Receive Rephase.
+594859600 [1000] : Turn off protection.
+594862600 [1000] : Receive.
+600881300 [2000] : Receive Rephase.
+601148300 [2000] : Turn off protection.
+601151300 [2000] : Receive.
+603009700 [3000] : Receive Rephase.
+603250000 [1000] : Transmit Rephase.
+603276700 [3000] : Turn off protection.
+603279700 [3000] : Receive.
+603520000 [1000] : Transmit.
+611000000 [3000] : Transmit Rephase.
+611270000 [3000] : Transmit.
+616210000 [2000] : Transmit Rephase.
+616480000 [2000] : Transmit.
+616592600 [1000] : Receive Rephase.
+616859600 [1000] : Turn off protection.
+616862600 [1000] : Receive.
+622881300 [2000] : Receive Rephase.
+623148300 [2000] : Turn off protection.
+623151300 [2000] : Receive.
+625009700 [3000] : Receive Rephase.
+625250000 [1003] : Transmit Rephase.
+625276700 [3000] : Turn off protection.
+625279700 [3000] : Receive.
+625520000 [1003] : Transmit.
+633000000 [3000] : Transmit Rephase.
+633270000 [3000] : Transmit.
+638210000 [2000] : Transmit Rephase.
+638480000 [2000] : Transmit.
+638592600 [1003] : Receive Rephase.
+638859600 [1003] : Turn off protection.
+638862600 [1003] : Receive.
+644881300 [2000] : Receive Rephase.
+645148300 [2000] : Turn off protection.
+645151300 [2000] : Receive.
+647009700 [3000] : Receive Rephase.
+647250000 [1000] : Transmit Rephase.
+647276700 [3000] : Turn off protection.
+647279700 [3000] : Receive.
+647520000 [1000] : Transmit.
+655000000 [3000] : Transmit Rephase.
+655270000 [3000] : Transmit.
+660210000 [2000] : Transmit Rephase.
+660480000 [2000] : Transmit.
+660592600 [1000] : Receive Rephase.
+660859600 [1000] : Turn off protection.
+660862600 [1000] : Receive.
+666600000 [2003] : Transmit Rephase.
+666870000 [2003] : Transmit.
+666881300 [2000] : Receive Rephase.
+667148300 [2000] : Turn off protection.
+667151300 [2000] : Receive.
+669009700 [3000] : Receive Rephase.
+669250000 [1000] : Transmit Rephase.
+669276700 [3000] : Turn off protection.
+669279700 [3000] : Receive.
+669520000 [1000] : Transmit.
+673271300 [2003] : Receive Rephase.
+673538300 [2003] : Turn off protection.
+673541300 [2003] : Receive.
+677000000 [4003] : Transmit Rephase.
+677270000 [4003] : Transmit.
+679000000 [3000] : Transmit Rephase.
+679270000 [3000] : Transmit.
+682210000 [2000] : Transmit Rephase.
+682480000 [2000] : Transmit.
+682592600 [1000] : Receive Rephase.
+682859600 [1000] : Turn off protection.
+682862600 [1000] : Receive.
+688600000 [3003] : Transmit Rephase.
+688870000 [3003] : Transmit.
+688881300 [2000] : Receive Rephase.
+689148300 [2000] : Turn off protection.
+689151300 [2000] : Receive.
+691009700 [4003] : Receive Rephase.
+691276700 [4003] : Turn off protection.
+691279700 [4003] : Receive.
+693009700 [3000] : Receive Rephase.
+693250000 [1000] : Transmit Rephase.
+693276700 [3000] : Turn off protection.
+693279700 [3000] : Receive.
+693520000 [1000] : Transmit.
+695271300 [3003] : Receive Rephase.
+695538300 [3003] : Turn off protection.
+695541300 [3003] : Receive.
+701000000 [3000] : Transmit Rephase.
+701270000 [3000] : Transmit.
+706210000 [2000] : Transmit Rephase.
+706480000 [2000] : Transmit.
+706592600 [1000] : Receive Rephase.
+706859600 [1000] : Turn off protection.
+706862600 [1000] : Receive.
+712881300 [2000] : Receive Rephase.
+713148300 [2000] : Turn off protection.
+713151300 [2000] : Receive.
+715009700 [3000] : Receive Rephase.
+715250000 [1000] : Transmit Rephase.
+715276700 [3000] : Turn off protection.
+715279700 [3000] : Receive.
+715520000 [1000] : Transmit.
+723000000 [3000] : Transmit Rephase.
+723270000 [3000] : Transmit.
+728210000 [2000] : Transmit Rephase.
+728480000 [2000] : Transmit.
+728592600 [1000] : Receive Rephase.
+728859600 [1000] : Turn off protection.
+728862600 [1000] : Receive.
+734881300 [2000] : Receive Rephase.
+735148300 [2000] : Turn off protection.
+735151300 [2000] : Receive.
+737009700 [3000] : Receive Rephase.
+737250000 [1003] : Transmit Rephase.
+737276700 [3000] : Turn off protection.
+737279700 [3000] : Receive.
+737520000 [1003] : Transmit.
+745000000 [3000] : Transmit Rephase.
+745270000 [3000] : Transmit.
+750210000 [2000] : Transmit Rephase.
+750480000 [2000] : Transmit.
+750592600 [1003] : Receive Rephase.
+750859600 [1003] : Turn off protection.
+750862600 [1003] : Receive.
+756881300 [2000] : Receive Rephase.
+757148300 [2000] : Turn off protection.
+757151300 [2000] : Receive.
+759009700 [3000] : Receive Rephase.
+759250000 [1000] : Transmit Rephase.
+759276700 [3000] : Turn off protection.
+759279700 [3000] : Receive.
+759520000 [1000] : Transmit.
+767000000 [3000] : Transmit Rephase.
+767270000 [3000] : Transmit.
+772210000 [2000] : Transmit Rephase.
+772480000 [2000] : Transmit.
+772592600 [1000] : Receive Rephase.
+772859600 [1000] : Turn off protection.
+772862600 [1000] : Receive.
+778600000 [2003] : Transmit Rephase.
+778870000 [2003] : Transmit.
+778881300 [2000] : Receive Rephase.
+779148300 [2000] : Turn off protection.
+779151300 [2000] : Receive.
+781009700 [3000] : Receive Rephase.
+781250000 [1000] : Transmit Rephase.
+781276700 [3000] : Turn off protection.
+781279700 [3000] : Receive.
+781520000 [1000] : Transmit.
+785271300 [2003] : Receive Rephase.
+785538300 [2003] : Turn off protection.
+785541300 [2003] : Receive.
+789000000 [4003] : Transmit Rephase.
+789270000 [4003] : Transmit.
+791000000 [3000] : Transmit Rephase.
+791270000 [3000] : Transmit.
+794210000 [2000] : Transmit Rephase.
+794480000 [2000] : Transmit.
+794592600 [1000] : Receive Rephase.
+794859600 [1000] : Turn off protection.
+794862600 [1000] : Receive.
+800600000 [3003] : Transmit Rephase.
+800870000 [3003] : Transmit.
+800881300 [2000] : Receive Rephase.
+801148300 [2000] : Turn off protection.
+801151300 [2000] : Receive.
+803009700 [4003] : Receive Rephase.
+803276700 [4003] : Turn off protection.
+803279700 [4003] : Receive.
+805009700 [3000] : Receive Rephase.
+805250000 [1000] : Transmit Rephase.
+805276700 [3000] : Turn off protection.
+805279700 [3000] : Receive.
+805520000 [1000] : Transmit.
+807271300 [3003] : Receive Rephase.
+807538300 [3003] : Turn off protection.
+807541300 [3003] : Receive.
+813000000 [3000] : Transmit Rephase.
+813270000 [3000] : Transmit.
+818210000 [2000] : Transmit Rephase.
+818480000 [2000] : Transmit.
+818592600 [1000] : Receive Rephase.
+818859600 [1000] : Turn off protection.
+818862600 [1000] : Receive.
+824881300 [2000] : Receive Rephase.
+825148300 [2000] : Turn off protection.
+825151300 [2000] : Receive.
+827009700 [3000] : Receive Rephase.
+827250000 [1000] : Transmit Rephase.
+827276700 [3000] : Turn off protection.
+827279700 [3000] : Receive.
+827520000 [1000] : Transmit.
+835000000 [3000] : Transmit Rephase.
+835270000 [3000] : Transmit.
+840210000 [2000] : Transmit Rephase.
+840480000 [2000] : Transmit.
+840592600 [1000] : Receive Rephase.
+840859600 [1000] : Turn off protection.
+840862600 [1000] : Receive.
+846881300 [2000] : Receive Rephase.
+847148300 [2000] : Turn off protection.
+847151300 [2000] : Receive.
+849009700 [3000] : Receive Rephase.
+849250000 [1003] : Transmit Rephase.
+849276700 [3000] : Turn off protection.
+849279700 [3000] : Receive.
+849520000 [1003] : Transmit.
+857000000 [3000] : Transmit Rephase.
+857270000 [3000] : Transmit.
+862210000 [2000] : Transmit Rephase.
+862480000 [2000] : Transmit.
+862592600 [1003] : Receive Rephase.
+862859600 [1003] : Turn off protection.
+862862600 [1003] : Receive.
+868881300 [2000] : Receive Rephase.
+869148300 [2000] : Turn off protection.
+869151300 [2000] : Receive.
+871009700 [3000] : Receive Rephase.
+871250000 [1000] : Transmit Rephase.
+871276700 [3000] : Turn off protection.
+871279700 [3000] : Receive.
+871520000 [1000] : Transmit.
+879000000 [3000] : Transmit Rephase.
+879270000 [3000] : Transmit.
+884210000 [2000] : Transmit Rephase.
+884480000 [2000] : Transmit.
+884592600 [1000] : Receive Rephase.
+884859600 [1000] : Turn off protection.
+884862600 [1000] : Receive.
+890600000 [2003] : Transmit Rephase.
+890870000 [2003] : Transmit.
+890881300 [2000] : Receive Rephase.
+891148300 [2000] : Turn off protection.
+891151300 [2000] : Receive.
+893009700 [3000] : Receive Rephase.
+893250000 [1000] : Transmit Rephase.
+893276700 [3000] : Turn off protection.
+893279700 [3000] : Receive.
+893520000 [1000] : Transmit.
+897271300 [2003] : Receive Rephase.
+897538300 [2003] : Turn off protection.
+897541300 [2003] : Receive.
+901000000 [4003] : Transmit Rephase.
+901270000 [4003] : Transmit.
+903000000 [3000] : Transmit Rephase.
+903270000 [3000] : Transmit.
+906210000 [2000] : Transmit Rephase.
+906480000 [2000] : Transmit.
+906592600 [1000] : Receive Rephase.
+906859600 [1000] : Turn off protection.
+906862600 [1000] : Receive.
+912600000 [3003] : Transmit Rephase.
+912870000 [3003] : Transmit.
+912881300 [2000] : Receive Rephase.
+913148300 [2000] : Turn off protection.
+913151300 [2000] : Receive.
+915009700 [4003] : Receive Rephase.
+915276700 [4003] : Turn off protection.
+915279700 [4003] : Receive.
+917009700 [3000] : Receive Rephase.
+917250000 [1000] : Transmit Rephase.
+917276700 [3000] : Turn off protection.
+917279700 [3000] : Receive.
+917520000 [1000] : Transmit.
+919271300 [3003] : Receive Rephase.
+919538300 [3003] : Turn off protection.
+919541300 [3003] : Receive.
+925000000 [3000] : Transmit Rephase.
+925270000 [3000] : Transmit.
+930210000 [2000] : Transmit Rephase.
+930480000 [2000] : Transmit.
+930592600 [1000] : Receive Rephase.
+930859600 [1000] : Turn off protection.
+930862600 [1000] : Receive.
+936881300 [2000] : Receive Rephase.
+937148300 [2000] : Turn off protection.
+937151300 [2000] : Receive.
+939009700 [3000] : Receive Rephase.
+939250000 [1000] : Transmit Rephase.
+939276700 [3000] : Turn off protection.
+939279700 [3000] : Receive.
+939520000 [1000] : Transmit.
+947000000 [3000] : Transmit Rephase.
+947270000 [3000] : Transmit.
+952210000 [2000] : Transmit Rephase.
+952480000 [2000] : Transmit.
+952592600 [1000] : Receive Rephase.
+952859600 [1000] : Turn off protection.
+952862600 [1000] : Receive.
+958881300 [2000] : Receive Rephase.
+959148300 [2000] : Turn off protection.
+959151300 [2000] : Receive.
+961009700 [3000] : Receive Rephase.
+961250000 [1003] : Transmit Rephase.
+961276700 [3000] : Turn off protection.
+961279700 [3000] : Receive.
+961520000 [1003] : Transmit.
+969000000 [3000] : Transmit Rephase.
+969270000 [3000] : Transmit.
+974210000 [2000] : Transmit Rephase.
+974480000 [2000] : Transmit.
+974592600 [1003] : Receive Rephase.
+974859600 [1003] : Turn off protection.
+974862600 [1003] : Receive.
+980881300 [2000] : Receive Rephase.
+981148300 [2000] : Turn off protection.
+981151300 [2000] : Receive.
+983009700 [3000] : Receive Rephase.
+983250000 [1000] : Transmit Rephase.
+983276700 [3000] : Turn off protection.
+983279700 [3000] : Receive.
+983520000 [1000] : Transmit.
+991000000 [3000] : Transmit Rephase.
+991270000 [3000] : Transmit.
+996210000 [2000] : Transmit Rephase.
+996480000 [2000] : Transmit.
+996592600 [1000] : Receive Rephase.
+996859600 [1000] : Turn off protection.
+996862600 [1000] : Receive.
+1000000000 [100] : Tech.
+1002600000 [2003] : Transmit Rephase.
+1002870000 [2003] : Transmit.
+1002881300 [2000] : Receive Rephase.
+1003148300 [2000] : Turn off protection.
+1003151300 [2000] : Receive.
+1005009700 [3000] : Receive Rephase.
+1005250000 [1000] : Transmit Rephase.
+1005276700 [3000] : Turn off protection.
+1005279700 [3000] : Receive.
+1005520000 [1000] : Transmit.
+1009271300 [2003] : Receive Rephase.
+1009538300 [2003] : Turn off protection.
+1009541300 [2003] : Receive.
+1013000000 [4003] : Transmit Rephase.
+1013270000 [4003] : Transmit.
+1015000000 [3000] : Transmit Rephase.
+1015270000 [3000] : Transmit.
+1018210000 [2000] : Transmit Rephase.
+1018480000 [2000] : Transmit.
+1018592600 [1000] : Receive Rephase.
+1018859600 [1000] : Turn off protection.
+1018862600 [1000] : Receive.
+1024600000 [3003] : Transmit Rephase.
+1024870000 [3003] : Transmit.
+1024881300 [2000] : Receive Rephase.
+1025148300 [2000] : Turn off protection.
+1025151300 [2000] : Receive.
+1027009700 [4003] : Receive Rephase.
+1027276700 [4003] : Turn off protection.
+1027279700 [4003] : Receive.
+1029009700 [3000] : Receive Rephase.
+1029250000 [1000] : Transmit Rephase.
+1029276700 [3000] : Turn off protection.
+1029279700 [3000] : Receive.
+1029520000 [1000] : Transmit.
+1031271300 [3003] : Receive Rephase.
+1031538300 [3003] : Turn off protection.
+1031541300 [3003] : Receive.
+1037000000 [3000] : Transmit Rephase.
+1037270000 [3000] : Transmit.
+1042210000 [2000] : Transmit Rephase.
+1042480000 [2000] : Transmit.
+1042592600 [1000] : Receive Rephase.
+1042859600 [1000] : Turn off protection.
+1042862600 [1000] : Receive.
+1048881300 [2000] : Receive Rephase.
+1049148300 [2000] : Turn off protection.
+1049151300 [2000] : Receive.
+1051009700 [3000] : Receive Rephase.
+1051250000 [1000] : Transmit Rephase.
+1051276700 [3000] : Turn off protection.
+1051279700 [3000] : Receive.
+1051520000 [1000] : Transmit.
+1059000000 [3000] : Transmit Rephase.
+1059270000 [3000] : Transmit.
+1064210000 [2000] : Transmit Rephase.
+1064480000 [2000] : Transmit.
+1064592600 [1000] : Receive Rephase.
+1064859600 [1000] : Turn off protection.
+1064862600 [1000] : Receive.
+1070881300 [2000] : Receive Rephase.
+1071148300 [2000] : Turn off protection.
+1071151300 [2000] : Receive.
+1073009700 [3000] : Receive Rephase.
+1073250000 [1003] : Transmit Rephase.
+1073276700 [3000] : Turn off protection.
+1073279700 [3000] : Receive.
+1073520000 [1003] : Transmit.
+1081000000 [3000] : Transmit Rephase.
+1081270000 [3000] : Transmit.
+1086210000 [2000] : Transmit Rephase.
+1086480000 [2000] : Transmit.
+1086592600 [1003] : Receive Rephase.
+1086859600 [1003] : Turn off protection.
+1086862600 [1003] : Receive.
+1092881300 [2000] : Receive Rephase.
+1093148300 [2000] : Turn off protection.
+1093151300 [2000] : Receive.
+1095009700 [3000] : Receive Rephase.
+1095250000 [1000] : Transmit Rephase.
+1095276700 [3000] : Turn off protection.
+1095279700 [3000] : Receive.
+1095520000 [1000] : Transmit.
+1108592600 [1000] : Receive Rephase.
+1108859600 [1000] : Turn off protection.
+1108862600 [1000] : Receive.
+2000000000 [100] : Tech.
+3000000000 [100] : Tech.
+4000000000 [100] : Tech.
+5000000000 [100] : Tech.

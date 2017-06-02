@@ -1,10 +1,10 @@
-TARGET = logger
+TARGET = Logger
 TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++14
 
 QMAKE_LIBDIR = ../ConfigManager
-LIBS = -lconfig_manager
+LIBS = -lConfigManager -lboost_filesystem
 
 INCLUDEPATH += \
     ../ \

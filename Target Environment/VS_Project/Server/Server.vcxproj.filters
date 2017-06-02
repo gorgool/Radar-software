@@ -33,13 +33,7 @@
     <ClCompile Include="..\..\..\CoordinateSystems\CSTransform.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Utils\Logger.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Server\Server.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Config Manager\ConfigManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\SatelliteUtils\catalog_tle.cpp">
@@ -65,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="..\..\SatelliteUtils\noradSGP4.cpp">
       <Filter>tle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ConfigManager\ConfigManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Logger\Logger.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

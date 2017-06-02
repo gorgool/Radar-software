@@ -1,4 +1,4 @@
-TARGET = config_manager
+TARGET = ConfigManager
 TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++11

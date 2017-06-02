@@ -31,7 +31,9 @@
 #include "CoordinateSystems/CSUtils.h"
 
 #include "Utils/FormatString.h"
-#include "Config Manager/ConfigManager.hpp"
+#include "ConfigManager/ConfigManager.hpp"
+
+#include "Logger/Logger.h"
 
 namespace TargetEnvironment
 {

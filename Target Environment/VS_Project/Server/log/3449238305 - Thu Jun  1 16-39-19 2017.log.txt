@@ -1,0 +1,10 @@
+[error - 01.06.2017 16:39:27.279699400] Target Environment Server : Target Environment Server: Server started.
+[error - 01.06.2017 16:39:37.023621800] Target Environment Server : Target Environment Server: Connection accepted.
+[error - 01.06.2017 16:39:37.029477700] Target Environment Server : Target Environment Server: Connection accepted.
+[error - 01.06.2017 16:39:37.032049800] Target Environment Server : Target Environment Server: Connection accepted.
+[error - 01.06.2017 16:39:37.034724000] Target Environment Server : Target Environment Server: Connection accepted.
+[error - 01.06.2017 16:39:57.147232600] Target Environment Server : Target Environment Server: Deleting client.
+[error - 01.06.2017 16:39:57.468871600] Target Environment Server : Target Environment Server: Deleting client.
+[error - 01.06.2017 16:39:57.498969000] Target Environment Server : Target Environment Server: Deleting client.
+[error - 01.06.2017 16:39:57.506540100] Target Environment Server : Target Environment Server: Deleting client.
+[error - 01.06.2017 16:40:08.600849100] Target Environment Server : Target Environment Server: Server stopped.

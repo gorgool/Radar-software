@@ -1,7 +1,7 @@
 #include "Connection.h"
 #include <random>
 
-#include <Utils/Logger.h>
+#include <Logger/Logger.h>
 
 namespace TargetEnvironment
 {
@@ -33,13 +33,13 @@ namespace TargetEnvironment
       socket.get()->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
       if (ec)
       {
-        Utils::Log.log("Connection: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Connection: " + ec.message());
       }
 
       socket.get()->close(ec);
       if (ec)
       {
-        Utils::Log.log("Connection: " + ec.message());
+        Logger::log_dispfile(SeverityLevel::Error, "Target Environment Server", "Connection: " + ec.message());
       }
     }
   }
