@@ -4,7 +4,7 @@ CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++14
 
 QMAKE_LIBDIR = ../ConfigManager
-LIBS = -lConfigManager -lboost_filesystem
+LIBS = -lboost_system -lboost_filesystem
 
 INCLUDEPATH += \
     ../ \

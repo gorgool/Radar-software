@@ -3,8 +3,8 @@ TARGET = te_client
 
 QMAKE_LIBDIR = ../Shared ../../Utils ../../ConfigManager ../../Logger
 
-LIBS = -lboost_system -lboost_thread -lboost_regex \
-        -lShared -lUtils -lConfigManager -lLogger
+LIBS = -lConfigManager -lLogger -lboost_system -lboost_filesystem -lboost_thread -lboost_regex \
+        -lShared -lUtils 
 
 INCLUDEPATH += \
     ../ \

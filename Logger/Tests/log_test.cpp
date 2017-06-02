@@ -1,4 +1,4 @@
-#include "ConfigManager.h"
+#include "ConfigManager.hpp"
 #include "Logger.h"
 
 void log_test()

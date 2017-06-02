@@ -3,7 +3,7 @@ TEMPLATE = lib
 CONFIG = staticlib
 QMAKE_CXXFLAGS += -std=c++11
 
-LIBS = -lboost_filesystem -lboost_system -lrapidjson
+LIBS = -lrapidjson -lboost_system -lboost_filesystem
 
 INCLUDEPATH += \
     ../

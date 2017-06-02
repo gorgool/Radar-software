@@ -2,13 +2,14 @@ TARGET = logger_test
 TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++14
 
-QMAKE_LIBDIR +=
+QMAKE_LIBDIR += \
     ../../ConfigManager \
     ../
 
-LIBS = -lconfig_manager -llogger
+LIBS = -lConfigManager -lLogger -lboost_system -lboost_filesystem
 
 INCLUDEPATH += \
+    ../../ConfigManager \
     ../../ \
     ../
 

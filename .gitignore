@@ -12,3 +12,6 @@ Makefile*
 *.a
 te_client
 te_server
+logger_test
+*.stash
+log/
